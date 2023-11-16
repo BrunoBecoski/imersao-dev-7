@@ -38,10 +38,32 @@ body {
   right: 10px;
 }
 
-body > img {
+#moviesList img {
+  max-height: 250px;
   margin: 10px;
 }
 
-img {
-  max-height: 250px;
+.form-wrapper {
+  margin: 0 0 15px;
+}
+
+.form-wrapper input {
+  display: block;
+  margin: 0 auto;
+  padding: 10px 15px;
+}
+
+.form-wrapper button {
+  padding: 15px 20px;
+  margin-top: 20px;
+  
+  border: 0;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #FFFFFF;
+  background: #DA1E26;
+  font-weight: bold;
+  font-size: 16px;
+
+  transition: 0.3s;
 }

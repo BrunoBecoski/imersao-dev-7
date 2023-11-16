@@ -1,6 +1,6 @@
 <html html lang="pt-BR">
   <head>
-    <title>Aluraflix</title>
+    <title>Imersão Dev</title>
     
     <meta charset="utf-8" />
     <link rel="stylesheet" href="./styles.css" />
@@ -13,13 +13,25 @@
       </h1>
       
       <img class="page-logo" alt="Logo Imersão dev" src="./assets/logo-imersao-alura.svg" />
+
+      <p class="page-subtitle">
+        Qual seu filme favorito?
+      </p>
+      
+      <div class="form-wrapper">
+        <input type="text" id="movie" name="movie" placeholder="Insira endereço de imagem" />
+
+        <button onClick="addMovie()">Adicionar Filme</button>
+      </div>
+    </div>
+
+    <div id="moviesList"></div> 
+      
     </div>
     
     <a href="https://www.alura.com.br" target="_blank">
       <img class="alura-logo" alt="Logo Alura" src="./assets/alura-logo.svg" />  
     </a>
-
-    <div id="root"></div>
   </body>
 
   <script src="./script.js"></script>

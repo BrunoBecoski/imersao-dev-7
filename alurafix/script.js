@@ -1,11 +1,8 @@
-var moviesList = [
-  "./assets/school_rock.jpg",
-  "./assets/arrival.jpg",
-  "./assets/spiderman_into_the_spiderverse.jpg",
-  "./assets/10_things_i_hate_about_you.jpg",
-  "./assets/matrix.jpg"
-];
+function addMovie() {
+  var favoriteMovie = document.getElementById("movie").value;
+  var moviesListElement = document.getElementById("moviesList");
 
-for(var i = 0; i < moviesList.length; i++) {
-  window.document.write("<img src=" + moviesList[i] + ">");
+  moviesListElement.innerHTML = moviesListElement.innerHTML + "<img src=" + favoriteMovie + ">";
+
+  document.getElementById("movie").value = "";
 }
