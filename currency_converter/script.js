@@ -74,7 +74,7 @@ function handleInput(value, item) {
 
     const currency = valueToConvert * value;
 
-    const currencyFormatted = Intl.NumberFormat('pt-BR', { style: 'currency', currency: codeToConvert}).format(currency);
+    const currencyFormatted = currency.toFixed(2);
 
     const inputToConverter = document.getElementById('input_2');
 
@@ -92,7 +92,7 @@ function handleInput(value, item) {
 
     const currency = valueToConvert * value;
 
-    const currencyFormatted = Intl.NumberFormat('pt-BR', { style: 'currency', currency: codeToConvert}).format(currency);
+    const currencyFormatted = currency.toFixed(2);
 
     const inputToConverter = document.getElementById('input_1');
 

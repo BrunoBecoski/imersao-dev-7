@@ -9,6 +9,10 @@ body {
   
   text-align: center;
   font-family: "Roboto Mono", monospace;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .container {
@@ -46,4 +50,47 @@ body > img {
 
 img {
   max-height: 250px;
+}
+
+.line {
+  margin: 2px;
+
+  display: flex;
+  align-items: center;
+  width: fit-content;
+
+  background: #02131C;
+  color: #D7F9FF;
+  border-radius: 4px;
+  border: 1px solid #4B6679;
+}
+
+.line div {
+  width: 1px;
+  height: 32px;
+  
+  background: #4B6679;
+}
+
+.line input {
+  padding: 10px;
+  width: 150px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #D7F9FF;
+
+  background: none;
+  border: none;
+}
+
+.line select {
+  padding: 10px;
+  width: 200px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #D7F9FF;
+  background: #02131C;
+  border: none;
+
+  border-right: 5px solid transparent;
 }
