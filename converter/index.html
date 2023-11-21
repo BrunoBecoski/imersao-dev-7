@@ -1,13 +1,13 @@
 <html lang="pt-BR">
   <head>
-    <title>Conversor de moedas</title>
+    <title>Conversor</title>
     
     <link rel="icon" type="image/x-icon" href="./assets/coins.png" />
     <link rel="stylesheet" href="./styles.css" />
   </head>
 
   <body>
-    <div class="container">
+    <!-- <div class="container">
       <h1 class="page-title">
         Conversor de moedas
       </h1>
@@ -18,9 +18,44 @@
     <a href="https://www.alura.com.br" target="_blank">
       <img class="alura-logo" alt="Logo Alura" src="./assets/alura-logo.svg" />  
       <img alt="Moedas" src="./assets/coins.png" />
-    </a>
+    </a> -->
 
-    <div class="line">
+    <main id="root">
+      <section>
+        <h1>Converter Temperatura</h1>
+
+        <div class="left">
+          <input 
+            id="input_1"
+            oninput="handleConverterTemperature(value, 'input_1')"
+          />
+
+          <select id="select_1">
+            <option value="c" selected>Grau Celsius</option>
+            <option value="f">Grau Fahrenheit</option>
+            <option valie="k">Kelvin</option>
+          </select>
+        </div>
+
+        <strong>=</strong>
+        
+        <div class="right">
+          <input
+            id="input_2"
+            oninput="handleConverterTemperature(value, 'input_2')"
+          />
+
+          <select id="select_2">
+            <option value="c">Grau Celsius</option>
+            <option value="f" selected>Grau Fahrenheit</option>
+            <option valie="k">Kelvin</option>
+          </select>
+        </div>
+
+      </section>
+    </main>
+
+    <!-- <div class="line">
       <input id="input_1" placeholder="1" oninput="handleInput(value, 'first')" />
 
       <div></div>
@@ -46,7 +81,7 @@
         <option value="eur">Euro</option>
         <option value="usd" selected>Dólar americano</option>
       </select>
-    </div>
+    </div> -->
   </body>
   
   <script src="./script.js"></script>
