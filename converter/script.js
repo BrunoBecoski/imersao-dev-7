@@ -100,29 +100,92 @@
 //   }
 // }
 
-const input_1 = document.getElementById("input_1");
-const input_2 = document.getElementById("input_2");
+function handleConvertTemperature(value, input) {
+  const input_1 = document.getElementById("input_1");
+  const input_2 = document.getElementById("input_2");
 
-function handleConverterTemperature(value, input) {
-  if(input === "input_1") {
-    converterCelsiusToFahrenheit(value)
+  const select_1 = document.getElementById("select_1")
+  const select_2 = document.getElementById("select_2")
+
+  if (input === "input_1") {
+    if (select_1.value === "c") {
+      if (select_2.value=== "c") { input_2.value  = value }
+      if (select_2.value === "f") { input_2.value = convertCelsiusToFahrenheit(value) }
+      if (select_2.value === "k") { input_2.value = convertCelsiusToKelvin(value) }
+    }
+
+    if (select_1.value === "f") {
+      if (select_2.value === "c") { input_2.value = convertFahrenheitToCelsius(value) }
+      if (select_2.value === "f") { input_2.value = value }
+      if (select_2.value === "k") { input_2.value = convertFahrenheitToKelvin(value) } 
+    }
+
+    if (select_1.value === "k") {
+      if (select_2.value === "c") { input_2.value = convertKelvinToCelsius(value) }
+      if (select_2.value === "f") { input_2.value = convertKelvinToFahrenheit(value) }
+      if (select_2.value === "k") { input_2.value = value }
+    }
   }
 
-  if(input === "input_2") {
-    converterFahrenheitToCelsius(value)
+  if (input === "input_2") {
+    if (select_2.value === "c") {
+      if (select_1.value === "c") { input_1.value  = value }
+      if (select_1.value === "f") { input_1.value = convertCelsiusToFahrenheit(value) }
+      if (select_1.value === "k") { input_1.value = convertCelsiusToKelvin(value) }
+    }
+
+    if (select_2.value === "f") {
+      if (select_1.value === "c") { input_1.value = convertFahrenheitToCelsius(value) }
+      if (select_1.value === "f") { input_1.value = value }
+      if (select_1.value === "k") { input_1.value = convertFahrenheitToKelvin(value) } 
+    }
+    
+    if (select_2.value === "k") {
+      if (select_1.value === "c") { input_1.value = convertKelvinToCelsius(value) }
+      if (select_1.value === "f") { input_1.value = convertKelvinToFahrenheit(value) }
+      if (select_1.value === "k") { input_1.value = value }
+    }
   }
 }
 
-function converterCelsiusToFahrenheit(value) {
-  const result = (value * 9/5) + 32;
-  const format = result.toFixed(4).replace(/\.0+$/, '');
+function convertCelsiusToFahrenheit(value) {
+  const result = (value * 9 / 5) + 32;
+  const format = result.toFixed(4).replace(/\.0+$/, "");
   
-  input_2.value = format;
+  return format;
 }
 
-function converterFahrenheitToCelsius(value) {
-  const result = (value - 32) * 5/9;
-  const format = result.toFixed(4).replace(/\.0+$/, '');
+function convertCelsiusToKelvin(value) {
+  const result = value + 273.15;
+  const format = result.toFixed(4).replace(/\.0+$/, "");
 
-  input_1.value = format;
+  return format;
+}
+
+function convertFahrenheitToCelsius(value) {
+  const result = (value - 32) * 5 / 9;
+  const format = result.toFixed(4).replace(/\.0+$/, "");
+
+  return format;
+}
+
+function convertFahrenheitToKelvin(value) {
+  const result = (value - 32) * 5 / 9 + 273.15;
+  const format = result.toFixed(4).replace(/\.0+$/, "");
+
+  return format;
+}
+
+function convertKelvinToCelsius(value) {
+  const result = value - 273.15;
+  const format = result.toFixed(4).replace(/\.0+$/, "");
+
+  return format;
+}
+
+function convertKelvinToFahrenheit(value) {
+  const result = (value - 273.15) * 9 / 5 + 32;
+  const format = result.toFixed(4).replace(/\.0+$/, "");
+
+  return format;
 }
