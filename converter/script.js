@@ -100,92 +100,52 @@
 //   }
 // }
 
-function handleConvertTemperature(value, input) {
-  const input_1 = document.getElementById("input_1");
-  const input_2 = document.getElementById("input_2");
+function handleInput(current_input, new_input) { 
+  const current_temperature = document.getElementById(`select_${current_input}`).value;
+  const new_temperature = document.getElementById(`select_${new_input}`).value;
 
-  const select_1 = document.getElementById("select_1")
-  const select_2 = document.getElementById("select_2")
+  const degree_current = document.getElementById(`input_${current_input}`).value;
+  const degree_new = document.getElementById(`input_${new_input}`);
 
-  if (input === "input_1") {
-    if (select_1.value === "c") {
-      if (select_2.value=== "c") { input_2.value  = value }
-      if (select_2.value === "f") { input_2.value = convertCelsiusToFahrenheit(value) }
-      if (select_2.value === "k") { input_2.value = convertCelsiusToKelvin(value) }
-    }
+  const degree_converted = convertTemperature(current_temperature, new_temperature, Number(degree_current));
 
-    if (select_1.value === "f") {
-      if (select_2.value === "c") { input_2.value = convertFahrenheitToCelsius(value) }
-      if (select_2.value === "f") { input_2.value = value }
-      if (select_2.value === "k") { input_2.value = convertFahrenheitToKelvin(value) } 
-    }
-
-    if (select_1.value === "k") {
-      if (select_2.value === "c") { input_2.value = convertKelvinToCelsius(value) }
-      if (select_2.value === "f") { input_2.value = convertKelvinToFahrenheit(value) }
-      if (select_2.value === "k") { input_2.value = value }
-    }
+  if (isNaN(degree_converted)) {
+    degree_new.value = "";
+  } else {
+    degree_new.value = degree_converted;
   }
+}
 
-  if (input === "input_2") {
-    if (select_2.value === "c") {
-      if (select_1.value === "c") { input_1.value  = value }
-      if (select_1.value === "f") { input_1.value = convertCelsiusToFahrenheit(value) }
-      if (select_1.value === "k") { input_1.value = convertCelsiusToKelvin(value) }
-    }
-
-    if (select_2.value === "f") {
-      if (select_1.value === "c") { input_1.value = convertFahrenheitToCelsius(value) }
-      if (select_1.value === "f") { input_1.value = value }
-      if (select_1.value === "k") { input_1.value = convertFahrenheitToKelvin(value) } 
-    }
+function convertTemperature(current_temperature, new_temperature, degree ) {
+  switch (current_temperature) {
+    case 'c':
+      switch (new_temperature) {
+        case 'c':
+          return degree;
+        case 'f':
+          return ((degree * 9 / 5) + 32).toFixed(2);
+        case 'k':
+          return (degree + 273.15).toFixed(2);
+      }
+      
+    case 'f':
+      switch (new_temperature) {
+        case 'c':
+          return ((degree - 32) * 5 / 9).toFixed(2);  
+        case 'f':
+          return degree;
+        case 'k':
+          return ((degree - 32) * 5 / 9 + 273.15).toFixed(2);
+      }
     
-    if (select_2.value === "k") {
-      if (select_1.value === "c") { input_1.value = convertKelvinToCelsius(value) }
-      if (select_1.value === "f") { input_1.value = convertKelvinToFahrenheit(value) }
-      if (select_1.value === "k") { input_1.value = value }
-    }
+    case 'k':
+      switch (new_temperature) {
+        case 'c':
+          return (degree - 273.15).toFixed(2);
+        case 'f':
+          return ((degree - 273.15) * 9 / 5 + 32).toFixed(2);
+        case 'k':
+          return degree;
+      }
   }
-}
-
-function convertCelsiusToFahrenheit(value) {
-  const result = (value * 9 / 5) + 32;
-  const format = result.toFixed(4).replace(/\.0+$/, "");
-  
-  return format;
-}
-
-function convertCelsiusToKelvin(value) {
-  const result = value + 273.15;
-  const format = result.toFixed(4).replace(/\.0+$/, "");
-
-  return format;
-}
-
-function convertFahrenheitToCelsius(value) {
-  const result = (value - 32) * 5 / 9;
-  const format = result.toFixed(4).replace(/\.0+$/, "");
-
-  return format;
-}
-
-function convertFahrenheitToKelvin(value) {
-  const result = (value - 32) * 5 / 9 + 273.15;
-  const format = result.toFixed(4).replace(/\.0+$/, "");
-
-  return format;
-}
-
-function convertKelvinToCelsius(value) {
-  const result = value - 273.15;
-  const format = result.toFixed(4).replace(/\.0+$/, "");
-
-  return format;
-}
-
-function convertKelvinToFahrenheit(value) {
-  const result = (value - 273.15) * 9 / 5 + 32;
-  const format = result.toFixed(4).replace(/\.0+$/, "");
-
-  return format;
 }
