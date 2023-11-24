@@ -7,21 +7,24 @@
   </head>
 
   <body>
-    <!-- <div class="container">
-      <h1 class="page-title">
-        Conversor de moedas
-      </h1>
-      
-      <img class="page-logo" alt="Logo Imersão dev" src="./assets/logo-imersao-alura.svg" />
+    <div class="container">
+      <img class="page-logo" alt="Logo Imersão dev" src="./assets/logo-imersao-alura.svg" />    
     </div>
-    
-    <a href="https://www.alura.com.br" target="_blank">
-      <img class="alura-logo" alt="Logo Alura" src="./assets/alura-logo.svg" />  
-      <img alt="Moedas" src="./assets/coins.png" />
-    </a> -->
 
-    <main id="root">
-      <section>
+    <main>
+      <div class="mode">
+        <label for="mode_selection">
+          Conversor de:
+        </label>
+
+        <select id="mode_selection" onchange="handleSelectMode()">
+          <option value="currency" selected>Moedas</option>
+          <option value="temperature">Temperaturas</option>
+          <option value="length">Comprimentos</option>
+        </select>
+      </div>
+
+      <!-- <section>
         <h1>Converter Temperatura</h1>
 
         <div class="left">
@@ -57,11 +60,11 @@
             <option value="k">Kelvin</option>
           </select>
         </div>
-
+        
       </section>
     </main>
 
-    <!-- <div class="line">
+    <div class="line">
       <input id="input_1" placeholder="1" oninput="handleInput(value, 'first')" />
 
       <div></div>

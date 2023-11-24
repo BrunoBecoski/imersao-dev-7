@@ -9,6 +9,12 @@
 //   alert("R$ " + valueInReal);
 // }
 
+let selectedMode = document.getElementById("mode_selection").value;
+
+function handleSelectMode() {
+  selectedMode = document.getElementById("mode_selection").value;
+}
+
 // const currencies = [
 //   {
 //     code: 'brl',
