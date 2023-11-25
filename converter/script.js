@@ -121,58 +121,58 @@ function createOptions(items) {
   })
 }
 
-// function handleInput(value, item) {
-//   if (item === 'first') {
-//     const codeSelected = document.getElementById("select_1").value;
+function getValues(value) {
+  let currentInputValue;
+  let currentSelectValue;
+  let newSelectValue;
 
-//     const codeToConvert = document.getElementById("select_2").value;
-
-//     const currencySelected = currencies.find(currency => currency.code === codeSelected);
-
-//     const valueToConvert = currencySelected.value[codeToConvert];
-
-//     const currency = valueToConvert * value;
-
-//     const currencyFormatted = currency.toFixed(2);
-
-//     const inputToConverter = document.getElementById('input_2');
-
-//     inputToConverter.value = currencyFormatted;
-//   }
-
-//   if (item === 'second') {
-//     const codeSelected = document.getElementById("select_2").value;
-
-//     const codeToConvert = document.getElementById("select_1").value;
-
-//     const currencySelected = currencies.find(currency => currency.code === codeSelected);
-
-//     const valueToConvert = currencySelected.value[codeToConvert];
-
-//     const currency = valueToConvert * value;
-
-//     const currencyFormatted = currency.toFixed(2);
-
-//     const inputToConverter = document.getElementById('input_1');
-
-//     inputToConverter.value = currencyFormatted;
-//   }
-// }
-
-function handleInput(current_input, new_input) { 
-  const current_temperature = document.getElementById(`select_${current_input}`).value;
-  const new_temperature = document.getElementById(`select_${new_input}`).value;
-
-  const degree_current = document.getElementById(`input_${current_input}`).value;
-  const degree_new = document.getElementById(`input_${new_input}`);
-
-  const degree_converted = convertTemperature(current_temperature, new_temperature, Number(degree_current));
-
-  if (isNaN(degree_converted)) {
-    degree_new.value = "";
-  } else {
-    degree_new.value = degree_converted;
+  switch (value) {
+    case 'input_1':
+    case 'select_1':
+      currentInputValue = isNaN(input_element_1.value) ? 1 : Number(input_element_1.value);
+      currentSelectValue = select_element_1.value;
+      newSelectValue = select_element_2.value;    
+      break;
+      
+    case 'input_2':
+    case 'select_2':
+      currentInputValue = isNaN(input_element_2.value) ? 1 : Number(input_element_2.value);
+      currentSelectValue = select_element_2.value;
+      newSelectValue = select_element_1.value;
+      break;
   }
+
+  return {
+    currentInputValue,
+    currentSelectValue,
+    newSelectValue,
+  }
+}
+
+function handleInput(input) {
+  const {
+    currentInputValue,
+    currentSelectValue,
+    newSelectValue,
+  } = getValues(input)
+
+  console.log('=-=-=-=-=-=-=-=-=-=-=')
+  console.log("Input atual: " + currentInputValue);
+  console.log("Select atual: " + currentSelectValue);
+  console.log("Select novo: " + newSelectValue);
+}
+
+function handleSelect(select) {
+  const {
+    currentInputValue,
+    currentSelectValue,
+    newSelectValue,
+  } = getValues(select)
+
+  console.log('=-=-=-=-=-=-=-=-=-=-=')
+  console.log("Input atual: " + currentInputValue);
+  console.log("Select atual: " + currentSelectValue);
+  console.log("Select novo: " + newSelectValue);
 }
 
 function convertTemperature(current_temperature, new_temperature, degree ) {
