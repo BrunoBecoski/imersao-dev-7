@@ -62,6 +62,33 @@ const currencies = [
   }
 ]
 
+const temperatures = [
+  {
+    value: 'celsius',
+    name: 'Grau Celsius',
+    calc: {
+      'fahrenheit': () => {},
+      'kelvin': () => {},
+    },    
+  },
+  {
+    value: 'fahrenheit',
+    name: 'Grau Fahrenheit',
+    calc: {
+      'celcius': () => {},
+      'kelvin': () => {},
+    },
+  },
+  {
+    value: 'kelvin',
+    name: 'Kelvin',
+    calc: {
+      'celsius': () => {},
+      'fahrenheit': () => {},
+    },
+  },
+]
+
 let select_element_1 = document.getElementById("select_1");
 let select_element_2 = document.getElementById("select_2");
 
@@ -79,7 +106,7 @@ function handleSelectMode() {
       break;
       
     case "temperature":
-      console.log("Temperatura");
+      fillSelects(temperatures);
       break;
         
     case "length":
@@ -92,6 +119,11 @@ function handleSelectMode() {
 }
 
 function fillSelects(items) { 
+  select_element_1.innerHTML = "";
+  select_element_2.innerHTML = "";
+  input_element_1.value = "";
+  input_element_2.value = "";
+
   createOptions(items).forEach((option, index) => {
     if (index === 0) {
       option.selected = true;
@@ -130,6 +162,7 @@ function getValues(value) {
     case 'input_1':
     case 'select_1':
       currentInputValue = isNaN(input_element_1.value) ? 1 : Number(input_element_1.value);
+      newInput = input_element_2;
       currentSelectValue = select_element_1.value;
       newSelectValue = select_element_2.value;    
       break;
@@ -137,6 +170,7 @@ function getValues(value) {
     case 'input_2':
     case 'select_2':
       currentInputValue = isNaN(input_element_2.value) ? 1 : Number(input_element_2.value);
+      newInput = input_element_1;
       currentSelectValue = select_element_2.value;
       newSelectValue = select_element_1.value;
       break;
@@ -144,6 +178,7 @@ function getValues(value) {
 
   return {
     currentInputValue,
+    newInput,
     currentSelectValue,
     newSelectValue,
   }
@@ -152,12 +187,14 @@ function getValues(value) {
 function handleInput(input) {
   const {
     currentInputValue,
+    newInput,
     currentSelectValue,
     newSelectValue,
   } = getValues(input)
 
   console.log('=-=-=-=-=-=-=-=-=-=-=')
   console.log("Input atual: " + currentInputValue);
+  console.log("Input: " + newInput);
   console.log("Select atual: " + currentSelectValue);
   console.log("Select novo: " + newSelectValue);
 }
@@ -165,12 +202,14 @@ function handleInput(input) {
 function handleSelect(select) {
   const {
     currentInputValue,
+    newInput,
     currentSelectValue,
     newSelectValue,
   } = getValues(select)
-
+  
   console.log('=-=-=-=-=-=-=-=-=-=-=')
   console.log("Input atual: " + currentInputValue);
+  console.log("Input: " + newInput);
   console.log("Select atual: " + currentSelectValue);
   console.log("Select novo: " + newSelectValue);
 }
