@@ -59,35 +59,35 @@ const currencies = [
       'cny': 0.14,
       'eur': 1.09,
     },
-  }
-]
+  },
+];
 
 const temperatures = [
   {
     value: 'celsius',
     name: 'Grau Celsius',
     calc: {
-      'fahrenheit': () => {},
-      'kelvin': () => {},
+      'fahrenheit': (value) => Math.trunc((value * 9 / 5) + 32),
+      'kelvin': (value) => Math.trunc(value + 273.15),
     },    
   },
   {
     value: 'fahrenheit',
     name: 'Grau Fahrenheit',
     calc: {
-      'celcius': () => {},
-      'kelvin': () => {},
+      'celsius': (value) => Math.trunc((value - 32) * 5 / 9),
+      'kelvin': (value) => Math.trunc((value - 32) * 5 / 9 + 273.15),
     },
   },
   {
     value: 'kelvin',
     name: 'Kelvin',
     calc: {
-      'celsius': () => {},
-      'fahrenheit': () => {},
+      'celsius': (value) => Math.trunc(value - 273.15),
+      'fahrenheit': (value) => Math.trunc((value - 273.15) * 9 / 5 + 32),
     },
   },
-]
+];
 
 let select_element_1 = document.getElementById("select_1");
 let select_element_2 = document.getElementById("select_2");
@@ -145,7 +145,7 @@ function fillSelects(items) {
 
 function createOptions(items) {
   return items.map((item) => {
-    const option = document.createElement("option")
+    const option = document.createElement("option");
     option.innerText = item.name;
     option.value = item.value;
 
@@ -161,21 +161,21 @@ function getValues(value) {
   switch (value) {
     case 'input_1':
     case 'select_1':
-      currentInputValue = isNaN(input_element_1.value) ? 1 : Number(input_element_1.value);
+      currentInputValue = input_element_1.value;
       newInput = input_element_2;
       currentSelectValue = select_element_1.value;
       newSelectValue = select_element_2.value;    
       break;
-      
+        
     case 'input_2':
     case 'select_2':
-      currentInputValue = isNaN(input_element_2.value) ? 1 : Number(input_element_2.value);
+      currentInputValue = input_element_2.value;
       newInput = input_element_1;
       currentSelectValue = select_element_2.value;
       newSelectValue = select_element_1.value;
       break;
   }
-
+  
   return {
     currentInputValue,
     newInput,
@@ -185,65 +185,53 @@ function getValues(value) {
 }
 
 function handleInput(input) {
+  const selectedMode = document.getElementById("mode_selection").value;
+
+  let select;
+
+  switch (selectedMode) {
+    case "currency":
+      select = currencies;
+      break;
+      
+    case "temperature":
+      select = temperatures;
+      break;
+        
+    case "length":
+      console.log("Comprimento");
+      break;
+  }
+
+  if (isNaN(input_element_1.value)) {
+    input_element_1.value = "";
+    return;
+  }
+  
+  if (isNaN(input_element_2.value)) {
+    input_element_2.value = "";
+    return;
+  }
+  
   const {
     currentInputValue,
     newInput,
     currentSelectValue,
     newSelectValue,
   } = getValues(input)
-
-  console.log('=-=-=-=-=-=-=-=-=-=-=')
-  console.log("Input atual: " + currentInputValue);
-  console.log("Input: " + newInput);
-  console.log("Select atual: " + currentSelectValue);
-  console.log("Select novo: " + newSelectValue);
-}
-
-function handleSelect(select) {
-  const {
-    currentInputValue,
-    newInput,
-    currentSelectValue,
-    newSelectValue,
-  } = getValues(select)
   
-  console.log('=-=-=-=-=-=-=-=-=-=-=')
-  console.log("Input atual: " + currentInputValue);
-  console.log("Input: " + newInput);
-  console.log("Select atual: " + currentSelectValue);
-  console.log("Select novo: " + newSelectValue);
-}
-
-function convertTemperature(current_temperature, new_temperature, degree ) {
-  switch (current_temperature) {
-    case 'c':
-      switch (new_temperature) {
-        case 'c':
-          return degree;
-        case 'f':
-          return ((degree * 9 / 5) + 32).toFixed(2);
-        case 'k':
-          return (degree + 273.15).toFixed(2);
-      }
-      
-    case 'f':
-      switch (new_temperature) {
-        case 'c':
-          return ((degree - 32) * 5 / 9).toFixed(2);  
-        case 'f':
-          return degree;
-        case 'k':
-          return ((degree - 32) * 5 / 9 + 273.15).toFixed(2);
-      }
-    
-    case 'k':
-      switch (new_temperature) {
-        case 'c':
-          return (degree - 273.15).toFixed(2);
-        case 'f':
-          return ((degree - 273.15) * 9 / 5 + 32).toFixed(2);
-        case 'k':
-          return degree;
-      }
+  if (currentSelectValue === newSelectValue) {
+    newInput.value = currentInputValue;
+    return;
   }
+
+  const converter = select.find(item => item.value === currentSelectValue);
+
+  const functionToConverter = converter.calc[newSelectValue];
+
+  console.log(functionToConverter)
+
+  const newValue = functionToConverter(currentInputValue);
+
+  newInput.value = newValue;
 }
