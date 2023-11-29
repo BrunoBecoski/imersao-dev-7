@@ -14,50 +14,50 @@ const currencies = [
     value: 'ars',
     name: 'Peso argentino',
     calc: {
-      'brl': 0.014,
-      'cny': 0.020,
-      'eur': 0.0026,
-      'usd': 0.0028,
+      'brl': (value) => (value * 0.014).toFixed(2),
+      'cny': (value) => (value * 0.020).toFixed(2),
+      'eur': (value) => (value * 0.0026).toFixed(2),
+      'usd': (value) => (value * 0.0028).toFixed(2),
     },
   },
   {
     value: 'brl',
     name: 'Real brasileiro',
     calc: {
-      'ars': 0.014,
-      'cny': 0.68,
-      'eur': 5.36,
-      'usd': 4.91,
+      'ars': (value) => (value * 0.014).toFixed(2),
+      'cny': (value) => (value * 0.68).toFixed(2),
+      'eur': (value) => (value * 5.36).toFixed(2),
+      'usd': (value) => (value * 4.91).toFixed(2),
     },
   },
   {
     value: 'cny',
     name: 'Yuan chinês',
     calc: {
-      'ars': 48.78,
-      'brl': 0.68,
-      'eur': 0.13,
-      'usd': 0.14,
+      'ars': (value) => (value * 48.78).toFixed(2),
+      'brl': (value) => (value * 0.68).toFixed(2),
+      'eur': (value) => (value * 0.13).toFixed(2),
+      'usd': (value) => (value * 0.14).toFixed(2),
     },
   },
   {
     value: 'eur',
     name: 'Euro',
     calc: {
-      'ars': 0.0026,
-      'brl': 0.19,
-      'cny': 0.13,
-      'usd': 0.92,
+      'ars': (value) => (value * 0.0026).toFixed(2),
+      'brl': (value) => (value * 0.19).toFixed(2),
+      'cny': (value) => (value * 0.13).toFixed(2),
+      'usd': (value) => (value * 0.92).toFixed(2),
     },
   },
   {
     value: 'usd',
     name: 'Dólar americano',
     calc: {
-      'ars': 0.0028,
-      'brl': 0.20,
-      'cny': 0.14,
-      'eur': 1.09,
+      'ars': (value) => (value * 0.0028).toFixed(2),
+      'brl': (value) => (value * 0.20).toFixed(2),
+      'cny': (value) => (value * 0.14).toFixed(2),
+      'eur': (value) => (value * 1.09).toFixed(2),
     },
   },
 ];
@@ -89,11 +89,142 @@ const temperatures = [
   },
 ];
 
+const lengths = [
+  {
+    value: 'nm',
+    name: 'Nanômetros',
+    calc: {
+      'mm': (value) => value,
+      'cm': (value) => value,
+      'm': (value) => value,
+      'km': (value) => value,
+      'mi': (value) => value,
+      'yd': (value) => value,
+      'ft': (value) => value,
+      'in': (value) => value,
+    }
+  },
+  {
+    value: 'mm',
+    name: 'Milímetros',
+    calc: {
+      'nm': (value) => value,
+      'cm': (value) => value,
+      'm': (value) => value,
+      'km': (value) => value,
+      'mi': (value) => value,
+      'yd': (value) => value,
+      'ft': (value) => value,
+      'in': (value) => value,
+    }
+  },
+  {
+    value: 'cm',
+    name: 'Centímetros',
+    calc: {
+      'nm': (value) => value,
+      'mm': (value) => value,
+      'm': (value) => value,
+      'km': (value) => value,
+      'mi': (value) => value,
+      'yd': (value) => value,
+      'ft': (value) => value,
+      'in': (value) => value,
+    }
+  },
+  {
+    value: 'm',
+    name: 'Metros',
+    calc: {
+      'nm': (value) => value,
+      'mm': (value) => value,
+      'cm': (value) => value,
+      'km': (value) => value,
+      'mi': (value) => value,
+      'yd': (value) => value,
+      'ft': (value) => value,
+      'in': (value) => value,
+    }
+  },
+  {
+    value: 'km',
+    name: 'Quilômetros',
+    calc: {
+      'nm': (value) => value,
+      'mm': (value) => value,
+      'cm': (value) => value,
+      'm': (value) => value,
+      'mi': (value) => value,
+      'yd': (value) => value,
+      'ft': (value) => value,
+      'in': (value) => value,
+    }
+  },
+  {
+    value: 'mi',
+    name: 'Milhas',
+    calc: {
+      'nm': (value) => value,
+      'mm': (value) => value,
+      'cm': (value) => value,
+      'm': (value) => value,
+      'km': (value) => value,
+      'yd': (value) => value,
+      'ft': (value) => value,
+      'in': (value) => value,
+    }
+  },
+  {
+    value: 'yd',
+    name: 'Jardas',
+    calc: {
+      'nm': (value) => value,
+      'mm': (value) => value,
+      'cm': (value) => value,
+      'm': (value) => value,
+      'km': (value) => value,
+      'mi': (value) => value,
+      'ft': (value) => value,
+      'in': (value) => value,
+    }
+  },
+  {
+    value: 'ft',
+    name: 'Pes',
+    calc: {
+      'nm': (value) => value,
+      'mm': (value) => value,
+      'cm': (value) => value,
+      'm': (value) => value,
+      'km': (value) => value,
+      'mi': (value) => value,
+      'yd': (value) => value,
+      'in': (value) => value,
+    }
+  },
+  {
+    value: 'in',
+    name: 'Polegadas',
+    calc: {
+      'nm': (value) => value,
+      'mm': (value) => value,
+      'cm': (value) => value,
+      'm': (value) => value,
+      'km': (value) => value,
+      'mi': (value) => value,
+      'yd': (value) => value,
+      'ft': (value) => value,
+    }
+  },
+];
+
 let select_element_1 = document.getElementById("select_1");
 let select_element_2 = document.getElementById("select_2");
 
 let input_element_1 = document.getElementById("input_1");
 let input_element_2 = document.getElementById("input_2");
+
+let selected;
 
 handleSelectMode();
 
@@ -103,18 +234,22 @@ function handleSelectMode() {
   switch (selectedMode) {
     case "currency":
       fillSelects(currencies);
+      selected = currencies;
       break;
       
     case "temperature":
       fillSelects(temperatures);
+      selected = temperatures;
       break;
         
     case "length":
-      console.log("Comprimento");
+      fillSelects(lengths);
+      selected = length;
       break;
       
     default:  "currency"
       fillSelects(currencies);
+      selected = currencies;
   }
 }
 
@@ -185,24 +320,6 @@ function getValues(value) {
 }
 
 function handleInput(input) {
-  const selectedMode = document.getElementById("mode_selection").value;
-
-  let select;
-
-  switch (selectedMode) {
-    case "currency":
-      select = currencies;
-      break;
-      
-    case "temperature":
-      select = temperatures;
-      break;
-        
-    case "length":
-      console.log("Comprimento");
-      break;
-  }
-
   if (isNaN(input_element_1.value)) {
     input_element_1.value = "";
     return;
@@ -225,11 +342,9 @@ function handleInput(input) {
     return;
   }
 
-  const converter = select.find(item => item.value === currentSelectValue);
+  const converter = selected.find(item => item.value === currentSelectValue);
 
   const functionToConverter = converter.calc[newSelectValue];
-
-  console.log(functionToConverter)
 
   const newValue = functionToConverter(currentInputValue);
 
