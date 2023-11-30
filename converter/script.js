@@ -91,129 +91,69 @@ const temperatures = [
 
 const lengths = [
   {
-    value: 'nm',
-    name: 'Nanômetros',
-    calc: {
-      'mm': (value) => value,
-      'cm': (value) => value,
-      'm': (value) => value,
-      'km': (value) => value,
-      'mi': (value) => value,
-      'yd': (value) => value,
-      'ft': (value) => value,
-      'in': (value) => value,
-    }
-  },
-  {
     value: 'mm',
     name: 'Milímetros',
     calc: {
-      'nm': (value) => value,
-      'cm': (value) => value,
-      'm': (value) => value,
-      'km': (value) => value,
-      'mi': (value) => value,
-      'yd': (value) => value,
-      'ft': (value) => value,
-      'in': (value) => value,
+      'cm': (value) => (value / 10).toFixed(5),
+      'm': (value) => (value / 1000).toFixed(5),
+      'km': (value) => (value / 1000000).toFixed(5),
+      'ft': (value) => (value / 304.8).toFixed(5),
+      'in': (value) => (value / 25.4).toFixed(5),
     }
   },
   {
     value: 'cm',
     name: 'Centímetros',
     calc: {
-      'nm': (value) => value,
-      'mm': (value) => value,
-      'm': (value) => value,
-      'km': (value) => value,
-      'mi': (value) => value,
-      'yd': (value) => value,
-      'ft': (value) => value,
-      'in': (value) => value,
+      'mm': (value) => (value * 10).toFixed(5),
+      'm': (value) => (value / 100).toFixed(5),
+      'km': (value) => (value / 100000).toFixed(5),
+      'ft': (value) => (value / 30.48).toFixed(5),
+      'in': (value) => (value / 2.54).toFixed(5),
     }
   },
   {
     value: 'm',
     name: 'Metros',
     calc: {
-      'nm': (value) => value,
-      'mm': (value) => value,
-      'cm': (value) => value,
-      'km': (value) => value,
-      'mi': (value) => value,
-      'yd': (value) => value,
-      'ft': (value) => value,
-      'in': (value) => value,
+      'mm': (value) => (value * 1000).toFixed(5),
+      'cm': (value) => (value * 100).toFixed(5),
+      'km': (value) => (value / 1000).toFixed(5),
+      'ft': (value) => (value * 3.281).toFixed(5),
+      'in': (value) => (value * 39.37).toFixed(5),
     }
   },
   {
     value: 'km',
     name: 'Quilômetros',
     calc: {
-      'nm': (value) => value,
-      'mm': (value) => value,
-      'cm': (value) => value,
-      'm': (value) => value,
-      'mi': (value) => value,
-      'yd': (value) => value,
-      'ft': (value) => value,
-      'in': (value) => value,
-    }
-  },
-  {
-    value: 'mi',
-    name: 'Milhas',
-    calc: {
-      'nm': (value) => value,
-      'mm': (value) => value,
-      'cm': (value) => value,
-      'm': (value) => value,
-      'km': (value) => value,
-      'yd': (value) => value,
-      'ft': (value) => value,
-      'in': (value) => value,
-    }
-  },
-  {
-    value: 'yd',
-    name: 'Jardas',
-    calc: {
-      'nm': (value) => value,
-      'mm': (value) => value,
-      'cm': (value) => value,
-      'm': (value) => value,
-      'km': (value) => value,
-      'mi': (value) => value,
-      'ft': (value) => value,
-      'in': (value) => value,
+      'mm': (value) => (value * 1000000).toFixed(5),
+      'cm': (value) => (value * 100000).toFixed(5),
+      'm': (value) => (value * 1000).toFixed(5),
+      'ft': (value) => (value * 3281).toFixed(5),
+      'in': (value) => (value * 39370).toFixed(5),
     }
   },
   {
     value: 'ft',
     name: 'Pes',
     calc: {
-      'nm': (value) => value,
-      'mm': (value) => value,
-      'cm': (value) => value,
-      'm': (value) => value,
-      'km': (value) => value,
-      'mi': (value) => value,
-      'yd': (value) => value,
-      'in': (value) => value,
+      'mm': (value) => (value * 304.8).toFixed(5),
+      'cm': (value) => (value * 30.48).toFixed(5),
+      'm': (value) => (value / 3.281).toFixed(5),
+      'km': (value) => (value / 3281).toFixed(5),
+      'in': (value) => (value * 12).toFixed(5),
     }
   },
   {
     value: 'in',
     name: 'Polegadas',
     calc: {
-      'nm': (value) => value,
-      'mm': (value) => value,
-      'cm': (value) => value,
-      'm': (value) => value,
-      'km': (value) => value,
-      'mi': (value) => value,
-      'yd': (value) => value,
-      'ft': (value) => value,
+      'mm': (value) => (value * 25.4).toFixed(5),
+      'cm': (value) => (value * 2.54).toFixed(5),
+      'm': (value) => (value / 39.37).toFixed(5),
+      'km': (value) => (value / 39370).toFixed(5),
+      'ft': (value) => (value / 12).toFixed(5),
     }
   },
 ];
@@ -244,7 +184,7 @@ function handleSelectMode() {
         
     case "length":
       fillSelects(lengths);
-      selected = length;
+      selected = lengths;
       break;
       
     default:  "currency"
@@ -343,7 +283,6 @@ function handleInput(input) {
   }
 
   const converter = selected.find(item => item.value === currentSelectValue);
-
   const functionToConverter = converter.calc[newSelectValue];
 
   const newValue = functionToConverter(currentInputValue);
