@@ -91,72 +91,125 @@ const temperatures = [
 
 const lengths = [
   {
-    value: 'mm',
+    value: 'millimeter',
     name: 'Milímetros',
     calc: {
-      'cm': (value) => (value / 10).toFixed(5),
-      'm': (value) => (value / 1000).toFixed(5),
-      'km': (value) => (value / 1000000).toFixed(5),
-      'ft': (value) => (value / 304.8).toFixed(5),
-      'in': (value) => (value / 25.4).toFixed(5),
+      'centimeter': (value) => (value / 10).toFixed(5),
+      'meter': (value) => (value / 1000).toFixed(5),
+      'kilometer': (value) => (value / 1000000).toFixed(5),
+      'foot': (value) => (value / 304.8).toFixed(5),
+      'inch': (value) => (value / 25.4).toFixed(5),
     }
   },
   {
-    value: 'cm',
+    value: 'centimeter',
     name: 'Centímetros',
     calc: {
-      'mm': (value) => (value * 10).toFixed(5),
-      'm': (value) => (value / 100).toFixed(5),
-      'km': (value) => (value / 100000).toFixed(5),
-      'ft': (value) => (value / 30.48).toFixed(5),
-      'in': (value) => (value / 2.54).toFixed(5),
+      'millimeter': (value) => (value * 10).toFixed(5),
+      'meter': (value) => (value / 100).toFixed(5),
+      'kilometer': (value) => (value / 100000).toFixed(5),
+      'foot': (value) => (value / 30.48).toFixed(5),
+      'inch': (value) => (value / 2.54).toFixed(5),
     }
   },
   {
-    value: 'm',
+    value: 'meter',
     name: 'Metros',
     calc: {
-      'mm': (value) => (value * 1000).toFixed(5),
-      'cm': (value) => (value * 100).toFixed(5),
-      'km': (value) => (value / 1000).toFixed(5),
-      'ft': (value) => (value * 3.281).toFixed(5),
-      'in': (value) => (value * 39.37).toFixed(5),
+      'millimeter': (value) => (value * 1000).toFixed(5),
+      'centimeter': (value) => (value * 100).toFixed(5),
+      'kilometer': (value) => (value / 1000).toFixed(5),
+      'foot': (value) => (value * 3.281).toFixed(5),
+      'inch': (value) => (value * 39.37).toFixed(5),
     }
   },
   {
-    value: 'km',
+    value: 'kilometer',
     name: 'Quilômetros',
     calc: {
-      'mm': (value) => (value * 1000000).toFixed(5),
-      'cm': (value) => (value * 100000).toFixed(5),
-      'm': (value) => (value * 1000).toFixed(5),
-      'ft': (value) => (value * 3281).toFixed(5),
-      'in': (value) => (value * 39370).toFixed(5),
+      'millimeter': (value) => (value * 1000000).toFixed(5),
+      'centimeter': (value) => (value * 100000).toFixed(5),
+      'meter': (value) => (value * 1000).toFixed(5),
+      'foot': (value) => (value * 3281).toFixed(5),
+      'inch': (value) => (value * 39370).toFixed(5),
     }
   },
   {
-    value: 'ft',
+    value: 'foot',
     name: 'Pes',
     calc: {
-      'mm': (value) => (value * 304.8).toFixed(5),
-      'cm': (value) => (value * 30.48).toFixed(5),
-      'm': (value) => (value / 3.281).toFixed(5),
-      'km': (value) => (value / 3281).toFixed(5),
-      'in': (value) => (value * 12).toFixed(5),
+      'millimeter': (value) => (value * 304.8).toFixed(5),
+      'centimeter': (value) => (value * 30.48).toFixed(5),
+      'meter': (value) => (value / 3.281).toFixed(5),
+      'kilometer': (value) => (value / 3281).toFixed(5),
+      'inch': (value) => (value * 12).toFixed(5),
     }
   },
   {
-    value: 'in',
+    value: 'inch',
     name: 'Polegadas',
     calc: {
-      'mm': (value) => (value * 25.4).toFixed(5),
-      'cm': (value) => (value * 2.54).toFixed(5),
-      'm': (value) => (value / 39.37).toFixed(5),
-      'km': (value) => (value / 39370).toFixed(5),
-      'ft': (value) => (value / 12).toFixed(5),
+      'millimeter': (value) => (value * 25.4).toFixed(5),
+      'centimeter': (value) => (value * 2.54).toFixed(5),
+      'meter': (value) => (value / 39.37).toFixed(5),
+      'kilometer': (value) => (value / 39370).toFixed(5),
+      'foot': (value) => (value / 12).toFixed(5),
     }
   },
 ];
+
+const times = [
+  {
+    value: 'second',
+    name: 'Segundos',
+    calc: {
+      'minute': (value) => value / 60,
+      'hour': (value) => value / 3600,
+      'day': (value) => value / 86400,
+      'week': (value) => value / 604800,
+    }
+  },
+  {
+    value: 'minute',
+    name: 'Minutos',
+    calc: {
+      'second': (value) => value * 60,
+      'hour': (value) => value / 60,
+      'day': (value) => value / 1440,
+      'week': (value) => value / 10080,
+    }
+  },
+  {
+    value: 'hour',
+    name: 'Horas',
+    calc: {
+      'second': (value) => value * 3600, 
+      'minute': (value) => value * 60,
+      'day': (value) => value / 24,
+      'week': (value) => value / 168,
+    }
+  },
+  {
+    value: 'day',
+    name: 'Dias',
+    calc: {
+      'second': (value) => value * 86400,
+      'minute': (value) => value * 1440,
+      'hour': (value) => value * 24,
+      'week': (value) => value / 7,
+    }
+  },
+  {
+    value: 'week',
+    name: 'Semanas',
+    calc: {
+      'second': (value) => value * 604800,
+      'minute': (value) => value * 10080,
+      'hour': (value) => value * 168,
+      'day': (value) => value * 7,
+    }
+  },
+]
 
 let select_element_1 = document.getElementById("select_1");
 let select_element_2 = document.getElementById("select_2");
@@ -186,6 +239,12 @@ function handleSelectMode() {
       fillSelects(lengths);
       selected = lengths;
       break;
+
+    case "time":
+      fillSelects(times);
+      selected = times;
+      break;
+        
       
     default:  "currency"
       fillSelects(currencies);
