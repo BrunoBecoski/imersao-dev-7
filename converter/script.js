@@ -94,68 +94,86 @@ const lengths = [
     value: 'millimeter',
     name: 'Milímetros',
     calc: {
-      'centimeter': (value) => (value / 10).toFixed(5),
-      'meter': (value) => (value / 1000).toFixed(5),
-      'kilometer': (value) => (value / 1000000).toFixed(5),
-      'foot': (value) => (value / 304.8).toFixed(5),
-      'inch': (value) => (value / 25.4).toFixed(5),
-    }
+      'centimeter': (value) => (value / 10),
+      'meter': (value) => (value / 1000),
+      'kilometer': (value) => (value / 1e+6),
+      'inch': (value) => (value / 25.4),
+      'foot': (value) => (value / 304.8),
+      'mile': (value) => (value / 1.609e+6),
+    },
   },
   {
     value: 'centimeter',
     name: 'Centímetros',
     calc: {
-      'millimeter': (value) => (value * 10).toFixed(5),
-      'meter': (value) => (value / 100).toFixed(5),
-      'kilometer': (value) => (value / 100000).toFixed(5),
-      'foot': (value) => (value / 30.48).toFixed(5),
-      'inch': (value) => (value / 2.54).toFixed(5),
+      'millimeter': (value) => value * 10,
+      'meter': (value) => value / 100,
+      'kilometer': (value) => value / 100000,
+      'inch': (value) => value / 2.54,
+      'foot': (value) => value / 30.48,
+      'mile': (value) => value / 160900,
     }
   },
   {
     value: 'meter',
     name: 'Metros',
     calc: {
-      'millimeter': (value) => (value * 1000).toFixed(5),
-      'centimeter': (value) => (value * 100).toFixed(5),
-      'kilometer': (value) => (value / 1000).toFixed(5),
-      'foot': (value) => (value * 3.281).toFixed(5),
-      'inch': (value) => (value * 39.37).toFixed(5),
+      'millimeter': (value) => value * 1000,
+      'centimeter': (value) => value * 100,
+      'kilometer': (value) => value / 1000,
+      'inch': (value) => value * 39.37,
+      'foot': (value) => value * 3.281,
+      'mile': (value) => value / 1609,
     }
   },
   {
     value: 'kilometer',
     name: 'Quilômetros',
     calc: {
-      'millimeter': (value) => (value * 1000000).toFixed(5),
-      'centimeter': (value) => (value * 100000).toFixed(5),
-      'meter': (value) => (value * 1000).toFixed(5),
-      'foot': (value) => (value * 3281).toFixed(5),
-      'inch': (value) => (value * 39370).toFixed(5),
+      'millimeter': (value) => value * 1e+6,
+      'centimeter': (value) => value * 100000,
+      'meter': (value) => value * 1000,
+      'inch': (value) => value * 39370,
+      'foot': (value) => value * 3281,
+      'mile': (value) => value / 1.609,
     }
   },
   {
     value: 'foot',
     name: 'Pes',
     calc: {
-      'millimeter': (value) => (value * 304.8).toFixed(5),
-      'centimeter': (value) => (value * 30.48).toFixed(5),
-      'meter': (value) => (value / 3.281).toFixed(5),
-      'kilometer': (value) => (value / 3281).toFixed(5),
-      'inch': (value) => (value * 12).toFixed(5),
+      'millimeter': (value) => value * 304.8,
+      'centimeter': (value) => value * 30.48,
+      'meter': (value) => value / 3.281,
+      'kilometer': (value) => value / 3281,
+      'inch': (value) => value * 12,
+      'mile': (value) => value / 5280,
     }
   },
   {
     value: 'inch',
     name: 'Polegadas',
     calc: {
-      'millimeter': (value) => (value * 25.4).toFixed(5),
-      'centimeter': (value) => (value * 2.54).toFixed(5),
-      'meter': (value) => (value / 39.37).toFixed(5),
-      'kilometer': (value) => (value / 39370).toFixed(5),
-      'foot': (value) => (value / 12).toFixed(5),
+      'millimeter': (value) => value * 25.4,
+      'centimeter': (value) => value * 2.54,
+      'meter': (value) => value / 39.37,
+      'kilometer': (value) => value / 39370,
+      'foot': (value) => value / 12,
+      'mile': (value) => value / 63360,
     }
   },
+  {
+    value: 'mile',
+    name: 'Milhas',
+    calc: {
+      'millimeter': (value) => value *  1.609e+6,
+      'centimeter': (value) => value * 160900,
+      'meter': (value) => value * 1609,
+      'kilometer': (value) => value * 1.609,
+      'inch': (value) => value * 63360,
+      'foot': (value) => value * 5280,
+    }
+  }
 ];
 
 const times = [
