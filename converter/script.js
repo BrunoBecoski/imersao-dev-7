@@ -185,6 +185,10 @@ const times = [
       'hour': (value) => value / 3600,
       'day': (value) => value / 86400,
       'week': (value) => value / 604800,
+      'month': (value) => value / 2.628e+6,
+      'year': (value) => value / 3.154e+7,
+      'decade': (value) => value / 3.154e+8,
+      'century': (value) => value / 3.154e+9,
     }
   },
   {
@@ -195,6 +199,10 @@ const times = [
       'hour': (value) => value / 60,
       'day': (value) => value / 1440,
       'week': (value) => value / 10080,
+      'month': (value) => value / 43800,
+      'year': (value) => value / 525600,
+      'decade': (value) => value / 5.256e+6,
+      'century': (value) => value / 5.256e+7,
     }
   },
   {
@@ -205,6 +213,10 @@ const times = [
       'minute': (value) => value * 60,
       'day': (value) => value / 24,
       'week': (value) => value / 168,
+      'month': (value) => value / 730,
+      'year': (value) => value / 8760,
+      'decade': (value) => value / 87600,
+      'century': (value) => value / 876000,
     }
   },
   {
@@ -215,6 +227,10 @@ const times = [
       'minute': (value) => value * 1440,
       'hour': (value) => value * 24,
       'week': (value) => value / 7,
+      'month': (value) => value / 30.417,
+      'year': (value) => value / 365,
+      'decade': (value) => value / 3650,
+      'century': (value) => value / 36500,
     }
   },
   {
@@ -225,6 +241,66 @@ const times = [
       'minute': (value) => value * 10080,
       'hour': (value) => value * 168,
       'day': (value) => value * 7,
+      'month': (value) => value / 4.345,
+      'year': (value) => value / 52.143,
+      'decade': (value) => value / 521.4,
+      'century': (value) => value / 5214,
+    }
+  },
+  {
+    value: 'month',
+    name: 'Meses',
+    calc: {
+      'second': (value) => value * 2.628e+6,
+      'minute': (value) => value * 43800,
+      'hour': (value) => value * 730,
+      'day': (value) => value * 30.417,
+      'week': (value) => value * 4.345,
+      'year': (value) => value / 12,
+      'decade': (value) => value / 120,
+      'century': (value) => value / 1200,
+    }
+  },
+  {
+    value: 'year',
+    name: 'Anos',
+    calc: {
+      'second': (value) => value * 3.154e+7,
+      'minute': (value) => value * 525600,
+      'hour': (value) => value * 8760,
+      'day': (value) => value * 365,
+      'week': (value) => value * 52.143,
+      'month': (value) => value * 12,
+      'decade': (value) => value / 10,
+      'century': (value) => value / 100,
+    }
+  },
+  {
+    value: 'decade',
+    name: 'Décadas',
+    calc: {
+      'second': (value) => value * 3.154e+8,
+      'minute': (value) => value * 5.256e+6,
+      'hour': (value) => value * 87600,
+      'day': (value) => value * 3650,
+      'week': (value) => value * 521.4,
+      'month': (value) => value * 120,
+      'year': (value) => value * 10,
+      'century': (value) => value / 10,
+    }
+  },
+  {
+    value: 'century',
+    name: 'Séculos',
+    calc: {
+      'second': (value) => value * 3.154e+9,
+      'minute': (value) => value * 5.256e+7,
+      'hour': (value) => value * 876000,
+      'day': (value) => value * 36500,
+      'week': (value) => value * 5214,
+      'month': (value) => value * 1200,
+      'year': (value) => value * 100,
+      'decade': (value) => value * 10 ,
     }
   },
 ]
