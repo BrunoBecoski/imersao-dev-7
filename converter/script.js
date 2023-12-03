@@ -14,50 +14,50 @@ const currencies = [
     value: 'ars',
     name: 'Peso argentino',
     calc: {
-      'brl': (value) => (value * 0.014).toFixed(2),
-      'cny': (value) => (value * 0.020).toFixed(2),
-      'eur': (value) => (value * 0.0026).toFixed(2),
-      'usd': (value) => (value * 0.0028).toFixed(2),
+      'brl': (value) => value * 0.014,
+      'cny': (value) => value * 0.020,
+      'eur': (value) => value * 0.0026,
+      'usd': (value) => value * 0.0028,
     },
   },
   {
     value: 'brl',
     name: 'Real brasileiro',
     calc: {
-      'ars': (value) => (value * 0.014).toFixed(2),
-      'cny': (value) => (value * 0.68).toFixed(2),
-      'eur': (value) => (value * 5.36).toFixed(2),
-      'usd': (value) => (value * 4.91).toFixed(2),
+      'ars': (value) => value * 0.014,
+      'cny': (value) => value * 0.68,
+      'eur': (value) => value * 5.36,
+      'usd': (value) => value * 4.91,
     },
   },
   {
     value: 'cny',
     name: 'Yuan chinês',
     calc: {
-      'ars': (value) => (value * 48.78).toFixed(2),
-      'brl': (value) => (value * 0.68).toFixed(2),
-      'eur': (value) => (value * 0.13).toFixed(2),
-      'usd': (value) => (value * 0.14).toFixed(2),
+      'ars': (value) => value * 48.78,
+      'brl': (value) => value * 0.68,
+      'eur': (value) => value * 0.13,
+      'usd': (value) => value * 0.14,
     },
   },
   {
     value: 'eur',
     name: 'Euro',
     calc: {
-      'ars': (value) => (value * 0.0026).toFixed(2),
-      'brl': (value) => (value * 0.19).toFixed(2),
-      'cny': (value) => (value * 0.13).toFixed(2),
-      'usd': (value) => (value * 0.92).toFixed(2),
+      'ars': (value) => value * 0.0026,
+      'brl': (value) => value * 0.19,
+      'cny': (value) => value * 0.13,
+      'usd': (value) => value * 0.92,
     },
   },
   {
     value: 'usd',
     name: 'Dólar americano',
     calc: {
-      'ars': (value) => (value * 0.0028).toFixed(2),
-      'brl': (value) => (value * 0.20).toFixed(2),
-      'cny': (value) => (value * 0.14).toFixed(2),
-      'eur': (value) => (value * 1.09).toFixed(2),
+      'ars': (value) => value * 0.0028,
+      'brl': (value) => value * 0.20,
+      'cny': (value) => value * 0.14,
+      'eur': (value) => value * 1.09,
     },
   },
 ];
@@ -67,24 +67,24 @@ const temperatures = [
     value: 'celsius',
     name: 'Grau Celsius',
     calc: {
-      'fahrenheit': (value) => Math.trunc((value * 9 / 5) + 32),
-      'kelvin': (value) => Math.trunc(value + 273.15),
+      'fahrenheit': (value) => (value * 9 / 5) + 32,
+      'kelvin': (value) => value + 273.15,
     },    
   },
   {
     value: 'fahrenheit',
     name: 'Grau Fahrenheit',
     calc: {
-      'celsius': (value) => Math.trunc((value - 32) * 5 / 9),
-      'kelvin': (value) => Math.trunc((value - 32) * 5 / 9 + 273.15),
+      'celsius': (value) => (value - 32) * 5 / 9,
+      'kelvin': (value) => (value - 32) * 5 / 9 + 273.15,
     },
   },
   {
     value: 'kelvin',
     name: 'Kelvin',
     calc: {
-      'celsius': (value) => Math.trunc(value - 273.15),
-      'fahrenheit': (value) => Math.trunc((value - 273.15) * 9 / 5 + 32),
+      'celsius': (value) => value - 273.15,
+      'fahrenheit': (value) => (value - 273.15) * 9 / 5 + 32,
     },
   },
 ];
@@ -311,12 +311,13 @@ let select_element_2 = document.getElementById("select_2");
 let input_element_1 = document.getElementById("input_1");
 let input_element_2 = document.getElementById("input_2");
 
+let selectedMode;
 let selected;
 
 handleSelectMode();
 
 function handleSelectMode() {
-  const selectedMode = document.getElementById("mode_selection").value;
+  selectedMode = document.getElementById("mode_selection").value;
 
   switch (selectedMode) {
     case "currency":
@@ -389,6 +390,7 @@ function getValues(value) {
   switch (value) {
     case 'input_1':
     case 'select_1':
+    case 'select_2':
       currentInputValue = input_element_1.value;
       newInput = input_element_2;
       currentSelectValue = select_element_1.value;
@@ -396,7 +398,6 @@ function getValues(value) {
       break;
         
     case 'input_2':
-    case 'select_2':
       currentInputValue = input_element_2.value;
       newInput = input_element_1;
       currentSelectValue = select_element_2.value;
@@ -436,9 +437,26 @@ function handleInput(input) {
   }
 
   const converter = selected.find(item => item.value === currentSelectValue);
-  const functionToConverter = converter.calc[newSelectValue];
+  const converterValue = converter.calc[newSelectValue];
 
-  const newValue = functionToConverter(currentInputValue);
+  const convertedValue = converterValue(currentInputValue);
 
-  newInput.value = newValue;
+  const formattedValue = formatValue(convertedValue);
+
+  newInput.value = formattedValue;
+}
+
+function formatValue(value) {
+  switch (selectedMode) {
+    case 'currency':
+    case 'temperature':
+      return value.toFixed(2);
+
+    case 'length':
+    case 'time': 
+      return value.toFixed(5).replace(/\.?0+$/, '')
+
+    default:
+      return value;
+  }
 }
