@@ -8,7 +8,7 @@
 
   </head>
 
-  <body id="root">
+  <body>
     <div class="container">
       <h1 class="page-title">
         Mentalista
@@ -17,17 +17,29 @@
       <img class="page-logo" alt="Logo Imersão dev" src="./assets/logo-imersao-alura.svg" />
     </div>
 
-    <label for="input_1">entre</label>
-    <input id="input_1" oninput="handleInput('input_1')" value="0"/>
-    <label for="input_2">a</label>
-    <input id="input_2" oninput="handleInput('input_2')" value="1000" />
-    
-    <button onclick="handleStart()">Começar</button>
-    
-    <!-- <a href="https://www.alura.com.br" target="_blank">
+
+    <a href="https://www.alura.com.br" target="_blank">
       <img class="alura-logo" alt="Logo Alura" src="./assets/alura-logo.svg" />  
       <img alt="Cérebro" src="./assets/brain.png" />
-    </a> -->
+    </a>
+
+    <section id="section_1">
+      <label for="input_1">entre</label>
+      <input id="input_1" oninput="handleInput('input_1')" value="0"/>
+      <label for="input_2">a</label>
+      <input id="input_2" oninput="handleInput('input_2')" value="1000" />
+      
+      <button onclick="handleStart()">Começar</button>
+    </section>
+
+    <section id="section_2" style="display: none">
+      <h2>Parabéns você acertou o número era: <span id="result_1"></span></h2>
+      <p>Número de tentativas: <span id="result_2"></span></p>
+      <input type="range" id="result_3" />
+
+      <button onclick="handleStart()">Jogar novamente</button>
+    </section>
+    
   </body>
 
   <script src="./script.js"></script>

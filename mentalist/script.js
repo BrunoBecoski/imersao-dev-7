@@ -14,10 +14,15 @@
 //   }
 // }
 
-const root_element = document.getElementById("root");
+const section_1_element = document.getElementById('section_1');
+const section_2_element = document.getElementById('section_2');
 
 const input_1_element = document.getElementById("input_1");
 const input_2_element = document.getElementById("input_2");
+
+const result_1_element = document.getElementById("result_1");
+const result_2_element = document.getElementById("result_2");
+const result_3_element = document.getElementById("result_3")
 
 let input1Value = 1;
 let input2Value = 1000;
@@ -44,12 +49,14 @@ function createRandomNumber(input1Value, input2Value) {
 }
 
 function handleStart() {
-
   const { 
     min,
     max,
     secretNumber
   } = createRandomNumber(input1Value, input2Value);
+
+  section_1_element.style.display = "none";
+  section_2_element.style.display = "block";
 
   console.log(secretNumber);
 
@@ -74,20 +81,15 @@ function handleStart() {
 }
 
 function showResult(guesses, min, max) {
-  const h2_element = document.createElement('h2');
-  const p_element = document.createElement('p');
-  const input_element = document.createElement('input');
+  const numberGuesses = guesses.length;
+  const correctGuess = guesses[numberGuesses - 1];
 
-  const correctGuess = guesses[guesses.length - 1];
+ result_1_element.innerText = correctGuess;
 
-  h2_element.innerHTML = "Parabéns você acertou o número era: " + correctGuess;
-  p_element.innerText = "Número de tentativas: " + guesses.length;
-  
-  input_element.type = "range";
-  input_element.min = min;
-  input_element.max = max;
-  input_element.value = correctGuess;
-  input_element.title = correctGuess;
+ result_2_element.innerText = numberGuesses;
 
-  root_element.append(h2_element, p_element, input_element)
+ result_3_element.min = min;
+ result_3_element.max = max;
+ result_3_element.value = correctGuess;
+ result_3_element.title = correctGuess;
 }
