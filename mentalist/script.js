@@ -16,67 +16,88 @@
 
 const section_1_element = document.getElementById('section_1');
 const section_2_element = document.getElementById('section_2');
+const section_3_element = document.getElementById('section_3');
 
 const input_1_element = document.getElementById("input_1");
 const input_2_element = document.getElementById("input_2");
 
 const result_1_element = document.getElementById("result_1");
 const result_2_element = document.getElementById("result_2");
-const result_3_element = document.getElementById("result_3")
+const result_3_element = document.getElementById("result_3");
 
-let input1Value = 1;
+const tip_element = document.getElementById("tip");
+
+let secretNumber;
+
+let input1Value = 0;
 let input2Value = 1000;
 
-function handleInput(input) {
-  if(input === 'input_1') {
-    input1Value = input_1_element.value
-  } else if (input === 'input_2') {
-    input2Value = input_2_element.value
-  }
-}
+let guesses = [];
 
-function createRandomNumber(input1Value, input2Value) {
+function createRandomNumber() {
   const min = Math.ceil(input1Value);
   const max = Math.floor(input2Value);
   
-  const secretNumber = Math.floor(Math.random() * (max - min) + min); 
+  secretNumber = Math.floor(Math.random() * (max - min) + min); 
+}
 
-  return {
-    min,
-    max,
-    secretNumber,
-  };
+function showSection(section) {
+  switch (section) {
+    case 1:
+      section_1_element.style.display = "block";
+      section_2_element.style.display = "none";
+      section_3_element.style.display = "none";
+      break;
+
+    case 2:
+      section_1_element.style.display = "none";
+      section_2_element.style.display = "block";
+      section_3_element.style.display = "none";
+      break;
+    
+    case 3:
+      section_1_element.style.display = "none";
+      section_2_element.style.display = "none";
+      section_3_element.style.display = "block";
+      break;
+  
+    default:
+      section_1_element.style.display = "block";
+      section_2_element.style.display = "none";
+      section_3_element.style.display = "none";
+      break;
+  }
+}
+
+function handleInput(input) {
+  if(input === 'input_1') {
+    input1Value = input_1_element.value;
+  } else if (input === 'input_2') {
+    input2Value = input_2_element.value;
+  }
 }
 
 function handleStart() {
-  const { 
-    min,
-    max,
-    secretNumber
-  } = createRandomNumber(input1Value, input2Value);
+  showSection(2);
 
-  section_1_element.style.display = "none";
-  section_2_element.style.display = "block";
+  createRandomNumber();
+}
+  
+function handleGuess(event) {
+  event.preventDefault();
 
-  console.log(secretNumber);
+  const guessValue = event.target["guessValue"].value;
 
-  let guess
-
-  let guesses = []
-
-  while (guess != secretNumber) {
-    guess = prompt(`Digite um número entre ${input1Value} e ${input2Value}`);
-    guesses.push(guess)
-
-    if (guess == secretNumber) {
-      alert("Acertou!")
-      
-      showResult(guesses, min, max);
-    } else if (guess > secretNumber) {
-      alert("Errou... o número secreto é menor")
-    } else if (guess < secretNumber) {
-      alert("Errou... o número secreto é maior")
-    }
+  guesses.push(guessValue);
+  
+  if (guessValue == secretNumber) {
+    guess = guessValue;
+    showSection(3)
+    showResult(guesses, input1Value, input2Value);
+  } else if (guessValue > secretNumber) {
+    tip_element.innerText = "Errou... o número secreto é menor";
+  } else if (guessValue < secretNumber) {
+    tip_element.innerText = "Errou... o número secreto é maior";
   }
 }
 
