@@ -18,27 +18,15 @@ const section_1_element = document.getElementById('section_1');
 const section_2_element = document.getElementById('section_2');
 const section_3_element = document.getElementById('section_3');
 
-const input_1_element = document.getElementById("input_1");
-const input_2_element = document.getElementById("input_2");
-
-const result_1_element = document.getElementById("result_1");
-const result_2_element = document.getElementById("result_2");
-const result_3_element = document.getElementById("result_3");
-
-const tip_element = document.getElementById("tip");
-
+let minNumber;
+let maxNumber;
 let secretNumber;
-
-let input1Value = 0;
-let input2Value = 1000;
-
 let guesses = [];
 
-function createRandomNumber() {
-  const min = Math.ceil(input1Value);
-  const max = Math.floor(input2Value);
-  
-  secretNumber = Math.floor(Math.random() * (max - min) + min); 
+function createRandomNumber(min, max) {
+  minNumber = Math.ceil(min);
+  maxNumber = Math.floor(max);
+  secretNumber = Math.floor(Math.random() * (max - min) + min);
 }
 
 function showSection(section) {
@@ -69,31 +57,35 @@ function showSection(section) {
   }
 }
 
-function handleInput(input) {
-  if(input === 'input_1') {
-    input1Value = input_1_element.value;
-  } else if (input === 'input_2') {
-    input2Value = input_2_element.value;
-  }
-}
-
 function handleStart() {
-  showSection(2);
+  const min = document.getElementById("inputMin").value;
+  const max = document.getElementById("inputMax").value;
 
-  createRandomNumber();
+  if (min && max) {
+    if (min !== max && min < max) {
+      createRandomNumber(min, max);
+
+      document.getElementById("guessMin").innerText = minNumber;
+      document.getElementById("guessMax").innerText = maxNumber;
+
+      showSection(2);
+
+      return;
+    }
+  }
+
+  alert('Valor inválido');
 }
-  
-function handleGuess(event) {
-  event.preventDefault();
 
-  const guessValue = event.target["guessValue"].value;
-
+function handleGuess() {
+  const guessValue = document.getElementById("guessValue").value;
   guesses.push(guessValue);
-  
+  const tip_element = document.getElementById("tip");
+
   if (guessValue == secretNumber) {
     guess = guessValue;
-    showSection(3)
-    showResult(guesses, input1Value, input2Value);
+    showResult();
+    showSection(3);
   } else if (guessValue > secretNumber) {
     tip_element.innerText = "Errou... o número secreto é menor";
   } else if (guessValue < secretNumber) {
@@ -101,16 +93,7 @@ function handleGuess(event) {
   }
 }
 
-function showResult(guesses, min, max) {
-  const numberGuesses = guesses.length;
-  const correctGuess = guesses[numberGuesses - 1];
-
- result_1_element.innerText = correctGuess;
-
- result_2_element.innerText = numberGuesses;
-
- result_3_element.min = min;
- result_3_element.max = max;
- result_3_element.value = correctGuess;
- result_3_element.title = correctGuess;
+function showResult() {
+ document.getElementById("secretNumber").innerText = secretNumber;
+ document.getElementById("guessAttempts").innerText = guesses.length;
 }
