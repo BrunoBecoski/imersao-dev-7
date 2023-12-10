@@ -24,8 +24,9 @@ let secretNumber;
 let guesses = [];
 
 function createRandomNumber(min, max) {
-  minNumber = Math.ceil(min);
-  maxNumber = Math.floor(max);
+  minNumber = Number(min);
+  maxNumber = Number(max);
+
   secretNumber = Math.floor(Math.random() * (max - min) + min);
 }
 
@@ -61,7 +62,7 @@ function handleStart() {
   const min = document.getElementById("inputMin").value;
   const max = document.getElementById("inputMax").value;
 
-  if (min && max) {
+  if (min.length > 0 || max.length > 0) {
     if (min !== max && min < max) {
       createRandomNumber(min, max);
 
