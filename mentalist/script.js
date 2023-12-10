@@ -24,8 +24,8 @@ let secretNumber;
 let guesses = [];
 
 function createRandomNumber(min, max) {
-  minNumber = Number(min);
-  maxNumber = Number(max);
+  minNumber = min;
+  maxNumber = max;
 
   secretNumber = Math.floor(Math.random() * (max - min) + min);
 }
@@ -59,11 +59,11 @@ function showSection(section) {
 }
 
 function handleStart() {
-  const min = document.getElementById("inputMin").value;
-  const max = document.getElementById("inputMax").value;
+  const min = Number(document.getElementById("inputMin").value);
+  const max = Number(document.getElementById("inputMax").value);
 
-  if (min.length > 0 || max.length > 0) {
-    if (min !== max && min < max) {
+  if (min !== 0 && max !== 0) {
+    if (min < max) {
       createRandomNumber(min, max);
 
       document.getElementById("guessMin").innerText = minNumber;
@@ -79,17 +79,33 @@ function handleStart() {
 }
 
 function handleGuess() {
-  const guessValue = document.getElementById("guessValue").value;
+  const guess = document.getElementById("guessValue");
+  
+  const guessValue = Number(guess.value)
+
   guesses.push(guessValue);
   const tip_element = document.getElementById("tip");
 
-  if (guessValue == secretNumber) {
-    guess = guessValue;
+  if (guessValue > maxNumber) {
+    guess.value = "";
+    alert('Valor muito alto');
+    return;
+  }
+
+  if (guessValue < minNumber) {
+    guess.value = "";
+    alert('Valor muito baixo');
+    return;
+  }
+
+  if (Number(guessValue) === secretNumber) {
     showResult();
     showSection(3);
   } else if (guessValue > secretNumber) {
+    guess.value = "";
     tip_element.innerText = "Errou... o número secreto é menor";
   } else if (guessValue < secretNumber) {
+    guess.value = "";
     tip_element.innerText = "Errou... o número secreto é maior";
   }
 }
