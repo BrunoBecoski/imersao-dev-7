@@ -14,10 +14,6 @@
 //   }
 // }
 
-const section_1_element = document.getElementById('section_1');
-const section_2_element = document.getElementById('section_2');
-const section_3_element = document.getElementById('section_3');
-
 let minNumber;
 let maxNumber;
 let secretNumber;
@@ -31,6 +27,10 @@ function createRandomNumber(min, max) {
 }
 
 function showSection(section) {
+  const section_1_element = document.getElementById('section_1');
+  const section_2_element = document.getElementById('section_2');
+  const section_3_element = document.getElementById('section_3');
+
   switch (section) {
     case 1:
       section_1_element.style.display = "block";
@@ -80,12 +80,8 @@ function handleStart() {
 
 function handleGuess() {
   const guess = document.getElementById("guessValue");
-  
   const guessValue = Number(guess.value)
-
-  guesses.push(guessValue);
-  const tip_element = document.getElementById("tip");
-
+  
   if (guessValue > maxNumber) {
     guess.value = "";
     alert('Valor muito alto');
@@ -97,8 +93,23 @@ function handleGuess() {
     alert('Valor muito baixo');
     return;
   }
+  
+  const equalGuess = guesses.some(guess => guessValue === guess);
+
+  if (equalGuess) {
+    guess.value = "";
+    alert("Valor já foi chutado");
+    return;
+  }
+
+  guesses.push(guessValue);
+  const tip_element = document.getElementById("tip");
+
+  document.getElementById("attemptsNumber").innerText = guesses.length;
+  document.getElementById("attemptsHistory").innerText = guesses;
 
   if (Number(guessValue) === secretNumber) {
+    guess.value = "";
     showResult();
     showSection(3);
   } else if (guessValue > secretNumber) {
@@ -113,4 +124,13 @@ function handleGuess() {
 function showResult() {
  document.getElementById("secretNumber").innerText = secretNumber;
  document.getElementById("guessAttempts").innerText = guesses.length;
+}
+
+function handleReplay() {
+  document.getElementById("attemptsNumber").innerText = "";
+  document.getElementById("attemptsHistory").innerText = "";
+  document.getElementById("tip").innerText = "";
+  document.getElementById("guessValue").value = "";
+  guesses = [];
+  showSection(1);
 }

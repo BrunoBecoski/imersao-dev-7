@@ -36,7 +36,8 @@
       <input id="guessValue" type="number"/>
       
       <button onclick="handleGuess()">Chutar</button>
-
+      <p>Números de chutes: <span id="attemptsNumber"></span></p>
+      <p>Histórico de chutes: <span id="attemptsHistory"></span> </p>
       <span id="tip"></span>
     </section>
 
@@ -45,7 +46,7 @@
       <p>Número de tentativas: <span id="guessAttempts"></span></p>
       <input type="range" id="result_3" />
 
-      <button>Jogar novamente</button>
+      <button onclick="handleReplay()">Jogar novamente</button>
     </section>
   </body>
 
