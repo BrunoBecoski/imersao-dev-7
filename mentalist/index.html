@@ -33,7 +33,8 @@
 
     <section id="section_2" style="display: none">
       <label for="guessValue">Chute on valor entre <span id="guessMin"></span> a <span id="guessMax"></span></label>
-      <input id="guessValue" type="number"/>
+      <input type="range" id="guessRange" oninput="handleRange(event)" /> 
+      <input id="guessValue" type="number" oninput="handleInput(event)" />
       
       <button onclick="handleGuess()">Chutar</button>
       <p>Números de chutes: <span id="attemptsNumber"></span></p>
@@ -44,7 +45,6 @@
     <section id="section_3" style="display: none">
       <h2>Parabéns você acertou o número era: <span id="secretNumber"></span></h2>
       <p>Número de tentativas: <span id="guessAttempts"></span></p>
-      <input type="range" id="result_3" />
 
       <button onclick="handleReplay()">Jogar novamente</button>
     </section>

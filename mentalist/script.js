@@ -66,8 +66,11 @@ function handleStart() {
     if (min < max) {
       createRandomNumber(min, max);
 
-      document.getElementById("guessMin").innerText = minNumber;
-      document.getElementById("guessMax").innerText = maxNumber;
+      document.getElementById("guessMin").innerText = min;
+      document.getElementById("guessMax").innerText = max;
+
+      document.getElementById("guessRange").min = min;
+      document.getElementById("guessRange").max = max;
 
       showSection(2);
 
@@ -78,10 +81,18 @@ function handleStart() {
   alert('Valor inválido');
 }
 
+function handleRange(event) {
+  document.getElementById("guessValue").value = event.target.value;
+}
+
+function handleInput(event) {
+  document.getElementById("guessRange").value = event.target.value;
+}
+
 function handleGuess() {
   const guess = document.getElementById("guessValue");
   const guessValue = Number(guess.value)
-  
+
   if (guessValue > maxNumber) {
     guess.value = "";
     alert('Valor muito alto');
@@ -113,10 +124,8 @@ function handleGuess() {
     showResult();
     showSection(3);
   } else if (guessValue > secretNumber) {
-    guess.value = "";
     tip_element.innerText = "Errou... o número secreto é menor";
   } else if (guessValue < secretNumber) {
-    guess.value = "";
     tip_element.innerText = "Errou... o número secreto é maior";
   }
 }
