@@ -82,6 +82,17 @@ function handleStart() {
 }
 
 function handleRange(event) {
+  const input = event.target;
+  const value = event.target.value;
+
+  if (minNumber > value) {
+    input.value = minNumber;
+  };
+  
+  if (maxNumber < value) {
+    input.value = maxNumber;
+  }; 
+
   document.getElementById("guessValue").value = event.target.value;
 }
 
