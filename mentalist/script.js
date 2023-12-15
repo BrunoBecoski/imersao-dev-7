@@ -85,15 +85,25 @@ function handleRange(event) {
   const input = event.target;
   const value = event.target.value;
 
-  if (minNumber > value) {
-    input.value = minNumber;
-  };
-  
-  if (maxNumber < value) {
-    input.value = maxNumber;
-  }; 
+  if (guesses.length !== 0) {    
+    const belowValues = guesses.filter(guess => guess < secretNumber);
+    const aboveValues = guesses.filter(guess => guess > secretNumber);
+    
+    const belowValue = belowValues.sort((a, b) => a - b).reverse()[0];
+    const aboveValue = aboveValues.sort((a, b) => a - b)[0];    
 
-  document.getElementById("guessValue").value = event.target.value;
+    if (belowValue >= value) {
+      input.value = belowValue;
+      return;
+    };
+    
+    if (aboveValue <= value) {
+      input.value = aboveValue;
+      return;
+    };  
+  }
+
+  document.getElementById("guessValue").value = value;
 }
 
 function handleInput(event) {
