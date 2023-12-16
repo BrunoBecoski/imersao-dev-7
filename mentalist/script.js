@@ -72,6 +72,24 @@ function showResult() {
   document.getElementById("guessAttempts").innerText = guesses.length;
  }
  
+ function checkValue(value) {
+  const belowValues = guesses.filter(guess => guess < secretNumber);
+  const aboveValues = guesses.filter(guess => guess > secretNumber);
+  
+  const belowValue = belowValues.sort((a, b) => a - b).reverse()[0];
+  const aboveValue = aboveValues.sort((a, b) => a - b)[0];
+
+  if (belowValue >= value) {
+    return belowValue + 1;
+  };
+  
+  if (aboveValue <= value) {
+    return aboveValue - 1;
+  };
+  
+  return value;
+ }
+
 function handleStart() {
   const min = Number(document.getElementById("inputMin").value);
   const max = Number(document.getElementById("inputMax").value);
@@ -103,35 +121,22 @@ function handleStart() {
 function handleRange() {
   const value = getValue();
 
-  if (guesses.length !== 0) {    
-    const belowValues = guesses.filter(guess => guess < secretNumber);
-    const aboveValues = guesses.filter(guess => guess > secretNumber);
-    
-    const belowValue = belowValues.sort((a, b) => a - b).reverse()[0];
-    const aboveValue = aboveValues.sort((a, b) => a - b)[0];    
-
-    if (belowValue > value) {
-      setValue(belowValue + 1);
-      return;
-    };
-    
-    if (aboveValue < value) {
-      setValue(aboveValue - 1)
-      return;
-    };  
-  }
-  
-  setValue(value);
+  const valueChecked = checkValue(value);
+  setValue(valueChecked);
 }
 
 function handleDecrease() {
   const value = getValue() - 1;
-  setValue(value);
+  const valueChecked = checkValue(value);
+  
+  setValue(valueChecked);
 }
 
 function handleIncrease() {
   const value = getValue() + 1;
-  setValue(value);
+  const valueChecked = checkValue(value);
+
+  setValue(valueChecked);
 }
 
 function handleGuess() {
