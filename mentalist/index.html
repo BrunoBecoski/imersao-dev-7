@@ -33,8 +33,10 @@
 
     <section id="section_2" style="display: none">
       <label for="guessValue">Chute on valor entre <span id="guessMin"></span> a <span id="guessMax"></span></label>
+      <button onclick="handleDecrease()">Diminuir</button>
       <input type="range" id="guessRange" oninput="handleRange(event)" /> 
-      <input id="guessValue" type="number" oninput="handleInput(event)" />
+      <button onclick="handleIncrease()">Aumentar</button>
+      <input id="guessValue" disabled />
       
       <button onclick="handleGuess()">Chutar</button>
       <p>Números de chutes: <span id="attemptsNumber"></span></p>

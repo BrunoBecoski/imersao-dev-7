@@ -26,6 +26,15 @@ function createRandomNumber(min, max) {
   secretNumber = Math.floor(Math.random() * (max - min) + min);
 }
 
+function getValue() {
+  return Number(document.getElementById("guessRange").value);
+}
+
+function setValue(value) {
+  document.getElementById("guessRange").value = value;
+  document.getElementById("guessValue").value = value;
+}
+
 function showSection(section) {
   const section_1_element = document.getElementById('section_1');
   const section_2_element = document.getElementById('section_2');
@@ -58,9 +67,18 @@ function showSection(section) {
   }
 }
 
+function showResult() {
+  document.getElementById("secretNumber").innerText = secretNumber;
+  document.getElementById("guessAttempts").innerText = guesses.length;
+ }
+ 
 function handleStart() {
   const min = Number(document.getElementById("inputMin").value);
   const max = Number(document.getElementById("inputMax").value);
+
+  const range = document.getElementById("guessRange");
+
+  const startValue = Math.ceil((max - min) / 2);
 
   if (min !== 0 && max !== 0) {
     if (min < max) {
@@ -69,8 +87,9 @@ function handleStart() {
       document.getElementById("guessMin").innerText = min;
       document.getElementById("guessMax").innerText = max;
 
-      document.getElementById("guessRange").min = min;
-      document.getElementById("guessRange").max = max;
+      range.min = min;
+      range.max = max;
+      setValue(startValue);
 
       showSection(2);
 
@@ -81,9 +100,8 @@ function handleStart() {
   alert('Valor inválido');
 }
 
-function handleRange(event) {
-  const input = event.target;
-  const value = event.target.value;
+function handleRange() {
+  const value = getValue();
 
   if (guesses.length !== 0) {    
     const belowValues = guesses.filter(guess => guess < secretNumber);
@@ -92,75 +110,55 @@ function handleRange(event) {
     const belowValue = belowValues.sort((a, b) => a - b).reverse()[0];
     const aboveValue = aboveValues.sort((a, b) => a - b)[0];    
 
-    if (belowValue >= value) {
-      input.value = belowValue;
+    if (belowValue > value) {
+      setValue(belowValue + 1);
       return;
     };
     
-    if (aboveValue <= value) {
-      input.value = aboveValue;
+    if (aboveValue < value) {
+      setValue(aboveValue - 1)
       return;
     };  
   }
-
-  document.getElementById("guessValue").value = value;
+  
+  setValue(value);
 }
 
-function handleInput(event) {
-  document.getElementById("guessRange").value = event.target.value;
+function handleDecrease() {
+  const value = getValue() - 1;
+  setValue(value);
+}
+
+function handleIncrease() {
+  const value = getValue() + 1;
+  setValue(value);
 }
 
 function handleGuess() {
-  const guess = document.getElementById("guessValue");
-  const guessValue = Number(guess.value)
+  const value = getValue();
 
-  if (guessValue > maxNumber) {
-    guess.value = "";
-    alert('Valor muito alto');
-    return;
-  }
-
-  if (guessValue < minNumber) {
-    guess.value = "";
-    alert('Valor muito baixo');
-    return;
-  }
-  
-  const equalGuess = guesses.some(guess => guessValue === guess);
-
-  if (equalGuess) {
-    guess.value = "";
-    alert("Valor já foi chutado");
-    return;
-  }
-
-  guesses.push(guessValue);
+  guesses.push(value);
   const tip_element = document.getElementById("tip");
 
   document.getElementById("attemptsNumber").innerText = guesses.length;
   document.getElementById("attemptsHistory").innerText = guesses;
 
-  if (Number(guessValue) === secretNumber) {
-    guess.value = "";
+  if (Number(value) === secretNumber) {
     showResult();
     showSection(3);
-  } else if (guessValue > secretNumber) {
+  } else if (value > secretNumber) {
+    setValue(value - 1)
     tip_element.innerText = "Errou... o número secreto é menor";
-  } else if (guessValue < secretNumber) {
+  } else if (value < secretNumber) {
+    setValue(value + 1)
     tip_element.innerText = "Errou... o número secreto é maior";
   }
-}
-
-function showResult() {
- document.getElementById("secretNumber").innerText = secretNumber;
- document.getElementById("guessAttempts").innerText = guesses.length;
 }
 
 function handleReplay() {
   document.getElementById("attemptsNumber").innerText = "";
   document.getElementById("attemptsHistory").innerText = "";
   document.getElementById("tip").innerText = "";
-  document.getElementById("guessValue").value = "";
   guesses = [];
   showSection(1);
 }
