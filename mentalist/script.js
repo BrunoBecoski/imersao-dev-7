@@ -20,19 +20,16 @@ let secretNumber;
 let guesses = [];
 
 function createRandomNumber(min, max) {
-  minNumber = min;
-  maxNumber = max;
-
-  secretNumber = Math.floor(Math.random() * (max - min) + min);
+  return Math.floor(Math.random() * (max - min) + min);
 }
 
 function getValue() {
-  return Number(document.getElementById("guessRange").value);
+  return Number(document.getElementById("guess_1").value);
 }
 
 function setValue(value) {
-  document.getElementById("guessRange").value = value;
-  document.getElementById("guessValue").value = value;
+  document.getElementById("guess_1").value = value;
+  document.getElementById("guess_2").value = value;
 }
 
 function showSection(section) {
@@ -91,39 +88,59 @@ function showResult() {
  }
 
 function handleStart() {
-  const min = Number(document.getElementById("inputMin").value);
-  const max = Number(document.getElementById("inputMax").value);
+  let min;
+  let max;
 
-  const range = document.getElementById("guessRange");
+  const rangeValue_1 = Number(document.getElementById("range_1").value);
+  const rangeValue_2 = Number(document.getElementById("range_2").value);
 
-  const startValue = Math.ceil((max - min) / 2);
-
-  if (min !== 0 && max !== 0) {
-    if (min < max) {
-      createRandomNumber(min, max);
-
-      document.getElementById("guessMin").innerText = min;
-      document.getElementById("guessMax").innerText = max;
-
-      range.min = min;
-      range.max = max;
-      setValue(startValue);
-
-      showSection(2);
-
-      return;
-    }
+  if(rangeValue_1 === 0) {
+    return;
   }
 
-  alert('Valor inválido');
+  if(rangeValue_2 === 0) {
+    return;
+  }
+
+  if(rangeValue_1 === rangeValue_2) {
+    return;
+  }
+
+
+  if (rangeValue_1 < rangeValue_2) {
+    min = rangeValue_1;
+    max = rangeValue_2;
+  } else {
+    min = rangeValue_2;
+    max = rangeValue_1;
+  }
+
+  
+  minNumber = min;
+  maxNumber = max;
+
+  const guess = document.getElementById("guess_1");
+  
+  const startValue = Math.ceil(((max - min) / 2) + min);
+  secretNumber = createRandomNumber(min, max);
+
+  document.getElementById("guessMin").innerText = min;
+  document.getElementById("guessMax").innerText = max;
+
+  guess.min = min;
+  guess.max = max;
+  setValue(startValue);
+
+  showSection(2);
 }
 
-function handleRange() {
+function handleInput() {
   const value = getValue();
-
   const valueChecked = checkValue(value);
+
   setValue(valueChecked);
 }
+
 
 function handleDecrease() {
   const value = getValue() - 1;

@@ -23,20 +23,20 @@
     </a>
 
     <section id="section_1">
-      <label for="inputMin">entre</label>
-      <input id="inputMin" type="number" min="1" value="1" />
-      <label for="inputMax">a</label>
-      <input id="inputMax" type="number" min="1" value="1000" />
+      <label for="range_1">entre</label>
+      <input id="range_1" type="number" min="1" value="1" />
+      <label for="range_2">a</label>
+      <input id="range_2" type="number" min="1" value="1000" />
       
       <button onclick="handleStart()">Começar</button>
     </section>
 
     <section id="section_2" style="display: none">
-      <label for="guessValue">Chute on valor entre <span id="guessMin"></span> a <span id="guessMax"></span></label>
+      <label for="guess_1">Chute on valor entre <span id="guessMin"></span> a <span id="guessMax"></span></label>
       <button onclick="handleDecrease()">Diminuir</button>
-      <input type="range" id="guessRange" oninput="handleRange(event)" /> 
+      <input type="range" id="guess_1" oninput="handleInput(event)" /> 
       <button onclick="handleIncrease()">Aumentar</button>
-      <input id="guessValue" disabled />
+      <input id="guess_2" disabled />
       
       <button onclick="handleGuess()">Chutar</button>
       <p>Números de chutes: <span id="attemptsNumber"></span></p>
