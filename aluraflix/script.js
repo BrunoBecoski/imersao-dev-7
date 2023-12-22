@@ -9,20 +9,23 @@
 
 addEventListener("submit", (event) => {
   event.preventDefault();
-
-  const titleInput_element = event.target["mediaTitle"];
-  const coverInput_element = event.target["mediaCover"];
-  const videoInput_element = event.target["mediaVideo"];
   
-  const titleValue = titleInput_element.value;
-  const coverValue = coverInput_element.value;
-  const videoValue = videoInput_element.value;
+  const mediaForm_element = event.target;
+  const buttonShow_element = document.getElementById("buttonShow");
+
+  const titleInput_element = event.target["inputTitle"];
+  const coverInput_element = event.target["inputCover"];
+  const videoInput_element = event.target["inputVideo"];
+
+  const titleValue = titleInput_element.value.trim();
+  const coverValue = coverInput_element.value.trim();
+  const videoValue = videoInput_element.value.trim();
 
   if (!titleValue || !coverValue || !videoValue) {
     return;
   }
   
-  const mediaList_element = document.getElementById("mediaList");
+  const divList_element = document.getElementById("divList");
 
   const div_element = document.createElement("div");
   const h3_element = document.createElement("h3");
@@ -45,13 +48,24 @@ addEventListener("submit", (event) => {
 
   div_element.append( buttonRemove_element, h3_element, img_element, iframe_element);
 
-  mediaList_element.append(div_element);
+  divList_element.append(div_element);
 
   titleInput_element.value = "";
   coverInput_element.value = "";
   videoInput_element.value = "";
+
+  buttonShow_element.style = "block";
+  mediaForm_element.style.display = "none";
 });
 
-function handleRemove(value) {
-  document.getElementById(value).remove();
+function handleRemove(id) {
+  document.getElementById(id).remove();
+}
+
+function handleShow() {
+  const buttonShow_element = document.getElementById("buttonShow");
+  const formMedia_element = document.getElementById("formMedia");
+
+  formMedia_element.style.display = "block";
+  buttonShow_element.style.display = "none";
 }

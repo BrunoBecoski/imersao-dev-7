@@ -14,20 +14,20 @@
       
       <img class="page-logo" alt="Logo Imersão dev" src="./assets/logo-imersao-alura.svg" />
 
-      <p class="page-subtitle">
-        Qual sua mídia favorita?
-      </p>
+      <button id="buttonShow" onclick="handleShow()">
+        Adicione a sua mídia favorita?
+      </button>
       
-      <form class="form-wrapper">
-        <input id="mediaTitle" placeholder="Insira o titulo da mídia" />
-        <input id="mediaCover" placeholder="Insira endereço de imagem" />
-        <input id="mediaVideo" placeholder="Insira uma url de um video do YouTube" />
+      <form id="formMedia" class="form-wrapper" style="display: none">
+        <input id="inputTitle" placeholder="Insira o titulo da mídia"/>
+        <input id="inputCover" placeholder="Insira endereço de imagem"/>
+        <input id="inputVideo" placeholder="Insira uma url de um video do YouTube"/>
           
         <button type="submit">Adicionar Mídia</button>
       </form>
     </div>
 
-    <div id="mediaList"></div> 
+    <div id="divList"></div> 
     </div>
           
     <a href="https://www.alura.com.br" target="_blank">
