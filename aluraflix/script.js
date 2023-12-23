@@ -10,9 +10,6 @@
 addEventListener("submit", (event) => {
   event.preventDefault();
   
-  const mediaForm_element = event.target;
-  const buttonShow_element = document.getElementById("buttonShow");
-
   const titleInput_element = event.target["inputTitle"];
   const coverInput_element = event.target["inputCover"];
   const videoInput_element = event.target["inputVideo"];
@@ -38,10 +35,10 @@ addEventListener("submit", (event) => {
   div_element.id = id;
 
   buttonRemove_element.innerText = "Remover";
-  buttonRemove_element.onclick = () => handleRemove(id);
+  buttonRemove_element.onclick = () => handleRemoveMedia(id);
 
   buttonEdit_element.innerText = "Editar";
-  buttonEdit_element.onclick = () => handleEdit(id);
+  buttonEdit_element.onclick = () => handleEditMedia(id);
 
   const urlVideo = videoValue.replace("https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/")
   
@@ -61,38 +58,41 @@ addEventListener("submit", (event) => {
   coverInput_element.value = "";
   videoInput_element.value = "";
 
-  buttonShow_element.style = "block";
-  mediaForm_element.style.display = "none";
+  handleHideForm();
 });
 
-function handleShow() {
-  const buttonShow_element = document.getElementById("buttonShow");
-  const formMedia_element = document.getElementById("formMedia");
-
-  formMedia_element.style.display = "block";
-  buttonShow_element.style.display = "none";
+function handleShowForm() {
+  document.getElementById("buttonShowForm").style.display = "none";
+  document.getElementById("formMedia").style.display = "block";
+  document.getElementById("divList").style.display = "none";
 }
 
-function handleRemove(id) {
+function handleHideForm() {
+  document.getElementById("buttonShowForm").style.display = "inline-block";
+  document.getElementById("formMedia").style.display = "none";
+  document.getElementById("divList").style.display = "block";
+
+  document.getElementById("inputTitle").value = "";
+  document.getElementById("inputCover").value = "";
+  document.getElementById("inputVideo").value = "";
+}
+
+function handleRemoveMedia(id) {
   document.getElementById(id).remove();
 }
 
-function handleEdit(id) {
+function handleEditMedia(id) {
   const div_element = document.getElementById(id);
-  
-  const h3 = document.getElementById("title").innerText;
-  const img = document.getElementById("cover").src;
-  const iframe = document.getElementById("video").src;
-  
+
   div_element.remove();
-  
-  const inputTitle_element = document.getElementById("inputTitle");
-  const coverInput_element = document.getElementById("inputCover");
-  const videoInput_element = document.getElementById("inputVideo");
 
-  inputTitle_element.value = h3;
-  coverInput_element.value = img;
-  videoInput_element.value = iframe;
+  const title = div_element.querySelector("#title").innerText;
+  const cover = div_element.querySelector("#cover").src;
+  const video = div_element.querySelector("#video").src;
+    
+  document.getElementById("inputTitle").value = title;
+  document.getElementById("inputCover").value = cover;
+  document.getElementById("inputVideo").value = video;
 
-  handleShow();
+  handleShowForm();
 }
