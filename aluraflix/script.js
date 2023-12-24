@@ -10,20 +10,47 @@
 addEventListener("submit", (event) => {
   event.preventDefault();
   
-  const titleInput_element = event.target["inputTitle"];
-  const coverInput_element = event.target["inputCover"];
-  const videoInput_element = event.target["inputVideo"];
+  const divMedia_element = createDivMedia();
+
+  if (!divMedia_element)  {
+    return;
+  }
+
+  setMediaList(divMedia_element);
+
+  const {
+    titleInput_element,
+    coverInput_element,
+    videoInput_element, 
+  } = getFormInputs();
+    
+  titleInput_element.value = "";
+  coverInput_element.value = "";
+  videoInput_element.value = "";
+
+  handleHideForm();
+});
+
+function setMediaList(divMedia_element) {
+  const divList_element = document.getElementById("divList");
+  divList_element.append(divMedia_element);
+}
+
+function createDivMedia() {
+  const {
+    titleInput_element,
+    coverInput_element, 
+    videoInput_element,
+  } = getFormInputs();
 
   const titleValue = titleInput_element.value.trim();
   const coverValue = coverInput_element.value.trim();
   const videoValue = videoInput_element.value.trim();
-
-  if (!titleValue || !coverValue || !videoValue) {
-    return;
-  }
   
-  const divList_element = document.getElementById("divList");
-
+  if (!titleValue || !coverValue || !videoValue) {
+    return 
+  }
+ 
   const div_element = document.createElement("div");
   const h3_element = document.createElement("h3");
   const img_element = document.createElement("img");
@@ -40,7 +67,7 @@ addEventListener("submit", (event) => {
   buttonEdit_element.innerText = "Editar";
   buttonEdit_element.onclick = () => handleEditMedia(id);
 
-  const urlVideo = videoValue.replace("https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/")
+  const videoUrl = videoValue.replace("https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/");
   
   h3_element.id = "title";
   img_element.id = "cover";
@@ -48,18 +75,24 @@ addEventListener("submit", (event) => {
 
   h3_element.innerText = titleValue;
   img_element.src = coverValue;
-  iframe_element.src = urlVideo;
+  iframe_element.src = videoUrl;
 
   div_element.append(buttonRemove_element, buttonEdit_element, h3_element, img_element, iframe_element);
 
-  divList_element.append(div_element);
+  return div_element;
+}
 
-  titleInput_element.value = "";
-  coverInput_element.value = "";
-  videoInput_element.value = "";
+function getFormInputs() {
+  const titleInput_element = document.getElementById("inputTitle");
+  const coverInput_element = document.getElementById("inputCover");
+  const videoInput_element = document.getElementById("inputVideo");
 
-  handleHideForm();
-});
+  return {
+    titleInput_element,
+    coverInput_element, 
+    videoInput_element,
+  }
+}
 
 function handleShowForm() {
   document.getElementById("buttonShowForm").style.display = "none";
@@ -72,9 +105,15 @@ function handleHideForm() {
   document.getElementById("formMedia").style.display = "none";
   document.getElementById("divList").style.display = "block";
 
-  document.getElementById("inputTitle").value = "";
-  document.getElementById("inputCover").value = "";
-  document.getElementById("inputVideo").value = "";
+  const {
+    titleInput_element,
+    coverInput_element, 
+    videoInput_element,
+  } = getFormInputs()
+
+  titleInput_element.value = "";
+  coverInput_element.value = ""; 
+  videoInput_element.value = "";
 }
 
 function handleRemoveMedia(id) {
@@ -89,10 +128,16 @@ function handleEditMedia(id) {
   const title = div_element.querySelector("#title").innerText;
   const cover = div_element.querySelector("#cover").src;
   const video = div_element.querySelector("#video").src;
-    
-  document.getElementById("inputTitle").value = title;
-  document.getElementById("inputCover").value = cover;
-  document.getElementById("inputVideo").value = video;
+
+  const {
+    titleInput_element,
+    coverInput_element, 
+    videoInput_element,
+  } = getFormInputs()
+  
+  titleInput_element.value = title;
+  coverInput_element.value = cover;
+  videoInput_element.value = video;
 
   handleShowForm();
 }
