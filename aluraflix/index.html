@@ -23,9 +23,16 @@
         <input id="inputCover" placeholder="Insira endereço de imagem" />
         <input id="inputVideo" placeholder="Insira uma url de um video do YouTube" />
         
-        <button type="button" onclick="handleHideForm()">Cancelar</button>
+        <div id="buttonsCreate">
+          <button type="button" onclick="handleHideForm('create')">Cancelar</button>
+          <button type="button" onclick="handleSubmit()">Adicionar Mídia</button>
+        </div>
 
-        <button type="submit">Adicionar Mídia</button>
+        <div id="buttonsEdit" style="display: none">
+          <button id="buttonCancel" type="button" onclick="handleHideForm('edit')">Cancelar</button>
+          <button id="buttonSubmitEdit" type="button">Editar Mídia</button>
+        </div>
+
       </form>
     </div>
 
