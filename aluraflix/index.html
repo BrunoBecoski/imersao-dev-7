@@ -14,25 +14,26 @@
       
       <img class="page-logo" alt="Logo Imersão dev" src="./assets/logo-imersao-alura.svg" />
 
-      <button id="buttonShowForm" onclick="handleShowForm()">
+      <button id="buttonShowFormCreate" type="button" onclick="handleShowFormCreate()">
         Adicione a sua mídia favorita?
       </button>
       
-      <form id="formMedia" class="form-wrapper" style="display: none">
+      <form id="formCreate" class="form-wrapper" style="display: none">
+        <input id="title" placeholder="Insira o titulo da mídia" />
+        <input id="cover" placeholder="Insira endereço de imagem" />
+        <input id="video" placeholder="Insira uma url de um video do YouTube" />
+        
+        <button type="reset" onclick="handleCancelFormCreate()">Cancelar</button>
+        <button type="submit">Adicionar Mídia</button>
+      </form>
+
+      <form id="formEdit" class="form-wrapper" style="display: none">
         <input id="inputTitle" placeholder="Insira o titulo da mídia" />
         <input id="inputCover" placeholder="Insira endereço de imagem" />
         <input id="inputVideo" placeholder="Insira uma url de um video do YouTube" />
-        
-        <div id="buttonsCreate">
-          <button type="button" onclick="handleHideForm('create')">Cancelar</button>
-          <button type="button" onclick="handleSubmit()">Adicionar Mídia</button>
-        </div>
 
-        <div id="buttonsEdit" style="display: none">
-          <button id="buttonCancel" type="button" onclick="handleHideForm('edit')">Cancelar</button>
-          <button id="buttonSubmitEdit" type="button">Editar Mídia</button>
-        </div>
-
+        <button type="button" onclick="handleHideFormEdit()">Cancelar</button>
+        <button type="submit" onclick="handleSubmitFormEdit()">Editar Mídia</button>
       </form>
     </div>
 
