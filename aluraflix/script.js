@@ -55,9 +55,10 @@ formCreate_element.addEventListener("submit", (event) => {
 
   buttonEdit_element.innerText = "Editar";
   buttonEdit_element.onclick = () => {
+    document.getElementById("divList").style.display = "none";
+    document.getElementById("buttonShowFormCreate").style.display = "none";
     const formEdit_element = document.getElementById("formEdit");
     formEdit_element.style.display = "block";
-    document.getElementById("divList").style.display = "none";
 
     const divMedia_element = document.getElementById(id);
 
@@ -65,10 +66,12 @@ formCreate_element.addEventListener("submit", (event) => {
     const coverValue = divMedia_element.querySelector("#cover").src;
     const videoValue = divMedia_element.querySelector("#video").src;
    
+    const idInput_element = formEdit_element.querySelector("#id");
     const titleInput_element = formEdit_element.querySelector("#title");
     const coverInput_element = formEdit_element.querySelector("#cover");
     const videoInput_element = formEdit_element.querySelector("#video");
 
+    idInput_element.value = id;
     titleInput_element.value = titleValue;
     coverInput_element.value = coverValue;
     videoInput_element.value = videoValue;
@@ -110,16 +113,26 @@ formEdit_element.addEventListener("reset", (event) => {
   event.target.style.display = "none";
 
   document.getElementById("divList").style.display = "block";
+  document.getElementById("buttonShowFormCreate").style.display = "inline-block";
 });
 
 formEdit_element.addEventListener("submit", (event) => {
   event.preventDefault();
 
+  const id = event.target["id"].value;
   const title = event.target["title"].value;
   const cover = event.target["cover"].value;
   const video = event.target["video"].value;
+  
+  const videoUrl = video.replace("https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/");
 
-  console.log("title", title);
-  console.log("cover", cover);
-  console.log("video", video);
+  const div_element = document.getElementById(id);
+
+  div_element.querySelector("#title").innerText = title;
+  div_element.querySelector("#cover").src = cover;
+  div_element.querySelector("#video").src = videoUrl;
+
+  document.getElementById("divList").style.display = "block";
+  document.getElementById("buttonShowFormCreate").style.display = "inline-block";
+  event.target.style.display = "none";
 });
