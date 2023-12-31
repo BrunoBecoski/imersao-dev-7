@@ -120,10 +120,14 @@ formEdit_element.addEventListener("submit", (event) => {
   event.preventDefault();
 
   const id = event.target["id"].value;
-  const title = event.target["title"].value;
-  const cover = event.target["cover"].value;
-  const video = event.target["video"].value;
+  const title = event.target["title"].value.trim();
+  const cover = event.target["cover"].value.trim();
+  const video = event.target["video"].value.trim();
   
+  if(!title || !cover || !video) {
+    return;
+  }
+
   const videoUrl = video.replace("https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/");
 
   const div_element = document.getElementById(id);
@@ -132,7 +136,7 @@ formEdit_element.addEventListener("submit", (event) => {
   div_element.querySelector("#cover").src = cover;
   div_element.querySelector("#video").src = videoUrl;
 
+  event.target.style.display = "none";
   document.getElementById("divList").style.display = "block";
   document.getElementById("buttonShowFormCreate").style.display = "inline-block";
-  event.target.style.display = "none";
 });
