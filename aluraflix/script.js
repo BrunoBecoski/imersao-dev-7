@@ -13,6 +13,12 @@ function handleShowFormCreate() {
   document.getElementById("divList").style.display = "none";
 }
 
+function handleHideFormCreate() {
+  document.getElementById("buttonShowFormCreate").style.display = "inline-block";
+  document.getElementById("formCreate").style.display = "none";
+  document.getElementById("divList").style.display = "block";
+}
+
 const formCreate_element = document.getElementById("formCreate");
 
 formCreate_element.addEventListener("reset", (event) => {
@@ -20,9 +26,7 @@ formCreate_element.addEventListener("reset", (event) => {
   event.target["cover"].value = "";
   event.target["video"].value = "";
 
-  document.getElementById("buttonShowFormCreate").style.display = "inline-block";
-  document.getElementById("formCreate").style.display = "none";
-  document.getElementById("divList").style.display = "block";
+  handleHideFormCreate();
 });
 
 formCreate_element.addEventListener("submit", (event) => {
@@ -97,9 +101,7 @@ formCreate_element.addEventListener("submit", (event) => {
   cover_element.value = "";
   video_element.value = "";
 
-  document.getElementById("buttonShowFormCreate").style.display = "inline-block";
-  document.getElementById("formCreate").style.display = "none";
-  document.getElementById("divList").style.display = "block";
+  handleHideFormCreate();
 });
 
 
