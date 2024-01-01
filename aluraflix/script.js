@@ -19,6 +19,18 @@ function handleHideFormCreate() {
   document.getElementById("divList").style.display = "block";
 }
 
+function handleShowFormEdit() {
+  document.getElementById("buttonShowFormCreate").style.display = "none";
+  document.getElementById("formEdit").style.display = "block";
+  document.getElementById("divList").style.display = "none";
+}
+
+function handleHideFormEdit() {
+  document.getElementById("buttonShowFormCreate").style.display = "inline-block";
+  document.getElementById("formEdit").style.display = "none";
+  document.getElementById("divList").style.display = "block";
+}
+
 const formCreate_element = document.getElementById("formCreate");
 
 formCreate_element.addEventListener("reset", (event) => {
@@ -104,7 +116,6 @@ formCreate_element.addEventListener("submit", (event) => {
   handleHideFormCreate();
 });
 
-
 const formEdit_element = document.getElementById("formEdit");
 
 formEdit_element.addEventListener("reset", (event) => {
@@ -112,10 +123,7 @@ formEdit_element.addEventListener("reset", (event) => {
   event.target["cover"] = "";
   event.target["video"] = "";
 
-  event.target.style.display = "none";
-
-  document.getElementById("divList").style.display = "block";
-  document.getElementById("buttonShowFormCreate").style.display = "inline-block";
+  handleHideFormEdit()
 });
 
 formEdit_element.addEventListener("submit", (event) => {
@@ -138,7 +146,5 @@ formEdit_element.addEventListener("submit", (event) => {
   div_element.querySelector("#cover").src = cover;
   div_element.querySelector("#video").src = videoUrl;
 
-  event.target.style.display = "none";
-  document.getElementById("divList").style.display = "block";
-  document.getElementById("buttonShowFormCreate").style.display = "inline-block";
+  handleShowFormEdit();
 });
