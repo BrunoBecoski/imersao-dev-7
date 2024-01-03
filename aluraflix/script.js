@@ -70,28 +70,7 @@ formCreate_element.addEventListener("submit", (event) => {
   buttonRemove_element.onclick = () => document.getElementById(id).remove();
 
   buttonEdit_element.innerText = "Editar";
-  buttonEdit_element.onclick = () => {
-    document.getElementById("divList").style.display = "none";
-    document.getElementById("buttonShowFormCreate").style.display = "none";
-    const formEdit_element = document.getElementById("formEdit");
-    formEdit_element.style.display = "block";
-
-    const divMedia_element = document.getElementById(id);
-
-    const titleValue = divMedia_element.querySelector("#title").innerText;
-    const coverValue = divMedia_element.querySelector("#cover").src;
-    const videoValue = divMedia_element.querySelector("#video").src;
-   
-    const idInput_element = formEdit_element.querySelector("#id");
-    const titleInput_element = formEdit_element.querySelector("#title");
-    const coverInput_element = formEdit_element.querySelector("#cover");
-    const videoInput_element = formEdit_element.querySelector("#video");
-
-    idInput_element.value = id;
-    titleInput_element.value = titleValue;
-    coverInput_element.value = coverValue;
-    videoInput_element.value = videoValue;
-  };
+  buttonEdit_element.onclick = () => handleOpenFormEdit(id, titleValue, coverValue, videoValue);
 
   const videoUrl = videoValue.replace("https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/");
   
@@ -148,3 +127,25 @@ formEdit_element.addEventListener("submit", (event) => {
 
   handleShowFormEdit();
 });
+
+function handleOpenFormEdit(id, titleValue, coverValue, videoValue) {
+  handleShowFormEdit();
+
+  const formEdit_element = document.getElementById("formEdit");
+
+  const divMedia_element = document.getElementById(id);
+
+  const titleValue = divMedia_element.querySelector("#title").innerText;
+  const coverValue = divMedia_element.querySelector("#cover").src;
+  const videoValue = divMedia_element.querySelector("#video").src;
+   
+  const idInput_element = formEdit_element.querySelector("#id");
+  const titleInput_element = formEdit_element.querySelector("#title");
+  const coverInput_element = formEdit_element.querySelector("#cover");
+  const videoInput_element = formEdit_element.querySelector("#video");
+
+  idInput_element.value = id;
+  titleInput_element.value = titleValue;
+  coverInput_element.value = coverValue;
+  videoInput_element.value = videoValue;
+}
