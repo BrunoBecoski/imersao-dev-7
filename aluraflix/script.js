@@ -7,41 +7,47 @@
 //   document.getElementById("movie").value = "";
 // }
 
-function handleShowFormCreate() {
-  document.getElementById("buttonShowFormCreate").style.display = "none";
+const formCreate_element = document.getElementById("formCreate");
+formCreate_element.addEventListener("reset", handleResetFormCreate);
+formCreate_element.addEventListener("submit", handleSubmitFormCreate);
+
+const formEdit_element = document.getElementById("formEdit");
+formEdit_element.addEventListener("reset", handleResetFormEdit);
+formEdit_element.addEventListener("submit", handleSubmitFormEdit);
+
+function handleOpenFormCreate() { 
+  document.getElementById("buttonOpenFormCreate").style.display = "none";
   document.getElementById("formCreate").style.display = "block";
   document.getElementById("divList").style.display = "none";
-}
-
-function handleHideFormCreate() {
-  document.getElementById("buttonShowFormCreate").style.display = "inline-block";
+} 
+  
+function handleCloseFormCreate() {
+  document.getElementById("buttonOpenFormCreate").style.display = "inline-block";
   document.getElementById("formCreate").style.display = "none";
   document.getElementById("divList").style.display = "block";
 }
 
-function handleShowFormEdit() {
-  document.getElementById("buttonShowFormCreate").style.display = "none";
+function handleOpenFormEdit() {
+  document.getElementById("buttonOpenFormCreate").style.display = "none";
   document.getElementById("formEdit").style.display = "block";
   document.getElementById("divList").style.display = "none";
 }
 
-function handleHideFormEdit() {
-  document.getElementById("buttonShowFormCreate").style.display = "inline-block";
+function handleCloseFormEdit() {
+  document.getElementById("buttonOpenFormCreate").style.display = "inline-block";
   document.getElementById("formEdit").style.display = "none";
   document.getElementById("divList").style.display = "block";
 }
 
-const formCreate_element = document.getElementById("formCreate");
-
-formCreate_element.addEventListener("reset", (event) => {
+function handleResetFormCreate(event) {
   event.target["title"].value = "";
   event.target["cover"].value = "";
   event.target["video"].value = "";
 
-  handleHideFormCreate();
-});
+  handleCloseFormCreate();
+}
 
-formCreate_element.addEventListener("submit", (event) => {
+function handleSubmitFormCreate(event) {
   event.preventDefault();
   
   const title_element = event.target["title"];
@@ -70,7 +76,27 @@ formCreate_element.addEventListener("submit", (event) => {
   buttonRemove_element.onclick = () => document.getElementById(id).remove();
 
   buttonEdit_element.innerText = "Editar";
-  buttonEdit_element.onclick = () => handleOpenFormEdit(id, titleValue, coverValue, videoValue);
+  buttonEdit_element.onclick = () => {
+    handleOpenFormEdit();
+
+    const formEdit_element = document.getElementById("formEdit");
+
+    const divMedia_element = document.getElementById(id);
+  
+    const titleValue = divMedia_element.querySelector("#title").innerText;
+    const coverValue = divMedia_element.querySelector("#cover").src;
+    const videoValue = divMedia_element.querySelector("#video").src;
+     
+    const idInput_element = formEdit_element.querySelector("#id");
+    const titleInput_element = formEdit_element.querySelector("#title");
+    const coverInput_element = formEdit_element.querySelector("#cover");
+    const videoInput_element = formEdit_element.querySelector("#video");
+  
+    idInput_element.value = id;
+    titleInput_element.value = titleValue;
+    coverInput_element.value = coverValue;
+    videoInput_element.value = videoValue;
+  };
 
   const videoUrl = videoValue.replace("https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/");
   
@@ -92,20 +118,18 @@ formCreate_element.addEventListener("submit", (event) => {
   cover_element.value = "";
   video_element.value = "";
 
-  handleHideFormCreate();
-});
+  handleCloseFormCreate();
+}
 
-const formEdit_element = document.getElementById("formEdit");
-
-formEdit_element.addEventListener("reset", (event) => {
+function handleResetFormEdit(event) {
   event.target["title"] = "";
   event.target["cover"] = "";
   event.target["video"] = "";
 
-  handleHideFormEdit()
-});
+  handleCloseFormEdit();
+}
 
-formEdit_element.addEventListener("submit", (event) => {
+function handleSubmitFormEdit(event) {
   event.preventDefault();
 
   const id = event.target["id"].value;
@@ -124,28 +148,6 @@ formEdit_element.addEventListener("submit", (event) => {
   div_element.querySelector("#title").innerText = title;
   div_element.querySelector("#cover").src = cover;
   div_element.querySelector("#video").src = videoUrl;
-
-  handleShowFormEdit();
-});
-
-function handleOpenFormEdit(id, titleValue, coverValue, videoValue) {
-  handleShowFormEdit();
-
-  const formEdit_element = document.getElementById("formEdit");
-
-  const divMedia_element = document.getElementById(id);
-
-  const titleValue = divMedia_element.querySelector("#title").innerText;
-  const coverValue = divMedia_element.querySelector("#cover").src;
-  const videoValue = divMedia_element.querySelector("#video").src;
-   
-  const idInput_element = formEdit_element.querySelector("#id");
-  const titleInput_element = formEdit_element.querySelector("#title");
-  const coverInput_element = formEdit_element.querySelector("#cover");
-  const videoInput_element = formEdit_element.querySelector("#video");
-
-  idInput_element.value = id;
-  titleInput_element.value = titleValue;
-  coverInput_element.value = coverValue;
-  videoInput_element.value = videoValue;
+  
+  handleCloseFormEdit();
 }
