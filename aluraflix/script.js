@@ -66,7 +66,7 @@ function submitFormCreate(event) {
 
   const id = title.toLowerCase().replaceAll(/[^a-z0-9]+/ig, "_");
 
-  setMediaList({
+  addMedia({
     id,
     title,
     cover,
@@ -111,27 +111,37 @@ function submitFormEdit(event) {
   closeFormEdit();
 }
 
-function setMediaList(item){
-  const index = mediaList.push(item) - 1;
+function addMedia(item) {  
+  mediaList.push(item);
 
-  renderMedias(index);
+  renderMedias();
 }
 
-function renderMedias(index){
-  const divMedia_element = createDivMedia(index);
+function removeMedia(id) {
+  mediaList = mediaList.filter(item => item.id !== id);
 
+  renderMedias();
+}
+
+function renderMedias(){
   const divList_element = document.getElementById("divList");
 
-  divList_element.append(divMedia_element);
+  divList_element.innerHTML = "";
+
+  const arrayMedia = mediaList.map(item => createDivMedia(item));
+
+  arrayMedia.forEach((item) => {
+    divList_element.appendChild(item);
+  })
 }
 
-function createDivMedia(index) {
+function createDivMedia(item) {
   const {
     id,
     title,
     cover,
     video,
-  } = mediaList[index];
+  } = item;
 
   const divMedia_element = document.createElement("div");
   const h3_element = document.createElement("h3");
@@ -143,14 +153,14 @@ function createDivMedia(index) {
   divMedia_element.id = id;
 
   buttonRemove_element.innerText = "Remover";
-  buttonRemove_element.onclick = () => document.getElementById(id).remove();
+  buttonRemove_element.onclick = () => removeMedia(id);
 
   buttonEdit_element.innerText = "Editar";
   buttonEdit_element.onclick = () => {
     setValuesFormEdit(index);
     openFormEdit();
   };
-
+  
   const videoUrl = video.replace("https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/");
   
   h3_element.id = "title";
@@ -166,12 +176,12 @@ function createDivMedia(index) {
   return divMedia_element;
 };
 
-function setValuesFormEdit(index) {
+function setValuesFormEdit(id) {
   const {
     title,
     cover,
     video,
-  } = mediaList[index];
+  } = mediaList[id];
 
   const formEdit_element = document.getElementById("formEdit");
    
