@@ -21,31 +21,77 @@ function openFormCreate() {
   document.getElementById("buttonOpenFormCreate").style.display = "none";
   document.getElementById("formCreate").style.display = "block";
   document.getElementById("divList").style.display = "none";
+  
+  const formCreate_element = document.getElementById("formCreate");
+
+  const titleInput_element = formCreate_element.querySelector("#title");
+  const coverInput_element = formCreate_element.querySelector("#cover");
+  const videoInput_element = formCreate_element.querySelector("#video");
+
+  titleInput_element.value = "";
+  coverInput_element.value = "";
+  videoInput_element.value = "";
 } 
   
 function closeFormCreate() {
   document.getElementById("buttonOpenFormCreate").style.display = "inline-block";
   document.getElementById("formCreate").style.display = "none";
   document.getElementById("divList").style.display = "block";
+
+  const formCreate_element = document.getElementById("formCreate");
+
+  const titleInput_element = formCreate_element.querySelector("#title");
+  const coverInput_element = formCreate_element.querySelector("#cover");
+  const videoInput_element = formCreate_element.querySelector("#video");
+
+  titleInput_element.value = "";
+  coverInput_element.value = "";
+  videoInput_element.value = "";
 }
 
-function openFormEdit() {
+function openFormEdit(id) {
   document.getElementById("buttonOpenFormCreate").style.display = "none";
   document.getElementById("formEdit").style.display = "block";
   document.getElementById("divList").style.display = "none";
+
+  const {
+    title,
+    cover,
+    video,
+  } = mediaList.find(item => item.id === id);
+
+  const formEdit_element = document.getElementById("formEdit");
+
+  const idInput_element = formEdit_element.querySelector("#id");
+  const titleInput_element = formEdit_element.querySelector("#title");
+  const coverInput_element = formEdit_element.querySelector("#cover");
+  const videoInput_element = formEdit_element.querySelector("#video");
+
+  idInput_element.value = id;
+  titleInput_element.value = title;
+  coverInput_element.value = cover;
+  videoInput_element.value = video;
 }
 
 function closeFormEdit() {
   document.getElementById("buttonOpenFormCreate").style.display = "inline-block";
   document.getElementById("formEdit").style.display = "none";
   document.getElementById("divList").style.display = "block";
+
+  const formCreate_element = document.getElementById("formEdit");
+
+  const idInput_element = formCreate_element.querySelector("#id");
+  const titleInput_element = formCreate_element.querySelector("#title");
+  const coverInput_element = formCreate_element.querySelector("#cover");
+  const videoInput_element = formCreate_element.querySelector("#video");
+
+  idInput_element.value = "";
+  titleInput_element.value = "";
+  coverInput_element.value = "";
+  videoInput_element.value = "";
 }
 
-function resetFormCreate(event) {
-  event.target["title"].value = "";
-  event.target["cover"].value = "";
-  event.target["video"].value = "";
-
+function resetFormCreate() {
   closeFormCreate();
 }
 
@@ -80,11 +126,7 @@ function submitFormCreate(event) {
   closeFormCreate();
 }
 
-function resetFormEdit(event) {
-  event.target["title"] = "";
-  event.target["cover"] = "";
-  event.target["video"] = "";
-
+function resetFormEdit() {
   closeFormEdit();
 }
 
@@ -156,10 +198,7 @@ function createDivMedia(item) {
   buttonRemove_element.onclick = () => removeMedia(id);
 
   buttonEdit_element.innerText = "Editar";
-  buttonEdit_element.onclick = () => {
-    setValuesFormEdit(index);
-    openFormEdit();
-  };
+  buttonEdit_element.onclick = () => openFormEdit(id);
   
   const videoUrl = video.replace("https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/");
   
@@ -175,23 +214,3 @@ function createDivMedia(item) {
   
   return divMedia_element;
 };
-
-function setValuesFormEdit(id) {
-  const {
-    title,
-    cover,
-    video,
-  } = mediaList[id];
-
-  const formEdit_element = document.getElementById("formEdit");
-   
-  const idInput_element = formEdit_element.querySelector("#id");
-  const titleInput_element = formEdit_element.querySelector("#title");
-  const coverInput_element = formEdit_element.querySelector("#cover");
-  const videoInput_element = formEdit_element.querySelector("#video");
-
-  idInput_element.value = id;
-  titleInput_element.value = title;
-  coverInput_element.value = cover;
-  videoInput_element.value = video;
-}
