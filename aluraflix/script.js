@@ -18,19 +18,11 @@ formEdit_element.addEventListener("submit", submitFormEdit);
 let mediaList = [];
 
 function openFormCreate() { 
+  clearForm("formCreate");
+
   document.getElementById("buttonOpenFormCreate").style.display = "none";
   document.getElementById("formCreate").style.display = "block";
   document.getElementById("divList").style.display = "none";
-  
-  const formCreate_element = document.getElementById("formCreate");
-
-  const titleInput_element = formCreate_element.querySelector("#title");
-  const coverInput_element = formCreate_element.querySelector("#cover");
-  const videoInput_element = formCreate_element.querySelector("#video");
-
-  titleInput_element.value = "";
-  coverInput_element.value = "";
-  videoInput_element.value = "";
 } 
   
 function closeFormCreate() {
@@ -38,39 +30,15 @@ function closeFormCreate() {
   document.getElementById("formCreate").style.display = "none";
   document.getElementById("divList").style.display = "block";
 
-  const formCreate_element = document.getElementById("formCreate");
-
-  const titleInput_element = formCreate_element.querySelector("#title");
-  const coverInput_element = formCreate_element.querySelector("#cover");
-  const videoInput_element = formCreate_element.querySelector("#video");
-
-  titleInput_element.value = "";
-  coverInput_element.value = "";
-  videoInput_element.value = "";
+  clearForm("formCreate");
 }
 
-function openFormEdit(id) {
+function openFormEdit(mediaId) {
   document.getElementById("buttonOpenFormCreate").style.display = "none";
   document.getElementById("formEdit").style.display = "block";
   document.getElementById("divList").style.display = "none";
 
-  const {
-    title,
-    cover,
-    video,
-  } = mediaList.find(item => item.id === id);
-
-  const formEdit_element = document.getElementById("formEdit");
-
-  const idInput_element = formEdit_element.querySelector("#id");
-  const titleInput_element = formEdit_element.querySelector("#title");
-  const coverInput_element = formEdit_element.querySelector("#cover");
-  const videoInput_element = formEdit_element.querySelector("#video");
-
-  idInput_element.value = id;
-  titleInput_element.value = title;
-  coverInput_element.value = cover;
-  videoInput_element.value = video;
+  fillFormEdit(mediaId);
 }
 
 function closeFormEdit() {
@@ -78,17 +46,7 @@ function closeFormEdit() {
   document.getElementById("formEdit").style.display = "none";
   document.getElementById("divList").style.display = "block";
 
-  const formCreate_element = document.getElementById("formEdit");
-
-  const idInput_element = formCreate_element.querySelector("#id");
-  const titleInput_element = formCreate_element.querySelector("#title");
-  const coverInput_element = formCreate_element.querySelector("#cover");
-  const videoInput_element = formCreate_element.querySelector("#video");
-
-  idInput_element.value = "";
-  titleInput_element.value = "";
-  coverInput_element.value = "";
-  videoInput_element.value = "";
+  clearForm("formEdit");
 }
 
 function resetFormCreate() {
@@ -153,14 +111,14 @@ function submitFormEdit(event) {
   closeFormEdit();
 }
 
-function addMedia(item) {  
-  mediaList.push(item);
+function addMedia(media) {  
+  mediaList.push(media);
 
   renderMedias();
 }
 
-function removeMedia(id) {
-  mediaList = mediaList.filter(item => item.id !== id);
+function removeMedia(mediaId) {
+  mediaList = mediaList.filter(media => media.id !== mediaId);
 
   renderMedias();
 }
@@ -170,20 +128,20 @@ function renderMedias(){
 
   divList_element.innerHTML = "";
 
-  const arrayMedia = mediaList.map(item => createDivMedia(item));
+  const mediaList_elements = mediaList.map(media => createDivMedia(media));
 
-  arrayMedia.forEach((item) => {
-    divList_element.appendChild(item);
+  mediaList_elements.forEach((media_element) => {
+    divList_element.appendChild(media_element);
   })
 }
 
-function createDivMedia(item) {
+function createDivMedia(media) {
   const {
     id,
     title,
     cover,
     video,
-  } = item;
+  } = media;
 
   const divMedia_element = document.createElement("div");
   const h3_element = document.createElement("h3");
@@ -214,3 +172,35 @@ function createDivMedia(item) {
   
   return divMedia_element;
 };
+
+function clearForm(formId) {
+  const formCreate_element = document.getElementById(formId);
+
+  const titleInput_element = formCreate_element.querySelector("#title");
+  const coverInput_element = formCreate_element.querySelector("#cover");
+  const videoInput_element = formCreate_element.querySelector("#video");
+
+  titleInput_element.value = "";
+  coverInput_element.value = "";
+  videoInput_element.value = "";
+}
+
+function fillFormEdit(mediaId) {
+  const {
+    title,
+    cover,
+    video,
+  } = mediaList.find(media => media.id === mediaId);
+
+  const formEdit_element = document.getElementById("formEdit");
+
+  const idInput_element = formEdit_element.querySelector("#id");
+  const titleInput_element = formEdit_element.querySelector("#title");
+  const coverInput_element = formEdit_element.querySelector("#cover");
+  const videoInput_element = formEdit_element.querySelector("#video");
+
+  idInput_element.value = id;
+  titleInput_element.value = title;
+  coverInput_element.value = cover;
+  videoInput_element.value = video;
+}
