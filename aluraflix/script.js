@@ -111,10 +111,15 @@ function submitFormEdit(event) {
   closeFormEdit();
 }
 
-function addMedia(media) {  
-  mediaList.push(media);
-
-  renderMedias();
+function addMedia(media) {   
+  const exist = checkMediaExist(media);
+  
+  if (exist) {
+    return;
+  } else {
+    mediaList.push(media);
+    renderMedias();
+  }
 }
 
 function removeMedia(mediaId) {
@@ -203,4 +208,12 @@ function fillFormEdit(mediaId) {
   titleInput_element.value = title;
   coverInput_element.value = cover;
   videoInput_element.value = video;
+}
+
+function checkMediaExist(mediaToCheck) {
+  if (mediaList.length === 0) {
+    return false;
+  } else {
+    return mediaList.some((media) => JSON.stringify(media) === JSON.stringify(mediaToCheck));
+  }
 }
