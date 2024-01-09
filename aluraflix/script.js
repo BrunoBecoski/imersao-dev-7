@@ -113,7 +113,7 @@ function submitFormEdit(event) {
 
 function addMedia(media) {   
   const exist = checkMediaExist(media);
-  
+
   if (exist) {
     return;
   } else {
@@ -213,7 +213,15 @@ function fillFormEdit(mediaId) {
 function checkMediaExist(mediaToCheck) {
   if (mediaList.length === 0) {
     return false;
-  } else {
-    return mediaList.some((media) => JSON.stringify(media) === JSON.stringify(mediaToCheck));
   }
+
+  return mediaList.some((media) => {
+    if(media.id === mediaToCheck.id) { return true }
+
+    if(media.title === mediaToCheck.title) { return true }
+
+    if(media.cover === mediaToCheck.cover) { return true }
+
+    if(media.video === mediaToCheck.video) { return true }
+  }); 
 }
