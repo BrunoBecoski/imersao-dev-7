@@ -53,6 +53,10 @@ function resetFormCreate() {
   closeFormCreate();
 }
 
+function createUniqueId(title) {
+  return title.toLowerCase().match(/[a-z0-9]+/g).join("-") + "_" + String(Date.now());
+}
+
 function submitFormCreate(event) {
   event.preventDefault();
   
@@ -68,8 +72,18 @@ function submitFormCreate(event) {
     return;
   }
 
-  const id = title.toLowerCase().replaceAll(/[^a-z0-9]+/ig, "_");
+  const exist = checkMediaExist({
+    title,
+    cover,
+    video,
+  });
 
+  if (exist) {
+    return;
+  }
+
+  const id = createUniqueId(title);
+ 
   addMedia({
     id,
     title,
@@ -112,14 +126,8 @@ function submitFormEdit(event) {
 }
 
 function addMedia(media) {   
-  const exist = checkMediaExist(media);
-
-  if (exist) {
-    return;
-  } else {
-    mediaList.push(media);
-    renderMedias();
-  }
+  mediaList.push(media);
+  renderMedias();
 }
 
 function removeMedia(mediaId) {
@@ -216,8 +224,6 @@ function checkMediaExist(mediaToCheck) {
   }
 
   return mediaList.some((media) => {
-    if(media.id === mediaToCheck.id) { return true }
-
     if(media.title === mediaToCheck.title) { return true }
 
     if(media.cover === mediaToCheck.cover) { return true }
