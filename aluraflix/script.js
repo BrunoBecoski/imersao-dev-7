@@ -105,7 +105,7 @@ function resetFormEdit() {
 function submitFormEdit(event) {
   event.preventDefault();
 
-  const id = event.target["id"].value;
+  const mediaId = event.target["id"].value;
   const title = event.target["title"].value.trim();
   const cover = event.target["cover"].value.trim();
   const video = event.target["video"].value.trim();
@@ -114,14 +114,17 @@ function submitFormEdit(event) {
     return;
   }
 
-  const videoUrl = video.replace("https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/");
+  removeMedia(mediaId);
 
-  const div_element = document.getElementById(id);
+  const id = createUniqueId(title);
 
-  div_element.querySelector("#title").innerText = title;
-  div_element.querySelector("#cover").src = cover;
-  div_element.querySelector("#video").src = videoUrl;
-  
+  addMedia({
+    id,
+    title,
+    cover,
+    video,   
+  })
+
   closeFormEdit();
 }
 
@@ -200,6 +203,7 @@ function clearForm(formId) {
 
 function fillFormEdit(mediaId) {
   const {
+    id,
     title,
     cover,
     video,
