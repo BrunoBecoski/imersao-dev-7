@@ -17,6 +17,13 @@ formEdit_element.addEventListener("submit", submitFormEdit);
 
 let mediaList = [];
 
+const localStorageMediaList = JSON.parse(localStorage.getItem("mediaList"));
+
+if (localStorageMediaList) {
+  mediaList = localStorageMediaList;
+  renderMedias();
+}
+
 function openFormCreate() { 
   clearForm("formCreate");
 
@@ -148,6 +155,10 @@ function updateMedia(mediaId, media) {
 }
 
 function renderMedias(){
+  localStorage.setItem("mediaList", 
+    JSON.stringify(mediaList)
+  );
+
   const divList_element = document.getElementById("divList");
 
   divList_element.innerHTML = "";
