@@ -114,15 +114,13 @@ function submitFormEdit(event) {
     return;
   }
 
-  removeMedia(mediaId);
-
   const id = createUniqueId(title);
 
-  addMedia({
+  updateMedia(mediaId, {
     id,
     title,
     cover,
-    video,   
+    video,
   })
 
   closeFormEdit();
@@ -135,6 +133,16 @@ function addMedia(media) {
 
 function removeMedia(mediaId) {
   mediaList = mediaList.filter(media => media.id !== mediaId);
+
+  renderMedias();
+}
+
+function updateMedia(mediaId, media) {
+  const index = mediaList.findIndex((media) => media.id === mediaId);
+
+  mediaList[index] = {
+    ...media,
+  }
 
   renderMedias();
 }
