@@ -17,11 +17,56 @@ formEdit_element.addEventListener("submit", submitFormEdit);
 
 let mediaList = [];
 
-const localStorageMediaList = JSON.parse(localStorage.getItem("mediaList"));
+getLocalStorage();
 
-if (localStorageMediaList) {
-  mediaList = localStorageMediaList;
+function getLocalStorage() {
+  const localStorageMediaList = JSON.parse(localStorage.getItem("mediaList"));
+
+  if (localStorageMediaList) {
+    mediaList = localStorageMediaList; 
+    renderMedias();
+  } 
+}
+
+function setLocalStorage() {
+  localStorage.setItem("mediaList", JSON.stringify(mediaList));
+}
+
+function addMedia(media) {
+  mediaList.push(media);
+
+  setLocalStorage();
   renderMedias();
+}
+
+function removeMedia(mediaId) {
+  mediaList = mediaList.filter(media => media.id !== mediaId);
+
+  setLocalStorage();
+  renderMedias();
+}
+
+function updateMedia(mediaId, media) {
+  const index = mediaList.findIndex((media) => media.id === mediaId);
+
+  mediaList[index] = {
+    ...media,
+  }
+
+  setLocalStorage();
+  renderMedias();
+}
+
+function renderMedias(){
+  const divList_element = document.getElementById("divList");
+
+  divList_element.innerHTML = "";
+
+  const mediaList_elements = mediaList.map(media => createDivMedia(media));
+
+  mediaList_elements.forEach((media_element) => {
+    divList_element.appendChild(media_element);
+  })
 }
 
 function openFormCreate() { 
@@ -131,43 +176,6 @@ function submitFormEdit(event) {
   })
 
   closeFormEdit();
-}
-
-function addMedia(media) {   
-  mediaList.push(media);
-  renderMedias();
-}
-
-function removeMedia(mediaId) {
-  mediaList = mediaList.filter(media => media.id !== mediaId);
-
-  renderMedias();
-}
-
-function updateMedia(mediaId, media) {
-  const index = mediaList.findIndex((media) => media.id === mediaId);
-
-  mediaList[index] = {
-    ...media,
-  }
-
-  renderMedias();
-}
-
-function renderMedias(){
-  localStorage.setItem("mediaList", 
-    JSON.stringify(mediaList)
-  );
-
-  const divList_element = document.getElementById("divList");
-
-  divList_element.innerHTML = "";
-
-  const mediaList_elements = mediaList.map(media => createDivMedia(media));
-
-  mediaList_elements.forEach((media_element) => {
-    divList_element.appendChild(media_element);
-  })
 }
 
 function createDivMedia(media) {
