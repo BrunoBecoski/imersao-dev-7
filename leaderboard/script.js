@@ -72,14 +72,26 @@
 
 const form_element = document.getElementById("form");
 
-form_element.addEventListener("submit", (event) => {
+let playersList = [];
+
+form_element.addEventListener("submit", handleSubmit);
+
+function handleSubmit(event) {
   event.preventDefault();
 
-  const name = event.target["name"].value;
+  const name = event.target["name"].value.trim();
+
+  if(!name) {
+    return;
+  }
+
+  const id = createUniqueId(name);
 
   const playersTable_element = document.getElementById("playersTable");
 
   const tr_element = document.createElement("tr");
+
+  tr_element.id = id;
 
   const tdName_element = document.createElement("td");
   const tdVictory_element = document.createElement("td");
@@ -98,21 +110,33 @@ form_element.addEventListener("submit", (event) => {
   buttonDraw_element.innerText = "Empate";
   buttonDefeat_element.innerText = "Derrota";
 
-  buttonVictory_element.onclick = () => console.log('handleVictory: ' + name);
-  buttonDraw_element.onclick = () => console.log('handleDraw: ' + name);
-  buttonDefeat_element.onclick = () => console.log('handleDefeat: ' + name);
+  buttonVictory_element.onclick = () => console.log('handleVictory: ' + id);
+  buttonDraw_element.onclick = () => console.log('handleDraw: ' + id);
+  buttonDefeat_element.onclick = () => console.log('handleDefeat: ' + id);
 
+  const victories = 0;
+  const draws = 0;
+  const defeats = 0;
+  const points = 0;
 
   tdName_element.innerText = name;
-  tdVictory_element.innerText = 0;
-  tdDraw_element.innerText = 0;
-  tdDefeat_element.innerText = 0;
-  tdPoints_element.innerText = 0;
+  tdVictory_element.innerText = victories;
+  tdDraw_element.innerText = draws;
+  tdDefeat_element.innerText = defeats;
+  tdPoints_element.innerText = points;
 
   tdButtonVictory_element.appendChild(buttonVictory_element);
   tdButtonDraw__element.appendChild(buttonDraw_element);
   tdButtonDefeat_element.appendChild(buttonDefeat_element);
 
+  playersList.push({
+    id,
+    name,
+    victories,
+    draws,
+    defeats,
+    points,
+  })
 
   tr_element.append(
     tdName_element,
@@ -128,4 +152,8 @@ form_element.addEventListener("submit", (event) => {
   playersTable_element.appendChild(tr_element);
 
   event.target["name"].value = "";
-})
+}
+
+function createUniqueId(name) {
+  return name.toLowerCase().match(/[.\S]+/g).join("-") + "_" + String(Date.now())
+}
