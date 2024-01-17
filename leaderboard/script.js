@@ -87,10 +87,21 @@ function handleSubmit(event) {
 
   const id = createUniqueId(name);
 
-  const playersTable_element = document.getElementById("playersTable");
+  const tdPlayer_element = createPlayer(id, name);
 
+  const tbodyPlayersTable_element = document.getElementById("playersTable");
+
+  tbodyPlayersTable_element.appendChild(tdPlayer_element);
+
+  event.target["name"].value = "";
+}
+
+function createUniqueId(name) {
+  return name.toLowerCase().match(/[.\S]+/g).join("-") + "_" + String(Date.now())
+}
+
+function createPlayer(id, name) {
   const tr_element = document.createElement("tr");
-
   tr_element.id = id;
 
   const tdName_element = document.createElement("td");
@@ -101,18 +112,22 @@ function handleSubmit(event) {
   const tdButtonVictory_element = document.createElement("td");
   const tdButtonDraw__element = document.createElement("td");
   const tdButtonDefeat_element = document.createElement("td");
+  const tdButtonRemove_element = document.createElement("td");
 
   const buttonVictory_element = document.createElement("button");
   const buttonDraw_element = document.createElement("button");
   const buttonDefeat_element = document.createElement("button");
+  const buttonRemove_element = document.createElement("button");
 
   buttonVictory_element.innerText = "Vitória";
   buttonDraw_element.innerText = "Empate";
   buttonDefeat_element.innerText = "Derrota";
+  buttonRemove_element.innerText = "Remover";
 
   buttonVictory_element.onclick = () => console.log('handleVictory: ' + id);
   buttonDraw_element.onclick = () => console.log('handleDraw: ' + id);
   buttonDefeat_element.onclick = () => console.log('handleDefeat: ' + id);
+  buttonRemove_element.onclick = () => console.log('handleRemove: ' + id);
 
   const victories = 0;
   const draws = 0;
@@ -128,6 +143,7 @@ function handleSubmit(event) {
   tdButtonVictory_element.appendChild(buttonVictory_element);
   tdButtonDraw__element.appendChild(buttonDraw_element);
   tdButtonDefeat_element.appendChild(buttonDefeat_element);
+  tdButtonRemove_element.appendChild(buttonRemove_element);
 
   playersList.push({
     id,
@@ -147,13 +163,8 @@ function handleSubmit(event) {
     tdButtonVictory_element,
     tdButtonDraw__element,
     tdButtonDefeat_element,
+    tdButtonRemove_element,
   );
 
-  playersTable_element.appendChild(tr_element);
-
-  event.target["name"].value = "";
-}
-
-function createUniqueId(name) {
-  return name.toLowerCase().match(/[.\S]+/g).join("-") + "_" + String(Date.now())
+  return tr_element;
 }
