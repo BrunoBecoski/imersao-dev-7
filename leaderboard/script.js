@@ -49,7 +49,6 @@
 //   `;
 // }
 
-
 // function addVictory(player) {
 //   player.victory++
 //   player.points = player.points + 3
@@ -72,11 +71,11 @@
 
 const form_element = document.getElementById("form");
 
-let playersList = [];
+let players = [];
 
-form_element.addEventListener("submit", handleSubmit);
+form_element.addEventListener("submit", submit);
 
-function handleSubmit(event) {
+function submit(event) {
   event.preventDefault();
 
   const name = event.target["name"].value.trim();
@@ -84,10 +83,18 @@ function handleSubmit(event) {
   if(!name) {
     return;
   }
+  
+  const playerAlreadyExists = players.some((player) => player.name === name);
 
-  const id = createUniqueId(name);
+  if (playerAlreadyExists) {
+    return;
+  }
 
-  const tdPlayer_element = createPlayer(id, name);
+  const player = createPlayer(name);
+
+  savePlayer(player);
+
+  const tdPlayer_element = createPlayerTd(player);
 
   const tbodyPlayersTable_element = document.getElementById("playersTable");
 
@@ -100,60 +107,52 @@ function createUniqueId(name) {
   return name.toLowerCase().match(/[.\S]+/g).join("-") + "_" + String(Date.now())
 }
 
-function createPlayer(id, name) {
-  const tr_element = document.createElement("tr");
-  tr_element.id = id;
-
-  const tdName_element = document.createElement("td");
-  const tdVictory_element = document.createElement("td");
-  const tdDraw_element = document.createElement("td");
-  const tdDefeat_element = document.createElement("td");
-  const tdPoints_element = document.createElement("td");
-  const tdButtonVictory_element = document.createElement("td");
-  const tdButtonDraw__element = document.createElement("td");
-  const tdButtonDefeat_element = document.createElement("td");
-  const tdButtonRemove_element = document.createElement("td");
-
-  const buttonVictory_element = document.createElement("button");
-  const buttonDraw_element = document.createElement("button");
-  const buttonDefeat_element = document.createElement("button");
-  const buttonRemove_element = document.createElement("button");
-
-  buttonVictory_element.innerText = "Vitória";
-  buttonDraw_element.innerText = "Empate";
-  buttonDefeat_element.innerText = "Derrota";
-  buttonRemove_element.innerText = "Remover";
-
-  buttonVictory_element.onclick = () => console.log('handleVictory: ' + id);
-  buttonDraw_element.onclick = () => console.log('handleDraw: ' + id);
-  buttonDefeat_element.onclick = () => console.log('handleDefeat: ' + id);
-  buttonRemove_element.onclick = () => console.log('handleRemove: ' + id);
+function createPlayer(name) {
+  const id = createUniqueId(name);
 
   const victories = 0;
   const draws = 0;
   const defeats = 0;
   const points = 0;
 
-  tdName_element.innerText = name;
-  tdVictory_element.innerText = victories;
-  tdDraw_element.innerText = draws;
-  tdDefeat_element.innerText = defeats;
-  tdPoints_element.innerText = points;
-
-  tdButtonVictory_element.appendChild(buttonVictory_element);
-  tdButtonDraw__element.appendChild(buttonDraw_element);
-  tdButtonDefeat_element.appendChild(buttonDefeat_element);
-  tdButtonRemove_element.appendChild(buttonRemove_element);
-
-  playersList.push({
+  return {
     id,
     name,
     victories,
     draws,
     defeats,
     points,
-  })
+  }
+}
 
+function savePlayer(player) {
+  players.push(player);
+}
+
+function createPlayerTd(player) {
+  const {
+    id,
+    name,
+    victories,
+    draws,
+    defeats,
+    points,
+  } = player;
+  
+  const tr_element = document.createElement("tr");
+  tr_element.id = id;
+
+  const tdName_element = createTd(name, 'name');
+  const tdVictory_element = createTd(victories, "victories");
+  const tdDraw_element = createTd(draws, 'draws');
+  const tdDefeat_element = createTd(defeats, "defeats");  
+  const tdPoints_element = createTd(points, "points");
+
+  const tdButtonVictory_element = createTdButton("Vitória", () => console.log('handleVictory: ' + id), 'buttonVictory');
+  const tdButtonDraw_element = createTdButton("Empate", () => console.log('handleDraw: ' + id), 'buttonDraw');
+  const tdButtonDefeat_element = createTdButton("Derrota", () => console.log('handleDefeat: ' + id), 'buttonDefeat');
+  const tdButtonRemove_element =createTdButton("Remover",  () => console.log('handleDefeat: ' + id), 'buttonRemove');
+  
   tr_element.append(
     tdName_element,
     tdVictory_element,
@@ -161,10 +160,31 @@ function createPlayer(id, name) {
     tdDefeat_element,
     tdPoints_element,
     tdButtonVictory_element,
-    tdButtonDraw__element,
+    tdButtonDraw_element,
     tdButtonDefeat_element,
     tdButtonRemove_element,
   );
 
   return tr_element;
+}
+
+function createTd(text, id) {
+  const td_element = document.createElement("td");
+
+  td_element.innerText = text;
+  td_element.id = id;
+
+  return td_element;
+}
+
+function createTdButton(text, onClick, id) {
+  const td_element = document.createElement("td");
+  const button_element = document.createElement("button");
+
+  td_element.id = id;
+  button_element.innerText = text;
+  button_element.onclick = onClick;
+  td_element.appendChild(button_element);
+  
+  return td_element;
 }
