@@ -130,10 +130,55 @@ function savePlayers(newPlayers) {
 }
 
 function removePlayer(id) {
-  const newPlayers = players.filter(player => player.id !== id);
+  const index = players.findIndex(player => player.id === id);
 
-  savePlayers(newPlayers);
-} 
+  players.splice(index, 1);
+
+  renderPlayers();
+}
+
+function updatePlayer(playerToUpdate) {
+  const index = players.findIndex(player => player.id === playerToUpdate.id);
+  
+  players.splice(index, 1, playerToUpdate)
+  
+  renderPlayers();
+}
+
+function victoryPlayer(id) {
+  const player = players.find(player => player.id === id);
+  
+  const playerToUpdate = {
+    ...player,
+    victories: player.victories + 1,
+    points: player.points + 3,
+  }
+
+  updatePlayer(playerToUpdate);
+}
+
+function drawPlayer(id) {
+  const player = players.find(player => player.id === id);
+
+  const playerToUpdate = {
+    ...player,
+    draws: player.draws + 1,
+    points: player.points + 1,
+  }
+
+  updatePlayer(playerToUpdate);
+}
+
+function defeatPlayer(id) {
+  const player = players.find(player => player.id === id);
+
+  const playerToUpdate = {
+    ...player,
+    defeats: player.defeats + 1,
+  }
+
+  updatePlayer(playerToUpdate);
+}
 
 function renderPlayers() {
   const tbodyPlayersTable_element = document.getElementById("playersTable");
@@ -166,9 +211,9 @@ function createPlayerTd(player) {
   const tdDefeat_element = createTd(defeats);  
   const tdPoints_element = createTd(points);
 
-  const tdButtonVictory_element = createTdButton("Vitória", () => console.log('handleVictory: ' + id));
-  const tdButtonDraw_element = createTdButton("Empate", () => console.log('handleDraw: ' + id));
-  const tdButtonDefeat_element = createTdButton("Derrota", () => console.log('handleDefeat: ' + id));
+  const tdButtonVictory_element = createTdButton("Vitória", () => victoryPlayer(id));
+  const tdButtonDraw_element = createTdButton("Empate", () => drawPlayer(id));
+  const tdButtonDefeat_element = createTdButton("Derrota", () => defeatPlayer(id));
   const tdButtonRemove_element =createTdButton("Remover",  () => removePlayer(id));
   
   tr_element.append(
