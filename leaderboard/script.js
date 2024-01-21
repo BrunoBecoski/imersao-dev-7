@@ -79,27 +79,30 @@ function submit(event) {
   event.preventDefault();
 
   const name = event.target["name"].value.trim();
+  const avatar = event.target["avatar"].value.trim();
 
-  if(!name) {
+  if(!name || !avatar) {
     return;
   }
   
-  const playerAlreadyExists = players.some((player) => player.name === name);
+  const nameUsed = players.some((player) => player.name === name);
+  const avatarUsed = players.some((player) => player.avatar === avatar);
 
-  if (playerAlreadyExists) {
+  if (nameUsed || avatarUsed) {
     return;
   }
 
-  createPlayer(name);
-
+  createPlayer(name, avatar);
+  
   event.target["name"].value = "";
+  event.target["avatar"].value = "";
 }
 
 function createUniqueId(name) {
   return name.toLowerCase().match(/[.\S]+/g).join("-") + "_" + String(Date.now())
 }
 
-function createPlayer(name) {
+function createPlayer(name, avatar) {
   const id = createUniqueId(name);
 
   const victories = 0;
@@ -107,24 +110,15 @@ function createPlayer(name) {
   const defeats = 0;
   const points = 0;
 
-  savePlayer({
+  players.push({
     id,
     name,
+    avatar,
     victories,
     draws,
     defeats,
     points,
   });
-}
-
-function savePlayer(newPlayer) {
-  players.push(newPlayer);
-
-  renderPlayers();
-}
-
-function savePlayers(newPlayers) {
-  players = newPlayers;
 
   renderPlayers();
 }
@@ -195,6 +189,7 @@ function renderPlayers() {
 function createPlayerTd(player) {
   const {
     id,
+    avatar,
     name,
     victories,
     draws,
@@ -205,10 +200,12 @@ function createPlayerTd(player) {
   const tr_element = document.createElement("tr");
   tr_element.id = id;
 
+  const tdAvatar_element = createTdImg(name, avatar);
+
   const tdName_element = createTd(name);
-  const tdVictory_element = createTd(victories);
-  const tdDraw_element = createTd(draws);
-  const tdDefeat_element = createTd(defeats);  
+  const tdVictories_element = createTd(victories);
+  const tdDraws_element = createTd(draws);
+  const tdDefeats_element = createTd(defeats);  
   const tdPoints_element = createTd(points);
 
   const tdButtonVictory_element = createTdButton("Vitória", () => victoryPlayer(id));
@@ -217,10 +214,11 @@ function createPlayerTd(player) {
   const tdButtonRemove_element =createTdButton("Remover",  () => removePlayer(id));
   
   tr_element.append(
+    tdAvatar_element,
     tdName_element,
-    tdVictory_element,
-    tdDraw_element,
-    tdDefeat_element,
+    tdVictories_element,
+    tdDraws_element,
+    tdDefeats_element,
     tdPoints_element,
     tdButtonVictory_element,
     tdButtonDraw_element,
@@ -230,6 +228,19 @@ function createPlayerTd(player) {
 
   return tr_element;
 }
+
+function createTdImg(name, avatar) {
+  const td_element = document.createElement("td");
+  const img_element = document.createElement("img");
+
+  img_element.alt = name;
+  img_element.title = name;
+  img_element.src = avatar;
+
+  td_element.appendChild(img_element);
+
+  return td_element;
+ }
 
 function createTd(text) {
   const td_element = document.createElement("td");
@@ -245,6 +256,7 @@ function createTdButton(text, onClick) {
 
   button_element.innerText = text;
   button_element.onclick = onClick;
+  
   td_element.appendChild(button_element);
   
   return td_element;
