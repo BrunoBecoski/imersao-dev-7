@@ -84,31 +84,61 @@ function submit(event) {
   if(!name || !avatar) {
     return;
   }
-  
+
   const nameUsed = players.some((player) => player.name === name);
   const avatarUsed = players.some((player) => player.avatar === avatar);
 
   if (nameUsed || avatarUsed) {
     return;
   }
+    
+  let victories = Number(event.target["victories"].value.trim());
+  let draws = Number(event.target["draws"].value.trim());
+  let defeats = Number(event.target["defeats"].value.trim());
 
-  createPlayer(name, avatar);
+  if (isNaN(victories)) {
+    victories = 0;
+  }
+
+  if (isNaN(draws)) {
+    draws = 0;
+  }
+
+  if (isNaN(defeats)) {
+    defeats = 0;
+  }
+  
+  createPlayer({
+    name,
+    avatar,
+    victories,
+    draws,
+    defeats,
+  });
   
   event.target["name"].value = "";
   event.target["avatar"].value = "";
+  event.target["victories"].value = "0";
+  event.target["draws"].value = "0";
+  event.target["defeats"].value = "0";
 }
 
 function createUniqueId(name) {
-  return name.toLowerCase().match(/[.\S]+/g).join("-") + "_" + String(Date.now())
+  return name.toLowerCase().match(/[.\S]+/g).join("-") + "_" + String(Date.now());
 }
 
-function createPlayer(name, avatar) {
+function createPlayer(player) {
+  const {
+    name,
+    avatar,
+    victories,
+    draws,
+    defeats,
+  } = player;
+
   const id = createUniqueId(name);
 
-  const victories = 0;
-  const draws = 0;
-  const defeats = 0;
-  const points = 0;
+  const points = victories * 3 + draws;
 
   players.push({
     id,
