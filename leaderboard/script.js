@@ -170,19 +170,35 @@ function updatePlayer(playerToUpdate) {
   
   players.splice(index, 1, playerToUpdate)
   
-  renderPlayers();
+  // renderPlayers();
 }
 
-function victoryPlayer(id) {
-  const player = players.find(player => player.id === id);
+function updatePlayerTd(player) {
+  const newTD = createPlayerTd(player);
+  const oldTD = document.getElementById(player.id);
+
+  oldTD.outerHTML = newTD.outerHTML;
+
+  updatePlayer(player);
+}
+
+function victoryPlayer(player) {
+  // const player = players.find(player => player.id === id);
   
-  const playerToUpdate = {
+  // const playerToUpdate = {
+  //   ...player,
+  //   victories: player.victories + 1,
+  //   points: player.points + 3,
+  // }
+
+  // updatePlayer(playerToUpdate);
+
+  const playerUpdated = {
     ...player,
-    victories: player.victories + 1,
-    points: player.points + 3,
+    victories: player.victories + 3,
   }
 
-  updatePlayer(playerToUpdate);
+  updatePlayerTd(playerUpdated);
 }
 
 function drawPlayer(id) {
@@ -254,7 +270,7 @@ function createPlayerTd(player) {
   const tdDefeats_element = createTd(defeats);  
   const tdPoints_element = createTd(points);
 
-  const tdButtonVictory_element = createTdButton("Vitória", () => victoryPlayer(id));
+  const tdButtonVictory_element = createTdButton("Vitória", () => victoryPlayer(player));
   const tdButtonDraw_element = createTdButton("Empate", () => drawPlayer(id));
   const tdButtonDefeat_element = createTdButton("Derrota", () => defeatPlayer(id));
   const tdButtonRemove_element =createTdButton("Editar",  () => editPlayer());
@@ -334,9 +350,8 @@ function savePlayer(id) {
     draws,
     defeats,
     points: victories * 3 + draws,
-  })
+  });
 }
-
 
 function createTdImg(name, avatar) {
   const td_element = document.createElement("td");
