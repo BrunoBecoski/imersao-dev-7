@@ -169,59 +169,45 @@ function updatePlayer(playerToUpdate) {
   const index = players.findIndex(player => player.id === playerToUpdate.id);
   
   players.splice(index, 1, playerToUpdate)
-  
-  // renderPlayers();
 }
 
 function updatePlayerTd(player) {
-  const newTD = createPlayerTd(player);
-  const oldTD = document.getElementById(player.id);
+  const playerTd_element = createPlayerTd(player);
+  const currentTd_element = document.getElementById(player.id);
 
-  oldTD.outerHTML = newTD.outerHTML;
-
-  updatePlayer(player);
+  currentTd_element.replaceWith(playerTd_element);
 }
 
 function victoryPlayer(player) {
-  // const player = players.find(player => player.id === id);
-  
-  // const playerToUpdate = {
-  //   ...player,
-  //   victories: player.victories + 1,
-  //   points: player.points + 3,
-  // }
-
-  // updatePlayer(playerToUpdate);
-
   const playerUpdated = {
     ...player,
-    victories: player.victories + 3,
+    victories: player.victories + 1,
+    points: player.points + 3
   }
 
+  updatePlayer(player);
   updatePlayerTd(playerUpdated);
 }
 
-function drawPlayer(id) {
-  const player = players.find(player => player.id === id);
-
+function drawPlayer(player) {
   const playerToUpdate = {
     ...player,
     draws: player.draws + 1,
     points: player.points + 1,
   }
 
-  updatePlayer(playerToUpdate);
+  updatePlayer(player);
+  updatePlayerTd(playerToUpdate);
 }
 
-function defeatPlayer(id) {
-  const player = players.find(player => player.id === id);
-
+function defeatPlayer(player) {
   const playerToUpdate = {
     ...player,
     defeats: player.defeats + 1,
   }
-
-  updatePlayer(playerToUpdate);
+  
+  updatePlayer(player);
+  updatePlayerTd(playerToUpdate);
 }
 
 function renderPlayers() {
@@ -271,8 +257,8 @@ function createPlayerTd(player) {
   const tdPoints_element = createTd(points);
 
   const tdButtonVictory_element = createTdButton("Vitória", () => victoryPlayer(player));
-  const tdButtonDraw_element = createTdButton("Empate", () => drawPlayer(id));
-  const tdButtonDefeat_element = createTdButton("Derrota", () => defeatPlayer(id));
+  const tdButtonDraw_element = createTdButton("Empate", () => drawPlayer(player));
+  const tdButtonDefeat_element = createTdButton("Derrota", () => defeatPlayer(player));
   const tdButtonRemove_element =createTdButton("Editar",  () => editPlayer());
   
   tr_element.append(
