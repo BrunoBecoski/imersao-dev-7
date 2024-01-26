@@ -153,8 +153,10 @@ function createPlayer(player) {
   renderPlayers();
 }
 
-function editPlayer() {
-  renderPlayersForm();
+function editPlayer(player) {
+  const playerTdInput_element = createPlayerTdInput(player);
+
+  updatePlayerTd(player.id, playerTdInput_element);
 }
 
 function removePlayer(id) {
@@ -171,43 +173,42 @@ function updatePlayer(playerToUpdate) {
   players.splice(index, 1, playerToUpdate)
 }
 
-function updatePlayerTd(player) {
-  const playerTd_element = createPlayerTd(player);
-  const currentTd_element = document.getElementById(player.id);
+function updatePlayerTd(id, playerTd_element) {
+  const currentTd_element = document.getElementById(id);
 
   currentTd_element.replaceWith(playerTd_element);
 }
 
 function victoryPlayer(player) {
-  const playerUpdated = {
+  const playerTd_element = createPlayerTd({
     ...player,
     victories: player.victories + 1,
     points: player.points + 3
-  }
+  });
 
   updatePlayer(player);
-  updatePlayerTd(playerUpdated);
+  updatePlayerTd(player.id, playerTd_element);
 }
 
 function drawPlayer(player) {
-  const playerToUpdate = {
+  const playerTd_element = createPlayerTd({
     ...player,
     draws: player.draws + 1,
     points: player.points + 1,
-  }
+  });
 
   updatePlayer(player);
-  updatePlayerTd(playerToUpdate);
+  updatePlayerTd(player.id, playerTd_element);
 }
 
 function defeatPlayer(player) {
-  const playerToUpdate = {
+  const playerTd_element = createPlayerTd({
     ...player,
     defeats: player.defeats + 1,
-  }
+  });
   
   updatePlayer(player);
-  updatePlayerTd(playerToUpdate);
+  updatePlayerTd(player.id, playerTd_element);
 }
 
 function renderPlayers() {
@@ -219,18 +220,6 @@ function renderPlayers() {
     const tdPlayer_element = createPlayerTd(player);
 
     tbodyPlayersTable_element.appendChild(tdPlayer_element);
-  });
-}
-
-function renderPlayersForm() {
-  const tbodyPlayersTable_element = document.getElementById("playersTable");
-
-  tbodyPlayersTable_element.innerHTML = "";
-
-  players.forEach((player) => {
-    const tdPlayerForm_element = createPlayerTdForm(player);
-
-    tbodyPlayersTable_element.appendChild(tdPlayerForm_element);
   });
 }
 
@@ -259,7 +248,7 @@ function createPlayerTd(player) {
   const tdButtonVictory_element = createTdButton("Vitória", () => victoryPlayer(player));
   const tdButtonDraw_element = createTdButton("Empate", () => drawPlayer(player));
   const tdButtonDefeat_element = createTdButton("Derrota", () => defeatPlayer(player));
-  const tdButtonRemove_element =createTdButton("Editar",  () => editPlayer());
+  const tdButtonRemove_element =createTdButton("Editar",  () => editPlayer(player));
   
   tr_element.append(
     tdAvatar_element,
@@ -277,7 +266,7 @@ function createPlayerTd(player) {
   return tr_element;
 }
 
-function createPlayerTdForm(player) {
+function createPlayerTdInput(player) {
   const {
     id,
     avatar,
@@ -300,7 +289,7 @@ function createPlayerTdForm(player) {
 
   const tdButtonCancel_element = createTdButton("Cancelar", () => cancelPlayer(id));
   const tdButtonSave_element = createTdButton("Salvar", () => savePlayer(id));
-  const tdButtonRemove_element = createTdButton("Remover", () => removePlayer());
+  const tdButtonRemove_element = createTdButton("Remover", () => removePlayer(id));
 
   tr_element.append(
     tdInputAvatar_element,
@@ -327,16 +316,32 @@ function savePlayer(id) {
   const victories = Number(document.getElementById(`victories_${id}`).value);
   const draws = Number(document.getElementById(`draws_${id}`).value);
   const defeats = Number(document.getElementById(`defeats_${id}`).value);
+  const points = victories * 3 + draws;
 
-  updatePlayer({
+  const playersWithoutCurrentPlayer = players.filter(player => player.id !== id);
+
+  const nameUsed = playersWithoutCurrentPlayer.some((player) => player.name === name);
+  const avatarUsed = playersWithoutCurrentPlayer.some((player) => player.avatar === avatar);
+
+  if (nameUsed || avatarUsed) {
+    return;
+  }
+  
+  const player = {
     id,
     avatar,
     name,
     victories,
     draws,
     defeats,
-    points: victories * 3 + draws,
-  });
+    points,
+  }
+
+  updatePlayer(player);
+
+  const playerTd_element = createPlayerTd(player)
+
+  updatePlayerTd(id, playerTd_element);
 }
 
 function createTdImg(name, avatar) {
