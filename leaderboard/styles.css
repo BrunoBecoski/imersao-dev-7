@@ -5,12 +5,8 @@
 body {
   min-height: 400px;
 
-  background-image: url("./assets/background.png");
-  background-color: '#111111';
-  background-size: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-  
+  background-color: #111111;
+
   text-align: center;
   font-family: "Roboto Mono", monospace;
 }

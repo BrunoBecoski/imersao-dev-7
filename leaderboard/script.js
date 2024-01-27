@@ -69,13 +69,13 @@
 //   displayOnScreen()
 //  }
 
-const form_element = document.getElementById("form");
+let playersList = [];
 
-let players = [];
+const createPlayerForm_element = document.getElementById("createPlayerForm");
 
-form_element.addEventListener("submit", submit);
+createPlayerForm_element.addEventListener("submit", submitCreatePlayer);
 
-function submit(event) {
+function submitCreatePlayer(event) {
   event.preventDefault();
 
   const name = event.target["name"].value.trim();
@@ -85,19 +85,19 @@ function submit(event) {
     return;
   }
 
-  const nameUsed = players.some((player) => player.name === name);
-  const avatarUsed = players.some((player) => player.avatar === avatar);
+  const nameUsed = playersList.some((player) => player.name === name);
+  const avatarUsed = playersList.some((player) => player.avatar === avatar);
 
   if (nameUsed || avatarUsed) {
     return;
   }
     
-  let victories = Number(event.target["victories"].value.trim());
+  let wins = Number(event.target["wins"].value.trim());
   let draws = Number(event.target["draws"].value.trim());
   let defeats = Number(event.target["defeats"].value.trim());
 
-  if (isNaN(victories)) {
-    victories = 0;
+  if (isNaN(wins)) {
+    wins = 0;
   }
 
   if (isNaN(draws)) {
@@ -108,17 +108,22 @@ function submit(event) {
     defeats = 0;
   }
   
-  createPlayer({
+  const player = {
+    id: createUniqueId(name),
     name,
     avatar,
-    victories,
+    wins,
     draws,
     defeats,
-  });
+    points: wins * 3 + draws,
+  }
+    
+  addPlayerOnList(player);
+  addPlayerOnTable(player);
   
   event.target["name"].value = "";
   event.target["avatar"].value = "";
-  event.target["victories"].value = "0";
+  event.target["wins"].value = "0";
   event.target["draws"].value = "0";
   event.target["defeats"].value = "0";
 }
@@ -127,198 +132,90 @@ function createUniqueId(name) {
   return name.toLowerCase().match(/[.\S]+/g).join("-") + "_" + String(Date.now());
 }
 
-function createPlayer(player) {
-  const {
-    name,
-    avatar,
-    victories,
-    draws,
-    defeats,
-  } = player;
-
-  const id = createUniqueId(name);
-
-  const points = victories * 3 + draws;
-
-  players.push({
-    id,
-    name,
-    avatar,
-    victories,
-    draws,
-    defeats,
-    points,
-  });
-
-  renderPlayers();
+function addPlayerOnList(player) {
+  playersList.push(player);
 }
 
-function editPlayer(player) {
-  const playerTdInput_element = createPlayerTdInput(player);
+function addPlayerOnTable(player) {
+  const tbody_element = document.getElementById("playersTable");
+  const playerTr_element = createPlayerTr(player);
 
-  updatePlayerTd(player.id, playerTdInput_element);
+  tbody_element.appendChild(playerTr_element);
 }
 
-function removePlayer(id) {
-  const index = players.findIndex(player => player.id === id);
-
-  players.splice(index, 1);
-
-  renderPlayers();
-}
-
-function updatePlayer(playerToUpdate) {
-  const index = players.findIndex(player => player.id === playerToUpdate.id);
+function updatePlayerOnList(player) {
+  const index = playersList.findIndex(player => player.id === player.id);
   
-  players.splice(index, 1, playerToUpdate)
+  playersList.splice(index, 1, player);
 }
 
-function updatePlayerTd(id, playerTd_element) {
-  const currentTd_element = document.getElementById(id);
+function updatePlayerTrOnTable(player) {
+  const currentTd_element = document.getElementById(player.id);
+  const playerTr_element = createPlayerTr(player);
 
-  currentTd_element.replaceWith(playerTd_element);
+  currentTd_element.replaceWith(playerTr_element);
 }
 
-function victoryPlayer(player) {
-  const playerTd_element = createPlayerTd({
+function updatePlayerInputTrOnTable(player) {
+  const currentTd_element = document.getElementById(player.id);
+  const playerInputTr_element = createPlayerInputTr(player);
+
+  currentTd_element.replaceWith(playerInputTr_element);
+}
+
+function removePlayerOnList(id) {
+  const index = playersList.findIndex(player => player.id === id);
+
+  playersList.splice(index, 1);
+}
+
+function removePlayerOnTable(id) {
+  const playerTr_element = document.getElementById(id);
+
+  playerTr_element.remove();
+}
+
+function updatePlayerWins(player) {
+  const newPlayer = {
     ...player,
-    victories: player.victories + 1,
+    wins: player.wins + 1,
     points: player.points + 3
-  });
+  };
 
-  updatePlayer(player);
-  updatePlayerTd(player.id, playerTd_element);
+  updatePlayerOnList(newPlayer);
+  updatePlayerTrOnTable(newPlayer);
 }
 
-function drawPlayer(player) {
-  const playerTd_element = createPlayerTd({
+function updatePlayerDraws(player) {
+  const newPlayer = {
     ...player,
     draws: player.draws + 1,
     points: player.points + 1,
-  });
+  };
 
-  updatePlayer(player);
-  updatePlayerTd(player.id, playerTd_element);
+  updatePlayerOnList(newPlayer);
+  updatePlayerTrOnTable(newPlayer);
 }
 
-function defeatPlayer(player) {
-  const playerTd_element = createPlayerTd({
+function updatePlayerDefeats(player) {
+  const newPlayer = {
     ...player,
     defeats: player.defeats + 1,
-  });
+  };
   
-  updatePlayer(player);
-  updatePlayerTd(player.id, playerTd_element);
-}
-
-function renderPlayers() {
-  const tbodyPlayersTable_element = document.getElementById("playersTable");
-
-  tbodyPlayersTable_element.innerHTML = "";
-
-  players.forEach((player) => {
-    const tdPlayer_element = createPlayerTd(player);
-
-    tbodyPlayersTable_element.appendChild(tdPlayer_element);
-  });
-}
-
-function createPlayerTd(player) {
-  const {
-    id,
-    avatar,
-    name,
-    victories,
-    draws,
-    defeats,
-    points,
-  } = player;
-  
-  const tr_element = document.createElement("tr");
-  tr_element.id = id;
-
-  const tdAvatar_element = createTdImg(name, avatar);
-
-  const tdName_element = createTd(name);
-  const tdVictories_element = createTd(victories);
-  const tdDraws_element = createTd(draws);
-  const tdDefeats_element = createTd(defeats);  
-  const tdPoints_element = createTd(points);
-
-  const tdButtonVictory_element = createTdButton("Vitória", () => victoryPlayer(player));
-  const tdButtonDraw_element = createTdButton("Empate", () => drawPlayer(player));
-  const tdButtonDefeat_element = createTdButton("Derrota", () => defeatPlayer(player));
-  const tdButtonRemove_element =createTdButton("Editar",  () => editPlayer(player));
-  
-  tr_element.append(
-    tdAvatar_element,
-    tdName_element,
-    tdVictories_element,
-    tdDraws_element,
-    tdDefeats_element,
-    tdPoints_element,
-    tdButtonVictory_element,
-    tdButtonDraw_element,
-    tdButtonDefeat_element,
-    tdButtonRemove_element,
-  );
-
-  return tr_element;
-}
-
-function createPlayerTdInput(player) {
-  const {
-    id,
-    avatar,
-    name,
-    victories,
-    draws,
-    defeats,
-    points,
-  } = player;
-  
-  const tr_element = document.createElement("tr");
-  tr_element.id = id;
-
-  const tdInputAvatar_element = createTdInput(id, "avatar" ,avatar);
-  const tdInputName_element = createTdInput(id, "name" ,name);
-  const tdInputVictories_element = createTdInput(id, "victories", victories);
-  const tdInputDraws_element = createTdInput(id, "draws", draws);
-  const tdInputDefeats_element = createTdInput(id, "defeats", defeats);  
-  const tdInputPoints_element = createTdInput(id, "points", points);
-
-  const tdButtonCancel_element = createTdButton("Cancelar", () => cancelPlayer(id));
-  const tdButtonSave_element = createTdButton("Salvar", () => savePlayer(id));
-  const tdButtonRemove_element = createTdButton("Remover", () => removePlayer(id));
-
-  tr_element.append(
-    tdInputAvatar_element,
-    tdInputName_element,
-    tdInputVictories_element,
-    tdInputDraws_element,
-    tdInputDefeats_element,
-    tdInputPoints_element,
-    tdButtonCancel_element,
-    tdButtonSave_element,
-    tdButtonRemove_element,
-  );
-
-  return tr_element;
-}
-
-function cancelPlayer() {
-  renderPlayers();
+  updatePlayerOnList(newPlayer);
+  updatePlayerTrOnTable(newPlayer);
 }
 
 function savePlayer(id) {
   const avatar = document.getElementById(`avatar_${id}`).value;
   const name = document.getElementById(`name_${id}`).value;
-  const victories = Number(document.getElementById(`victories_${id}`).value);
+  const wins = Number(document.getElementById(`wins_${id}`).value);
   const draws = Number(document.getElementById(`draws_${id}`).value);
   const defeats = Number(document.getElementById(`defeats_${id}`).value);
-  const points = victories * 3 + draws;
+  const points = wins * 3 + draws;
 
-  const playersWithoutCurrentPlayer = players.filter(player => player.id !== id);
+  const playersWithoutCurrentPlayer = playersList.filter(player => player.id !== id);
 
   const nameUsed = playersWithoutCurrentPlayer.some((player) => player.name === name);
   const avatarUsed = playersWithoutCurrentPlayer.some((player) => player.avatar === avatar);
@@ -331,20 +228,117 @@ function savePlayer(id) {
     id,
     avatar,
     name,
-    victories,
+    wins,
     draws,
     defeats,
     points,
   }
 
-  updatePlayer(player);
-
-  const playerTd_element = createPlayerTd(player)
-
-  updatePlayerTd(id, playerTd_element);
+  updatePlayerOnList(player);
+  updatePlayerTrOnTable(player)
 }
 
-function createTdImg(name, avatar) {
+function removePlayer(id) {
+  removePlayerOnList(id);
+  removePlayerOnTable(id);
+}
+
+function addPlayersOnTable(player) {
+  const tbody_element = document.getElementById("playersTable");
+
+  tbody_element.innerHTML = "";
+
+  playersList.forEach((player) => {
+    const tdPlayer_element = createPlayerTr(player);
+
+    tbody_element.appendChild(tdPlayer_element);
+  });
+}
+
+function createPlayerTr(player) {
+  const {
+    id,
+    avatar,
+    name,
+    wins,
+    draws,
+    defeats,
+    points,
+  } = player;
+  
+  const tr_element = document.createElement("tr");
+  tr_element.id = id;
+
+  const tdAvatar_element = createImgTd(name, avatar);
+
+  const tdName_element = createTd(name);
+  const tdWins_element = createTd(wins);
+  const tdDraws_element = createTd(draws);
+  const tdDefeats_element = createTd(defeats);  
+  const tdPoints_element = createTd(points);
+
+  const tdButtonWin_element = createButtonTd("Vitória", () => updatePlayerWins(player));
+  const tdButtonDraw_element = createButtonTd("Empate", () => updatePlayerDraws(player));
+  const tdButtonDefeat_element = createButtonTd("Derrota", () => updatePlayerDefeats(player));
+  const tdButtonEdit_element = createButtonTd("Editar",  () => updatePlayerInputTrOnTable(player));
+  
+  tr_element.append(
+    tdAvatar_element,
+    tdName_element,
+    tdWins_element,
+    tdDraws_element,
+    tdDefeats_element,
+    tdPoints_element,
+    tdButtonWin_element,
+    tdButtonDraw_element,
+    tdButtonDefeat_element,
+    tdButtonEdit_element,
+  );
+
+  return tr_element;
+}
+
+function createPlayerInputTr(player) {
+  const {
+    id,
+    avatar,
+    name,
+    wins,
+    draws,
+    defeats,
+    points,
+  } = player;
+  
+  const tr_element = document.createElement("tr");
+  tr_element.id = id;
+
+  const tdInputAvatar_element = createInputTd(id, "avatar" ,avatar);
+  const tdInputName_element = createInputTd(id, "name" ,name);
+  const tdInputWins_element = createInputTd(id, "wins", wins);
+  const tdInputDraws_element = createInputTd(id, "draws", draws);
+  const tdInputDefeats_element = createInputTd(id, "defeats", defeats);  
+  const tdInputPoints_element = createInputTd(id, "points", points);
+
+  const tdButtonCancel_element = createButtonTd("Cancelar", () => updatePlayerTrOnTable(player));
+  const tdButtonSave_element = createButtonTd("Salvar", () => savePlayer(id));
+  const tdButtonRemove_element = createButtonTd("Remover", () => removePlayer(id));
+
+  tr_element.append(
+    tdInputAvatar_element,
+    tdInputName_element,
+    tdInputWins_element,
+    tdInputDraws_element,
+    tdInputDefeats_element,
+    tdInputPoints_element,
+    tdButtonCancel_element,
+    tdButtonSave_element,
+    tdButtonRemove_element,
+  );
+
+  return tr_element;
+}
+
+function createImgTd(name, avatar) {
   const td_element = document.createElement("td");
   const img_element = document.createElement("img");
 
@@ -365,7 +359,7 @@ function createTd(text) {
   return td_element;
 }
 
-function createTdButton(text, onClick) {
+function createButtonTd(text, onClick) {
   const td_element = document.createElement("td");
   const button_element = document.createElement("button");
 
@@ -377,7 +371,7 @@ function createTdButton(text, onClick) {
   return td_element;
 }
 
-function createTdInput(id, name, value) {
+function createInputTd(id, name, value) {
   const td_element = document.createElement("td");
   const input_element = document.createElement("input");
 
