@@ -85,10 +85,7 @@ function submitCreatePlayer(event) {
     return;
   }
 
-  const nameUsed = playersList.some((player) => player.name === name);
-  const avatarUsed = playersList.some((player) => player.avatar === avatar);
-
-  if (nameUsed || avatarUsed) {
+  if (checkNameAndAvatarUsed(name, avatar)) {
     return;
   }
     
@@ -130,6 +127,23 @@ function submitCreatePlayer(event) {
 
 function createUniqueId(name) {
   return name.toLowerCase().match(/[.\S]+/g).join("-") + "_" + String(Date.now());
+}
+
+function checkNameAndAvatarUsed(name, avatar, id) {
+  let list = playersList;
+
+  if (id) {
+    list = playersList.filter(player => player.id !== id);
+  }
+
+  const nameUsed = list.some((player) => player.name === name);
+  const avatarUsed = list.some((player) => player.avatar === avatar);
+
+  if (nameUsed || avatarUsed) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 function addPlayerOnList(player) {
@@ -207,20 +221,15 @@ function updatePlayerDefeats(player) {
   updatePlayerTrOnTable(newPlayer);
 }
 
-function savePlayer(id) {
+function savePlayerEdit(id) {
   const avatar = document.getElementById(`avatar_${id}`).value;
   const name = document.getElementById(`name_${id}`).value;
   const wins = Number(document.getElementById(`wins_${id}`).value);
   const draws = Number(document.getElementById(`draws_${id}`).value);
   const defeats = Number(document.getElementById(`defeats_${id}`).value);
   const points = wins * 3 + draws;
-
-  const playersWithoutCurrentPlayer = playersList.filter(player => player.id !== id);
-
-  const nameUsed = playersWithoutCurrentPlayer.some((player) => player.name === name);
-  const avatarUsed = playersWithoutCurrentPlayer.some((player) => player.avatar === avatar);
-
-  if (nameUsed || avatarUsed) {
+  
+  if (checkNameAndAvatarUsed(name, avatar, id)) {
     return;
   }
   
@@ -243,7 +252,7 @@ function removePlayer(id) {
   removePlayerOnTable(id);
 }
 
-function addPlayersOnTable(player) {
+function addPlayersOnTable() {
   const tbody_element = document.getElementById("playersTable");
 
   tbody_element.innerHTML = "";
@@ -320,7 +329,7 @@ function createPlayerInputTr(player) {
   const tdInputPoints_element = createInputTd(id, "points", points);
 
   const tdButtonCancel_element = createButtonTd("Cancelar", () => updatePlayerTrOnTable(player));
-  const tdButtonSave_element = createButtonTd("Salvar", () => savePlayer(id));
+  const tdButtonSave_element = createButtonTd("Salvar", () => savePlayerEdit(id));
   const tdButtonRemove_element = createButtonTd("Remover", () => removePlayer(id));
 
   tr_element.append(
