@@ -71,6 +71,24 @@
 
 let playersList = [];
 
+getLocalStorage();
+
+function getLocalStorage() {
+  const localStoragePlayersList = JSON.parse(localStorage.getItem("playersList"));
+
+  if (localStoragePlayersList) {
+    playersList = localStoragePlayersList;
+    addPlayersOnTable();
+  }
+}
+
+function setLocalStorage() {
+
+  console.log(playersList);
+
+  localStorage.setItem("playersList", JSON.stringify(playersList));
+}
+
 const createPlayerForm_element = document.getElementById("createPlayerForm");
 
 createPlayerForm_element.addEventListener("submit", submitCreatePlayer);
@@ -148,6 +166,24 @@ function checkNameAndAvatarUsed(name, avatar, id) {
 
 function addPlayerOnList(player) {
   playersList.push(player);
+  
+  setLocalStorage();
+}
+
+function updatePlayerOnList(player) {
+  const index = playersList.findIndex(playerFind => playerFind.id === player.id);
+  
+  playersList.splice(index, 1, player);
+
+  setLocalStorage();
+}
+
+function removePlayerOnList(id) {
+  const index = playersList.findIndex(player => player.id === id);
+
+  playersList.splice(index, 1);
+  
+  setLocalStorage();
 }
 
 function addPlayerOnTable(player) {
@@ -157,12 +193,6 @@ function addPlayerOnTable(player) {
   tbody_element.appendChild(playerTr_element);
 }
 
-function updatePlayerOnList(player) {
-  const index = playersList.findIndex(player => player.id === player.id);
-  
-  playersList.splice(index, 1, player);
-}
-
 function updatePlayerTrOnTable(player) {
   const currentTd_element = document.getElementById(player.id);
   const playerTr_element = createPlayerTr(player);
@@ -170,17 +200,23 @@ function updatePlayerTrOnTable(player) {
   currentTd_element.replaceWith(playerTr_element);
 }
 
+function addPlayersOnTable() {
+  const tbody_element = document.getElementById("playersTable");
+
+  tbody_element.innerHTML = "";
+
+  playersList.forEach((player) => {
+    const tdPlayer_element = createPlayerTr(player);
+
+    tbody_element.appendChild(tdPlayer_element);
+  });
+}
+
 function updatePlayerInputTrOnTable(player) {
   const currentTd_element = document.getElementById(player.id);
   const playerInputTr_element = createPlayerInputTr(player);
 
   currentTd_element.replaceWith(playerInputTr_element);
-}
-
-function removePlayerOnList(id) {
-  const index = playersList.findIndex(player => player.id === id);
-
-  playersList.splice(index, 1);
 }
 
 function removePlayerOnTable(id) {
@@ -250,18 +286,6 @@ function savePlayerEdit(id) {
 function removePlayer(id) {
   removePlayerOnList(id);
   removePlayerOnTable(id);
-}
-
-function addPlayersOnTable() {
-  const tbody_element = document.getElementById("playersTable");
-
-  tbody_element.innerHTML = "";
-
-  playersList.forEach((player) => {
-    const tdPlayer_element = createPlayerTr(player);
-
-    tbody_element.appendChild(tdPlayer_element);
-  });
 }
 
 function createPlayerTr(player) {
