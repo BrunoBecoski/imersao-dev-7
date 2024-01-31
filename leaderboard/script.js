@@ -78,14 +78,11 @@ function getLocalStorage() {
 
   if (localStoragePlayersList) {
     playersList = localStoragePlayersList;
-    addPlayersOnTable();
+    addPlayersOnTable(playersList);
   }
 }
 
 function setLocalStorage() {
-
-  console.log(playersList);
-
   localStorage.setItem("playersList", JSON.stringify(playersList));
 }
 
@@ -200,7 +197,7 @@ function updatePlayerTrOnTable(player) {
   currentTd_element.replaceWith(playerTr_element);
 }
 
-function addPlayersOnTable() {
+function addPlayersOnTable(playersList) {
   const tbody_element = document.getElementById("playersTable");
 
   tbody_element.innerHTML = "";
@@ -414,4 +411,67 @@ function createInputTd(id, name, value) {
   td_element.appendChild(input_element);
 
   return td_element;
+}
+
+function sortByName() {
+  const playersListByName = playersList.sort((playerA, playerB) => {
+    const nameA = playerA.name.toLowerCase();
+    const nameB = playerB.name.toLowerCase();
+
+    if (nameA < nameB) {
+      return -1;
+    }
+
+    if (nameA > nameB) {
+      return 1;
+    }
+
+    return 0;
+  });
+
+  addPlayersOnTable(playersListByName);
+}
+
+function sortByWins() {
+  const playersListByWins = playersList.sort((playerA, playerB) => {
+    const winsA = playerA.wins;
+    const winsB = playerB.wins;
+
+    return winsB - winsA;
+  });
+  
+  addPlayersOnTable(playersListByWins);
+}
+
+function sortByDraws() {
+  const playersListByDraws = playersList.sort((playerA, playerB) => {
+    const drawsA = playerA.draws;
+    const drawsB = playerB.draws;
+
+    return drawsB - drawsA;
+  });
+
+  addPlayersOnTable(playersListByDraws);
+}
+
+function sortByDefeats() {
+  const playersListByDefeats = playersList.sort((playerA, playerB) => {
+    const defeatsA = playerA.defeats;
+    const defeatsB = playerB.defeats;
+
+    return defeatsB - defeatsA;
+  });
+
+  addPlayersOnTable(playersListByDefeats);
+}
+
+function sortByPoints() {
+  const playersListByPoints = playersList.sort((playerA, playerB) => {
+    const pointsA = playerA.points;
+    const pointsB = playerB.points;
+
+    return pointsB - pointsA;
+  });
+  
+  addPlayersOnTable(playersListByPoints);
 }
