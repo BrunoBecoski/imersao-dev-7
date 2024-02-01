@@ -32,11 +32,26 @@
       <thead>
         <tr>
           <th>Avatar</th>
-          <th><button onclick="sortByName()">Nome</button></th>
-          <th><button onclick="sortByWins()">Vitórias</button></th>
-          <th><button onclick="sortByDraws()">Empates</button></th>
-          <th><button onclick="sortByDefeats()">Derrotas</button></th>
-          <th><button onclick="sortByPoints()">Pontos</button></th>
+          <th id="sortByName">
+            <button onclick="sortByName()">Nome</button>
+            <span>-</span>
+          </th>
+          <th id="sortByWins">
+            <button onclick="sortByWins()">Vitórias</button>
+            <span>-</span>
+          </th>
+          <th id="sortByDraws">
+            <button onclick="sortByDraws()">Empates</button>
+            <span>-</span>
+          </th>
+          <th id="sortByDefeats">
+            <button onclick="sortByDefeats()">Derrotas</button>
+            <span>-</span>
+          </th>
+          <th id="sortByPoints">
+            <button onclick="sortByPoints()">Pontos</button>
+            <span>-</span>
+          </th>
           <th colspan="4">Ações</th>
         </tr>
       </thead>

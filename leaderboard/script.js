@@ -414,7 +414,18 @@ function createInputTd(id, name, value) {
 }
 
 function sortByName() {
-  const playersListByName = playersList.sort((playerA, playerB) => {
+  clearSpansSort();
+
+  const td_element = document.getElementById("sortByName");
+  const span_element = td_element.querySelector("span");
+
+  let type = td_element.dataset.type;
+
+  if (type === undefined) {
+    type = "up";
+  }
+
+  const playersListSort = playersList.sort((playerA, playerB) => {
     const nameA = playerA.name.toLowerCase();
     const nameB = playerB.name.toLowerCase();
 
@@ -428,50 +439,163 @@ function sortByName() {
 
     return 0;
   });
-
-  addPlayersOnTable(playersListByName);
+  
+  if (type === "up") {
+    td_element.dataset.type = "down";
+    span_element.innerText = "↓";
+    
+    addPlayersOnTable(playersListSort);
+  }
+  
+  if (type === "down") {
+    td_element.dataset.type = "up";
+    span_element.innerText = "↑";
+    
+    addPlayersOnTable(playersListSort.reverse());
+  }
 }
 
 function sortByWins() {
-  const playersListByWins = playersList.sort((playerA, playerB) => {
+  clearSpansSort();
+
+  const td_element = document.getElementById("sortByWins");
+  const span_element = td_element.querySelector("span");
+
+  let type = td_element.dataset.type;
+
+  if (type === undefined) {
+    type = "up";
+  }
+
+  const playersListSort = playersList.sort((playerA, playerB) => {
     const winsA = playerA.wins;
     const winsB = playerB.wins;
 
     return winsB - winsA;
   });
   
-  addPlayersOnTable(playersListByWins);
+  if (type === "up") {
+    td_element.dataset.type = "down";
+    span_element.innerText = "↓";
+    
+    addPlayersOnTable(playersListSort);
+  }
+  
+  if (type === "down") {
+    td_element.dataset.type = "up";
+    span_element.innerText = "↑";
+    
+    addPlayersOnTable(playersListSort.reverse());
+  }
 }
 
 function sortByDraws() {
-  const playersListByDraws = playersList.sort((playerA, playerB) => {
+  clearSpansSort();
+
+  const td_element = document.getElementById("sortByDraws");
+  const span_element = td_element.querySelector("span");
+
+  let type = td_element.dataset.type;
+
+  if (type === undefined) {
+    type = "up";
+  }
+
+  const playersListSort = playersList.sort((playerA, playerB) => {
     const drawsA = playerA.draws;
     const drawsB = playerB.draws;
 
     return drawsB - drawsA;
   });
 
-  addPlayersOnTable(playersListByDraws);
+  if (type === "up") {
+    td_element.dataset.type = "down";
+    span_element.innerText = "↓";
+    
+    addPlayersOnTable(playersListSort);
+  }
+  
+  if (type === "down") {
+    td_element.dataset.type = "up";
+    span_element.innerText = "↑";
+    
+    addPlayersOnTable(playersListSort.reverse());
+  }
 }
 
 function sortByDefeats() {
-  const playersListByDefeats = playersList.sort((playerA, playerB) => {
+  clearSpansSort();
+
+  const td_element = document.getElementById("sortByDefeats");
+  const span_element = td_element.querySelector("span");
+
+  let type = td_element.dataset.type;
+
+  if (type === undefined) {
+    type = "up";
+  }
+
+  const playersListSort = playersList.sort((playerA, playerB) => {
     const defeatsA = playerA.defeats;
     const defeatsB = playerB.defeats;
 
     return defeatsB - defeatsA;
   });
 
-  addPlayersOnTable(playersListByDefeats);
+  if (type === "up") {
+    td_element.dataset.type = "down";
+    span_element.innerText = "↓";
+    
+    addPlayersOnTable(playersListSort);
+  }
+  
+  if (type === "down") {
+    td_element.dataset.type = "up";
+    span_element.innerText = "↑";
+    
+    addPlayersOnTable(playersListSort.reverse());
+  }
 }
 
 function sortByPoints() {
-  const playersListByPoints = playersList.sort((playerA, playerB) => {
+  clearSpansSort();
+
+  const td_element = document.getElementById("sortByPoints");
+  const span_element = td_element.querySelector("span");
+
+  let type = td_element.dataset.type;
+
+  if (type === undefined) {
+    type = "up";
+  }
+
+  const playersListSort = playersList.sort((playerA, playerB) => {
     const pointsA = playerA.points;
     const pointsB = playerB.points;
 
     return pointsB - pointsA;
   });
   
-  addPlayersOnTable(playersListByPoints);
+  if (type === "up") {
+    td_element.dataset.type = "down";
+    span_element.innerText = "↓";
+    
+    addPlayersOnTable(playersListSort);
+  }
+  
+  if (type === "down") {
+    td_element.dataset.type = "up";
+    span_element.innerText = "↑";
+    
+    addPlayersOnTable(playersListSort.reverse());
+  }
+}
+
+function clearSpansSort() {
+  const spans_element = document.getElementsByTagName("span");
+  const array = [].slice.call(spans_element);
+
+  array.forEach((span_element) => {
+    span_element.innerText = "-";
+  });
 }
