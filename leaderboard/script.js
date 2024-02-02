@@ -414,16 +414,10 @@ function createInputTd(id, name, value) {
 }
 
 function sortByName() {
-  clearSpansSort();
-
-  const td_element = document.getElementById("sortByName");
-  const span_element = td_element.querySelector("span");
-
-  let type = td_element.dataset.type;
-
-  if (type === undefined) {
-    type = "up";
-  }
+  const { 
+    th_element,
+    sortType,
+   } = get("sortByName");
 
   const playersListSort = playersList.sort((playerA, playerB) => {
     const nameA = playerA.name.toLowerCase();
@@ -440,32 +434,18 @@ function sortByName() {
     return 0;
   });
   
-  if (type === "up") {
-    td_element.dataset.type = "down";
-    span_element.innerText = "↓";
-    
-    addPlayersOnTable(playersListSort);
-  }
-  
-  if (type === "down") {
-    td_element.dataset.type = "up";
-    span_element.innerText = "↑";
-    
-    addPlayersOnTable(playersListSort.reverse());
-  }
+  set(
+    th_element,
+    sortType,
+    playersListSort,
+  );
 }
 
 function sortByWins() {
-  clearSpansSort();
-
-  const td_element = document.getElementById("sortByWins");
-  const span_element = td_element.querySelector("span");
-
-  let type = td_element.dataset.type;
-
-  if (type === undefined) {
-    type = "up";
-  }
+  const { 
+    th_element,
+    sortType,
+  } = get("sortByWins");
 
   const playersListSort = playersList.sort((playerA, playerB) => {
     const winsA = playerA.wins;
@@ -474,32 +454,18 @@ function sortByWins() {
     return winsB - winsA;
   });
   
-  if (type === "up") {
-    td_element.dataset.type = "down";
-    span_element.innerText = "↓";
-    
-    addPlayersOnTable(playersListSort);
-  }
-  
-  if (type === "down") {
-    td_element.dataset.type = "up";
-    span_element.innerText = "↑";
-    
-    addPlayersOnTable(playersListSort.reverse());
-  }
+  set(
+    th_element,
+    sortType,
+    playersListSort
+  );  
 }
 
 function sortByDraws() {
-  clearSpansSort();
-
-  const td_element = document.getElementById("sortByDraws");
-  const span_element = td_element.querySelector("span");
-
-  let type = td_element.dataset.type;
-
-  if (type === undefined) {
-    type = "up";
-  }
+  const {
+    th_element,
+    sortType,
+  } = get("sortByDraws");
 
   const playersListSort = playersList.sort((playerA, playerB) => {
     const drawsA = playerA.draws;
@@ -508,32 +474,18 @@ function sortByDraws() {
     return drawsB - drawsA;
   });
 
-  if (type === "up") {
-    td_element.dataset.type = "down";
-    span_element.innerText = "↓";
-    
-    addPlayersOnTable(playersListSort);
-  }
-  
-  if (type === "down") {
-    td_element.dataset.type = "up";
-    span_element.innerText = "↑";
-    
-    addPlayersOnTable(playersListSort.reverse());
-  }
+  set(
+    th_element,
+    sortType,
+    playersListSort,
+  );
 }
 
 function sortByDefeats() {
-  clearSpansSort();
-
-  const td_element = document.getElementById("sortByDefeats");
-  const span_element = td_element.querySelector("span");
-
-  let type = td_element.dataset.type;
-
-  if (type === undefined) {
-    type = "up";
-  }
+  const { 
+    th_element,
+    sortType,
+  } = get("sortByDefeats");
 
   const playersListSort = playersList.sort((playerA, playerB) => {
     const defeatsA = playerA.defeats;
@@ -542,32 +494,18 @@ function sortByDefeats() {
     return defeatsB - defeatsA;
   });
 
-  if (type === "up") {
-    td_element.dataset.type = "down";
-    span_element.innerText = "↓";
-    
-    addPlayersOnTable(playersListSort);
-  }
-  
-  if (type === "down") {
-    td_element.dataset.type = "up";
-    span_element.innerText = "↑";
-    
-    addPlayersOnTable(playersListSort.reverse());
-  }
+  set( 
+    th_element,
+    sortType,
+    playersListSort,
+  );
 }
 
 function sortByPoints() {
-  clearSpansSort();
-
-  const td_element = document.getElementById("sortByPoints");
-  const span_element = td_element.querySelector("span");
-
-  let type = td_element.dataset.type;
-
-  if (type === undefined) {
-    type = "up";
-  }
+  const {
+    th_element, 
+    sortType,
+  } = get("sortByPoints");
 
   const playersListSort = playersList.sort((playerA, playerB) => {
     const pointsA = playerA.points;
@@ -576,26 +514,37 @@ function sortByPoints() {
     return pointsB - pointsA;
   });
   
-  if (type === "up") {
-    td_element.dataset.type = "down";
-    span_element.innerText = "↓";
-    
-    addPlayersOnTable(playersListSort);
+  set(
+    th_element, 
+    sortType,
+    playersListSort,
+  );
+}
+
+function get(tdId) {
+  const th_element = document.getElementById(tdId);
+  let sortType = th_element.dataset.type;
+
+  if (sortType === undefined) {
+    sortType = "asd"
   }
-  
-  if (type === "down") {
-    td_element.dataset.type = "up";
-    span_element.innerText = "↑";
-    
-    addPlayersOnTable(playersListSort.reverse());
+
+  return {
+    th_element,
+    sortType,
   }
 }
 
-function clearSpansSort() {
-  const spans_element = document.getElementsByTagName("span");
-  const array = [].slice.call(spans_element);
+function set(th_element, sortType, playersListSort) {
+  if (sortType === "asd") {
+    th_element.dataset.type = "desc";
+  }
 
-  array.forEach((span_element) => {
-    span_element.innerText = "-";
-  });
+  if (sortType === "desc") {    
+    th_element.dataset.type = "asd";
+
+    playersListSort.reverse();
+  }
+
+  addPlayersOnTable(playersListSort);
 }
