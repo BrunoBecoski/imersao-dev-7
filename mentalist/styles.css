@@ -1,14 +1,5 @@
-body {
-  height: 100vh;
+/* body {
 
-  background-image: url("./assets/background.png");
-  background-color: '#000000';
-  background-size: cover;
-  background-position: center top;
-  background-repeat: no-repeat;
-  
-  text-align: center;
-  font-family: "Roboto Mono", monospace;
 }
 
 .container {
@@ -46,4 +37,4 @@ body > img {
 
 img {
   max-height: 350px;
-}
+} */

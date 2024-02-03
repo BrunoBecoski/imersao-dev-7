@@ -1,52 +1,86 @@
 :root {
-  --primary: #0D4D9C;
-  --border: #167BF7;
-  --text-primary: #FFFFFF;
+  --blue-500: #167BF7;
+  --blue-700: #0D4D9C;
+  --blue-900: #002351;
+
+  --red-500: #DA1E26;
+
+  --black: #000000;
   --white: #FFFFFF;
 
-  --secondary: #DA1E26;
-
+  --transition: all .5s;
   --font-family: 'Roboto', sans-serif;
+  --border-radius: 5px;
 }
 
 body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  
-  background: #002351;
-  background-image: url(./assets/background.png);
+  margin: 0;
+  padding: 0;
+
+  background-image: url("./assets/background.png");
+  background-color: var(--blue-700);
   background-size: cover;
   background-position: center top;
   background-repeat: no-repeat;
+  
+  font-family: var(--font-family);
 }
 
-header {
-  margin-block: 100px;
-}
+.header {
+  background: var(--blue-900);
+  padding: 10px;
 
-main {
   display: flex;
-  gap: 50px;
+  align-items: center;
+  justify-content: space-around;
 }
 
-.card {  
+.header .alura-logo {
+  height: 30px;
+}
+
+.header .page-logo {
+  height: 50px;
+}
+
+.header a {
+  padding: 10px;
+  border-radius: var(--border-radius);
+  
+  line-height: 0;
+  color: var(--white);
+  text-decoration: none;
+
+  transition: var(--transition);
+}
+.header a:hover {
+  background: var(--red-500);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  
+  margin-top: 50px;
+  margin-inline: 10%;  
+}
+
+.nav .card { 
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 20px;
   
-  border: 1px solid var(--border);
+  border-radius: var(--border-radius);
   text-decoration: none;
-  color: var(--text-primary);
+  color: var(--white);
   font-weight: 700;
   font-family: var(--font-family);
 
-  transition: all .5s;
+  transition: var(--transition);
 }
 
-.card:hover {
-  background-color: var(--secondary);
-  border-color: var(--secondary);
-  text-decoration: underline;
+.nav .card:hover {
+  background-color: var(--red-500);
 }

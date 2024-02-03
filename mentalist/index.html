@@ -3,33 +3,38 @@
     <title>Mentalista</title>
     
     <meta charset="utf-8" />
-    <link rel="icon" type="image/x-icon" href="./assets/brain.png" />
+    <link rel="icon" type="image/x-icon" href="../assets/icon.svg" />
     <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="../styles.css" />
 
   </head>
 
   <body>
-    <div class="container">
-      <h1 class="page-title">
-        Mentalista
-      </h1>
-      
-      <img class="page-logo" alt="Logo Imersão dev" src="./assets/logo-imersao-alura.svg" />
-    </div>
+    <header class="header">
+      <a href="../index.html">
+        <img class="page-logo" alt="Logo Imersão dev" src="../assets/logo-imersao-alura.svg" />
+      </a>
     
-    <a href="https://www.alura.com.br" target="_blank">
-      <img class="alura-logo" alt="Logo Alura" src="./assets/alura-logo.svg" />  
-      <img alt="Cérebro" src="./assets/brain.png" />
-    </a>
+      <a href="./index.html" target="_parent"><h1 class="page-title">Mentalista</h1></a>
 
-    <section id="section_1">
-      <label for="range_1">entre</label>
-      <input id="range_1" type="number" min="1" value="1" />
-      <label for="range_2">a</label>
-      <input id="range_2" type="number" min="1" value="1000" />
+      <a href="https://www.alura.com.br" target="_blank">
+        <img class="alura-logo" alt="Logo Alura" src="../assets/alura-logo.svg" />
+      </a>
+    </header>
+
+      <div class="container">
+        
+      </div>
+    
       
-      <button onclick="handleStart()">Começar</button>
-    </section>
+      <section id="section_1">
+        <label for="range_1">entre</label>
+        <input id="range_1" type="number" min="1" value="1" />
+        <label for="range_2">a</label>
+        <input id="range_2" type="number" min="1" value="1000" />
+      
+        <button onclick="handleStart()">Começar</button>
+      </section>
 
     <section id="section_2" style="display: none">
       <label for="guess_1">Chute on valor entre <span id="guessMin"></span> a <span id="guessMax"></span></label>
@@ -43,14 +48,15 @@
       <p>Histórico de chutes: <span id="attemptsHistory"></span> </p>
       <span id="tip"></span>
     </section>
-
+    
     <section id="section_3" style="display: none">
       <h2>Parabéns você acertou o número era: <span id="secretNumber"></span></h2>
       <p>Número de tentativas: <span id="guessAttempts"></span></p>
 
       <button onclick="handleReplay()">Jogar novamente</button>
+      
     </section>
   </body>
-
+  
   <script src="./script.js"></script>
 </html>
