@@ -1,0 +1,52 @@
+:root {
+  --primary: #0D4D9C;
+  --border: #167BF7;
+  --text-primary: #FFFFFF;
+  --white: #FFFFFF;
+
+  --secondary: #DA1E26;
+
+  --font-family: 'Roboto', sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  background: #002351;
+  background-image: url(./assets/background.png);
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+}
+
+header {
+  margin-block: 100px;
+}
+
+main {
+  display: flex;
+  gap: 50px;
+}
+
+.card {  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  
+  border: 1px solid var(--border);
+  text-decoration: none;
+  color: var(--text-primary);
+  font-weight: 700;
+  font-family: var(--font-family);
+
+  transition: all .5s;
+}
+
+.card:hover {
+  background-color: var(--secondary);
+  border-color: var(--secondary);
+  text-decoration: underline;
+}
