@@ -94,6 +94,10 @@ function handleStart() {
   const rangeValue_1 = Number(document.getElementById("range_1").value);
   const rangeValue_2 = Number(document.getElementById("range_2").value);
 
+  if (isNaN(rangeValue_1) || isNaN(rangeValue_2)) {
+    return;
+  }
+
   if(rangeValue_1 === 0) {
     return;
   }
@@ -106,7 +110,6 @@ function handleStart() {
     return;
   }
 
-
   if (rangeValue_1 < rangeValue_2) {
     min = rangeValue_1;
     max = rangeValue_2;
@@ -115,7 +118,6 @@ function handleStart() {
     max = rangeValue_1;
   }
 
-  
   minNumber = min;
   maxNumber = max;
 
