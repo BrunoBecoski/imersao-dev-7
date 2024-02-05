@@ -1,16 +1,24 @@
 :root {
-  --blue-100: #5CB8FF;
-  --blue-300: #1F9EFF;
-  --blue-500: ##0080DF;
-  --blue-700: #005CA3;
-  --blue-900: #003A66;
+  --blue-100: #CCE6F9;
+  --blue-200: #99CCF2;
+  --blue-300: #66B3EC;
+  --blue-400: #3399E5;
+  --blue-500: #0080DF;
+  --blue-600: #006DC3;
+  --blue-700: #005BA6;
+  --blue-800: #00488A;
+  --blue-900: #00366D;
+  --blue-950: #002351;
   
-
-  --red-100: #f09398;
-  --red-300: #E95D64;
+  --red-100: #F8D2D4;
+  --red-200: #F0A5A8;
+  --red-300: #E9787D;
+  --red-400: #E14B51;
   --red-500: #DA1E26;
-  --red-700: #B41820;
-  --red-900: #7E1117;
+  --red-600: #AE181E;
+  --red-700: #831217;
+  --red-800: #570C0F;
+  --red-900: #2C0608;
 
   --black: #000000;
   --white: #FFFFFF;
@@ -27,32 +35,34 @@ body {
   padding: 0;
 
   background-image: url("./assets/background.png");
-  background-color: var(--blue-700);
+  background-color: var(--blue-950);
   background-size: cover;
   background-position: center top;
   background-repeat: no-repeat;
-  
+
   font-family: var(--font-family);
 }
 
-.header {
+header {
   background: var(--blue-900);
-  padding: 1.5rem;
+  padding-block: 1.5rem;
+
+  /* opacity: .8; */
 
   display: flex;
   align-items: center;
   justify-content: space-around;
 }
 
-.header .alura-logo {
-  height: 1.8rem;
+header .alura-logo {
+  width: 50px;
 }
 
-.header .page-logo {
-  height: 3rem;
+header .page-logo {
+  width: 170px;
 }
 
-.header a {
+header a {
   padding: 0.5rem;
   border-radius: var(--border-radius);
   
@@ -63,11 +73,11 @@ body {
   transition: var(--transition);
 }
 
-.header a:hover {
+header a:hover {
   background: var(--red-500);
 }
 
-.nav {
+nav {
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -76,7 +86,7 @@ body {
   margin-inline: 5rem;  
 }
 
-.nav .card { 
+nav .card { 
   display: flex;
   align-items: center;
   justify-content: center;
@@ -93,23 +103,23 @@ body {
   transition: var(--transition);
 }
 
-.nav .card:hover {
-  background-color: var(--red-700);
+nav .card:hover {
+  background-color: var(--red-500);
 }
 
-.label {
+label {
   color: var(--white);
   font-size: 1.5rem;
 }
 
-.input {
-  background: var(--blue-700);
+input {
+  background: var(--blue-900);
   color: var(--white);
   padding: 0.5rem;
   font-size: 1.5rem;
 
   
-  border: 0.2rem solid var(--blue-300);
+  border: 2px solid var(--blue-300);
 
 
   border-radius: var(--border-radius);
@@ -119,18 +129,18 @@ body {
 
 }
 
-.input:focus {
+input:focus {
   outline: none;
-  border-color: var(--blue-100);
+  border-color: var(--red-500);
   background-color:  var(--blue-900);
 }
 
-.button {
+button {
   cursor: pointer;
 
   font-weight: 700;
   border: none;
-  background-color: var(--blue-700);
+  background-color: var(--blue-900);
 
   color: var(--white);
   padding: .5rem;
@@ -139,13 +149,13 @@ body {
   border-radius: var(--border-radius);
   
     
-  border: 0.2rem solid var(--blue-300);
+  border: 2px solid var(--blue-300);
 
   transition: var(--transition);
 
 }
 
-.button:hover {
-  border-color: var(--blue-100);
+button:hover {
+  border-color: var(--red-500);
   background-color: var(--blue-900);
 }

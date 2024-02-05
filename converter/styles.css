@@ -1,96 +1,30 @@
-body {
-  height: 100vh;
-
-  background-image: url("./assets/background.png");
-  background-color: '#000000';
-  background-size: cover;
-  background-position: center top;
-  background-repeat: no-repeat;
-  
-  text-align: center;
-  font-family: "Roboto Mono", monospace;
-
+main {
   display: flex;
+  gap: 2rem;
+  align-items: center;
   flex-direction: column;
-  align-items: center;
 }
 
-.container {
-  padding: 20px;
+label {
+  color: var(--red-100);
 
-  text-align: center;
+  font-weight: 600;
 }
 
-.page-title {
-  margin: 0 0 5px;
-
-  color: #FFFFFF;
+p {
+  color: var(--blue-100);
 }
 
-.page-subtitle {
-  margin-top: 5px;
+select {
+  background-color: var(--blue-700);
+  padding: 0.8rem;
 
-  color: #FFFFFF;
+  border: 2px solid var(--blue-500);
+
+  font-size: 1.2rem;
+  color: var(--white);
+  font-weight: 600;
+
+  outline: none;
 }
 
-.page-logo {
-  width: 200px;
-}
-
-.alura-logo {
-  width: 40px;
-  position: absolute;
-  top: 10px;
-  right: 10px;
-}
-
-body > img {
-  margin: 0 10px;
-}
-
-img {
-  max-height: 250px;
-}
-
-.line {
-  margin: 2px;
-
-  display: flex;
-  align-items: center;
-  width: fit-content;
-
-  background: #02131C;
-  color: #D7F9FF;
-  border-radius: 4px;
-  border: 1px solid #4B6679;
-}
-
-.line div {
-  width: 1px;
-  height: 32px;
-  
-  background: #4B6679;
-}
-
-.line input {
-  padding: 10px;
-  width: 150px;
-  font-size: 20px;
-  font-weight: bold;
-  color: #D7F9FF;
-
-  background: none;
-  border: none;
-}
-
-.line select {
-  padding: 10px;
-  width: 200px;
-  font-size: 20px;
-  font-weight: bold;
-  color: #D7F9FF;
-  background: #02131C;
-  border: none;
-
-  border-right: 5px solid transparent;
-}
