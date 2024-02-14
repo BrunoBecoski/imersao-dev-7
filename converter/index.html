@@ -24,29 +24,28 @@
 
     <main>
       <div class="mode">
-
-        <p>Selecione algum formato para converter e digite o valor</p>
-
-        <label for="mode_selection">
+        <label>
           Conversor de:
+          
+          <select id="mode_selection" onchange="handleSelectMode()">
+            <option value="currency" selected>Moedas</option>
+            <option value="temperature">Temperaturas</option>
+            <option value="length">Comprimentos</option>
+            <option value="time">Tempos</option>
+          </select>
         </label>
-
-        <select id="mode_selection" onchange="handleSelectMode()">
-          <option value="currency" selected>Moedas</option>
-          <option value="temperature">Temperaturas</option>
-          <option value="length">Comprimentos</option>
-          <option value="time">Tempos</option>
-        </select>
       </div>
       
-      <div>
+      <div class="converter">
         <div>
           <input id="input_1" oninput="handleInput('input_1')" />
+          <span></span>
           <select id="select_1" onchange="handleInput('select_1')"></select>
         </div>
 
         <div>
           <input id="input_2" oninput="handleInput('input_2')"  />
+          <span></span>
           <select id="select_2" onchange="handleInput('select_2')"></select>
         </div>
       </div>

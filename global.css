@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
 :root {
   --blue-100: #CCE6F9;
   --blue-200: #99CCF2;
@@ -24,34 +26,50 @@
   --white: #FFFFFF;
 
   --transition: all .5s;
-  --font-family: 'Roboto', sans-serif;
   --border-radius: 5px;
+  
+  --spacing-1: 8px;    
+  --spacing-2: 12px; 
+  --spacing-3: 16px; 
+  --spacing-4: 24px; 
+  --spacing-5: 32px; 
+  --spacing-6: 48px; 
 
-  font-size: 16px;
+  --font-xs: 0.75rem;
+  --font-sm: 0.875rem;
+  --font-md: 1rem;
+  --font-lg: 1.125rem;
+  --font-xl: 1.25rem;
+  --font-2xl: 1.5rem;
+  --font-3xl: 1.875rem;
+  --font-4xl: 2.25rem;
+  --font-5xl: 3rem;
+  --font-6xl: 3.75rem;
+  --font-7xl: 4.5rem;
+  --font-8xl: 6rem;
+  --font-9xl: 8rem;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  font-family: 'Roboto', sans-serif;
 }
 
 body {
-  margin: 0;
-  padding: 0;
-
-  background-image: url("./assets/background.png");
+  color: var(--white);
   background-color: var(--blue-950);
-  background-size: cover;
-  background-position: center top;
-  background-repeat: no-repeat;
-
-  font-family: var(--font-family);
 }
 
 header {
-  background: var(--blue-900);
-  padding-block: 1.5rem;
-
-  /* opacity: .8; */
-
   display: flex;
   align-items: center;
   justify-content: space-around;
+  padding-block: var(--spacing-4);
+  
+  background: var(--blue-900);
 }
 
 header .alura-logo {
@@ -63,99 +81,15 @@ header .page-logo {
 }
 
 header a {
-  padding: 0.5rem;
-  border-radius: var(--border-radius);
+  padding: var(--spacing-1);
   
-  line-height: 0;
   color: var(--white);
   text-decoration: none;
+  border-radius: var(--border-radius);
 
   transition: var(--transition);
 }
 
 header a:hover {
   background: var(--red-500);
-}
-
-nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  
-  margin-top: 3rem;
-  margin-inline: 5rem;  
-}
-
-nav .card { 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1.2rem;
-  
-  background-color: var(--blue-900);
-
-  border-radius: var(--border-radius);
-  text-decoration: none;
-  color: var(--white);
-  font-weight: 700;
-  font-family: var(--font-family);
-
-  transition: var(--transition);
-}
-
-nav .card:hover {
-  background-color: var(--red-500);
-}
-
-label {
-  color: var(--white);
-  font-size: 1.5rem;
-}
-
-input {
-  background: var(--blue-900);
-  color: var(--white);
-  padding: 0.5rem;
-  font-size: 1.5rem;
-
-  
-  border: 2px solid var(--blue-300);
-
-
-  border-radius: var(--border-radius);
-
-  width: 6rem;
-  font-weight: 600;
-
-}
-
-input:focus {
-  outline: none;
-  border-color: var(--red-500);
-  background-color:  var(--blue-900);
-}
-
-button {
-  cursor: pointer;
-
-  font-weight: 700;
-  border: none;
-  background-color: var(--blue-900);
-
-  color: var(--white);
-  padding: .5rem;
-  font-size: 1.5rem;
-
-  border-radius: var(--border-radius);
-  
-    
-  border: 2px solid var(--blue-300);
-
-  transition: var(--transition);
-
-}
-
-button:hover {
-  border-color: var(--red-500);
-  background-color: var(--blue-900);
 }
