@@ -26,28 +26,51 @@
   --white: #FFFFFF;
 
   --transition: all .5s;
-  --border-radius: 5px;
+  --rounded: 0.25rem; /* 4px */
   
-  --spacing-1: 8px;    
-  --spacing-2: 12px; 
-  --spacing-3: 16px; 
-  --spacing-4: 24px; 
-  --spacing-5: 32px; 
-  --spacing-6: 48px; 
+  --spacing-1: 0.25rem;  /* 4px */ 
+  --spacing-2: 0.5rem;   /* 8px */
+  --spacing-3: 0.75rem;  /* 12px */
+  --spacing-4: 1rem;     /* 16px */
+  --spacing-5: 1.25rem;  /* 20px */
+  --spacing-6: 1.5rem;   /* 24px */
+  --spacing-7: 1.75rem;  /* 28px */
+  --spacing-8: 2rem;     /* 32px */
+  --spacing-9: 2.25rem;  /* 36px */
+  --spacing-10: 2.5rem;  /* 40px */
+  --spacing-11: 2.75rem; /* 44px */
+  --spacing-12: 3rem;    /* 48px */
+  --spacing-14: 3.5rem;  /* 56px */
+  --spacing-16: 4rem;    /* 64px */
+  --spacing-20: 5rem;    /* 80px */
+  --spacing-24: 6rem;    /* 96px */
+  --spacing-28: 7rem;    /* 112px */
+  --spacing-32: 8rem;    /* 128px */
+  --spacing-36: 9rem;    /* 144px */
+  --spacing-40: 10rem;   /* 160px */
+  --spacing-44: 11rem;   /* 176px */
+  --spacing-48: 12rem;   /* 192px */
+  --spacing-52: 13rem;   /* 208px */
+  --spacing-56: 14rem;   /* 224px */
+  --spacing-60: 15rem;   /* 240px */
+  --spacing-64: 16rem;   /* 256px */
+  --spacing-72: 18rem;   /* 288px */
+  --spacing-80: 20rem;   /* 320px */
+  --spacing-96: 14rem;   /* 384px */
 
-  --font-xs: 0.75rem;
-  --font-sm: 0.875rem;
-  --font-md: 1rem;
-  --font-lg: 1.125rem;
-  --font-xl: 1.25rem;
-  --font-2xl: 1.5rem;
-  --font-3xl: 1.875rem;
-  --font-4xl: 2.25rem;
-  --font-5xl: 3rem;
-  --font-6xl: 3.75rem;
-  --font-7xl: 4.5rem;
-  --font-8xl: 6rem;
-  --font-9xl: 8rem;
+  --font-xs: 0.75rem;   /* 12px */
+  --font-sm: 0.875rem;  /* 14px */
+  --font-md: 1rem;      /* 16px */
+  --font-lg: 1.125rem;  /* 18px */
+  --font-xl: 1.25rem;   /* 20px */
+  --font-2xl: 1.5rem;   /* 24px */
+  --font-3xl: 1.875rem; /* 30px */
+  --font-4xl: 2.25rem;  /* 36px */
+  --font-5xl: 3rem;     /* 48px */
+  --font-6xl: 3.75rem;  /* 60px */
+  --font-7xl: 4.5rem;   /* 72px */
+  --font-8xl: 6rem;     /* 96px */ 
+  --font-9xl: 8rem;     /* 128px */
 }
 
 * {
@@ -67,29 +90,33 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  padding-block: var(--spacing-4);
+  padding-block: var(--spacing-8);
   
   background: var(--blue-900);
 }
 
-header .alura-logo {
-  width: 50px;
-}
-
-header .page-logo {
-  width: 170px;
+header div {
+  display: flex;
+  justify-content: end;
+  width: var(--spacing-64);
 }
 
 header a {
-  padding: var(--spacing-1);
-  
-  color: var(--white);
-  text-decoration: none;
-  border-radius: var(--border-radius);
-
+  padding: var(--spacing-2);
+  border-radius: var(--rounded);
   transition: var(--transition);
 }
 
 header a:hover {
   background: var(--red-500);
+}
+
+header img {
+  width: 100%;
+}
+
+header .title {
+  color: var(--white);
+  text-decoration: none;
+  border-radius: var(--rounded); 
 }

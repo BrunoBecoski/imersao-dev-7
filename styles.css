@@ -14,7 +14,7 @@ nav .card {
   font-weight: 700;
   color: var(--white);
   text-decoration: none;
-  border-radius: var(--border-radius);
+  border-radius: var(--rounded);
   background-color: var(--blue-900);
 
   transition: var(--transition);

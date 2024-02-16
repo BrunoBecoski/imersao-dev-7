@@ -1,8 +1,65 @@
 .section_1 {
   display: flex;
-  align-items: center;
-  justify-content: space-around;
+  flex-direction: column;
 
-  margin-top: 8rem;
+  align-items: center;
+
+  gap: var(--spacing-3);
+  /* justify-content: space-around; */
+
+  margin-top: var(--spacing-6);
   padding-inline: 5rem;
+}
+
+.section_1 div {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+
+.section_1 input {
+  border: 2px solid var(--blue-700);
+  color: var(--white);
+  font-size: var(--font-2xl);
+  background-color: transparent;
+
+  width: 150px;
+
+  outline: none;
+  padding: var(--spacing-1);
+
+  border-left: none;
+  border-top: none;
+  border-right: none;
+}
+
+.section_1 label {
+  color: var(--white);
+  font-size: var(--font-2xl);
+  font-weight: 700;
+}
+
+.section_1 input:hover {
+  border-color: var(--blue-300);
+}
+
+
+.section_1 button {
+  border: none;
+  cursor: pointer;
+
+  border-radius: var(--rounded);
+
+  color: var(--white);
+  font-size: var(--font-2xl);
+  font-weight: 700;
+  padding: var(--spacing-3);
+  background-color: var(--blue-700);
+
+}
+
+.section_1 button:hover {
+  background-color: var(--red-500);
 }

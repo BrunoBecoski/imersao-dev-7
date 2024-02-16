@@ -6,7 +6,7 @@ main {
 }
 
 .mode {
-  margin-top: var(--spacing-6);
+  margin-top: var(--spacing-12);
 }
 
 .mode label {
@@ -18,7 +18,7 @@ main {
 }
 
 .mode select {
-  padding:  var(--spacing-1);
+  padding:  var(--spacing-4);
   
   border: none;
   outline: none;
@@ -39,22 +39,22 @@ p {
 
 .converter {
   display: flex;
-  gap: var(--spacing-1);
+  gap: var(--spacing-4);
   flex-direction: column;
 }
 
 .converter div {
   display: flex; 
   align-items: center;
-  gap: var(--spacing-2);
-  padding: var(--spacing-1);
+  gap: var(--spacing-4);
+  padding: var(--spacing-2);
   
   border: 2px solid var(--blue-700);
-  border-radius: var(--border-radius);
+  border-radius: var(--rounded);
 }
 
 .converter div:has(:focus) {
-  border-color: var(--blue-300);
+  border-color: var(--red-500);
 }
 
 .converter select {
@@ -93,5 +93,7 @@ p {
 }
 
 .converter div:has(:focus) span {
-  background-color: var(--blue-300);
+  /* background-color: var(--blue-300); */
+  background-color: var(--red-500);
+  
 }
