@@ -1,14 +1,51 @@
-.section_1 {
+section{
   display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-6);
   flex-direction: column;
 
+  margin-inline: auto;
+  padding: var(--spacing-4);
+  margin-top: var(--spacing-10);
+  max-width: var(--container-md);
+}
+
+.subtitle {
+  padding-block: var(--spacing-4);
+
+  text-align: center;
+}
+
+.subtitle > span {
+  color: var(--red-500);
+  font-weight: 900;
+}
+
+.handle,
+.section_2 .range button {
+  border: none;
+  cursor: pointer;
+
+  border-radius: var(--rounded);
+
+  color: var(--white);
+  font-size: var(--font-2xl);
+  font-weight: 700;
+  padding: var(--spacing-3);
+  background-color: var(--blue-700);
+
+  max-width: var(--spacing-96);
+}
+
+.handle:hover,
+.section_2 .range button:hover {
+  background-color: var(--red-500);
+}
+
+
+.section_1 {
   align-items: center;
-
-  gap: var(--spacing-3);
-  /* justify-content: space-around; */
-
-  margin-top: var(--spacing-6);
-  padding-inline: 5rem;
 }
 
 .section_1 div {
@@ -20,7 +57,7 @@
 
 
 .section_1 input {
-  border: 2px solid var(--blue-700);
+  border: 3px solid var(--blue-700);
   color: var(--white);
   font-size: var(--font-2xl);
   background-color: transparent;
@@ -45,21 +82,52 @@
   border-color: var(--blue-300);
 }
 
+.section_2 {
+  display: flex;
+  align-items: center;
+}
 
-.section_1 button {
+
+.section_2 .range {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-6);
+
+  
+  width: 100%;
+}
+
+.section_2 .tip {
+  padding: var(--spacing-2);
+
+  font-style: italic;
+  font-size: var(--font-xl);
+}
+
+.section_2 .tip span {
+  font-weight: 700;
+  color: var(--red-500);
+}
+
+.section_2 .guess {
   border: none;
-  cursor: pointer;
+  background-color: var(--red-500);
+  
+  display: inline;
+
+  padding: var(--spacing-5);
+  width: var(--spacing-40);
+  height: var(--spacing-24);
+
+  color: var(--white);
+  text-align: center;
 
   border-radius: var(--rounded);
 
-  color: var(--white);
-  font-size: var(--font-2xl);
-  font-weight: 700;
-  padding: var(--spacing-3);
-  background-color: var(--blue-700);
-
+  font-size: var(--font-5xl);
+  font-weight: 900;
 }
 
-.section_1 button:hover {
-  background-color: var(--red-500);
+input[type="range"] {
+  width: 100%;
 }

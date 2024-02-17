@@ -58,6 +58,12 @@
   --spacing-80: 20rem;   /* 320px */
   --spacing-96: 14rem;   /* 384px */
 
+  --container-sm: 640px;
+  --container-md: 768px;
+  --container-lg: 1024px;
+  --container-xl: 1280px;
+  --container-2xl: 1536px;
+
   --font-xs: 0.75rem;   /* 12px */
   --font-sm: 0.875rem;  /* 14px */
   --font-md: 1rem;      /* 16px */

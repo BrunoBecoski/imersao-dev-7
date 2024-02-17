@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 
-    <link rel="icon" type="image/x-icon" href="./assets/icon.svg" />
+    <link rel="icon" type="image/x-icon" href="../assets/icon.svg" />
     <link rel="stylesheet" href="../global.css" />
     <link rel="stylesheet" href="./styles.css" />
     
@@ -28,9 +28,8 @@
       </div>
     </header>
 
-
     <section class="section_1" id="section_1">
-      <h2>Escolha o valor mínimo e o valor máximo tamanho para ser sorteado</h2>
+      <h2 class="subtitle">Escolha o valor mínimo e o valor máximo tamanho para ser sorteado</h2>
 
       <div>
         <label for="range_1">entre</label>
@@ -40,27 +39,37 @@
         <input class="input" id="range_2" min="1" value="1000" />
       </div>
     
-      <button class="button" onclick="handleStart()">Começar</button>
+      <button class="handle" onclick="handleStart()">Começar</button>
     </section>
 
-    <section id="section_2" style="display: none">
-      <label for="guess_1">Chute on valor entre <span id="guessMin"></span> a <span id="guessMax"></span></label>
-      <button onclick="handleDecrease()">Diminuir</button>
-      <input type="range" id="guess_1" oninput="handleInput(event)" /> 
-      <button onclick="handleIncrease()">Aumentar</button>
-      <input id="guess_2" disabled />
+    <section class="section_2" id="section_2" style="display: none">
+      <h2 class="subtitle">
+        Chute on valor entre
+        <span id="guessMin">50</span>
+        a
+        <span id="guessMax">100</span>
+      </h2>
       
-      <button onclick="handleGuess()">Chutar</button>
+      <div class="range">
+        <button onclick="handleDecrease()">Diminuir</button>
+        <input type="range" id="guess_1" oninput="handleInput(event)" /> 
+        <button onclick="handleIncrease()">Aumentar</button>
+      </div>
+
+      <p class="tip" id="tip"><span></span></p>
+
+      <input class="guess" id="guess_2" disabled />
+      
+      <button class="handle" onclick="handleGuess()">Chutar</button>
       <p>Números de chutes: <span id="attemptsNumber"></span></p>
       <p>Histórico de chutes: <span id="attemptsHistory"></span> </p>
-      <span id="tip"></span>
     </section>
     
-    <section id="section_3" style="display: none">
-      <h2>Parabéns você acertou o número era: <span id="secretNumber"></span></h2>
-      <p>Número de tentativas: <span id="guessAttempts"></span></p>
+    <section class="section_3" id="section_3" style="display: none">
+      <h2 class="subtitle">Parabéns você acertou o número era: <span id="secretNumber"></span></h2>
+      <p>Número de tentativas: <span id="guessAttempts">5</span></p>
 
-      <button onclick="handleReplay()">Jogar novamente</button>
+      <button class="handle" onclick="handleReplay()">Jogar novamente</button>
       
     </section>
   </body>

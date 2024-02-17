@@ -39,25 +39,25 @@ function showSection(section) {
 
   switch (section) {
     case 1:
-      section_1_element.style.display = "block";
+      section_1_element.style.display = "flex";
       section_2_element.style.display = "none";
       section_3_element.style.display = "none";
       break;
 
     case 2:
       section_1_element.style.display = "none";
-      section_2_element.style.display = "block";
+      section_2_element.style.display = "flex";
       section_3_element.style.display = "none";
       break;
     
     case 3:
       section_1_element.style.display = "none";
       section_2_element.style.display = "none";
-      section_3_element.style.display = "block";
+      section_3_element.style.display = "flex";
       break;
   
     default:
-      section_1_element.style.display = "block";
+      section_1_element.style.display = "flex";
       section_2_element.style.display = "none";
       section_3_element.style.display = "none";
       break;
@@ -162,21 +162,26 @@ function handleGuess() {
   const value = getValue();
 
   guesses.push(value);
-  const tip_element = document.getElementById("tip");
+  const p_element = document.getElementById("tip")
+  const span_element = p_element.querySelector("span");
 
+  p_element.innerHTML = "";
+  
   document.getElementById("attemptsNumber").innerText = guesses.length;
   document.getElementById("attemptsHistory").innerText = guesses;
-
+  
   if (Number(value) === secretNumber) {
     showResult();
     showSection(3);
   } else if (value > secretNumber) {
     setValue(value - 1)
-    tip_element.innerText = "Errou... o número secreto é menor";
+    span_element.innerText = "menor";
   } else if (value < secretNumber) {
     setValue(value + 1)
-    tip_element.innerText = "Errou... o número secreto é maior";
+    span_element.innerText = "maior";
   }
+
+  p_element.append("Errou... o número secreto é ", span_element);
 }
 
 function handleReplay() {
