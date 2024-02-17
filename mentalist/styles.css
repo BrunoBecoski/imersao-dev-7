@@ -87,29 +87,21 @@ section{
   align-items: center;
 }
 
-
-.section_2 .range {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-6);
-
-  
-  width: 100%;
-}
-
 .section_2 .tip {
+  display: flex;
+  gap: var(--spacing-2);
+
   padding: var(--spacing-2);
 
   font-style: italic;
   font-size: var(--font-xl);
 }
 
-.section_2 .tip span {
-  font-weight: 700;
+.section_2 .tip strong {
   color: var(--red-500);
 }
 
-.section_2 .guess {
+.section_2 .input {
   border: none;
   background-color: var(--red-500);
   
@@ -128,6 +120,6 @@ section{
   font-weight: 900;
 }
 
-input[type="range"] {
+.section_2 .range {
   width: 100%;
 }

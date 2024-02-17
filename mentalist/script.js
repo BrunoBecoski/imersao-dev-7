@@ -24,12 +24,12 @@ function createRandomNumber(min, max) {
 }
 
 function getValue() {
-  return Number(document.getElementById("guess_1").value);
+  return Number(document.getElementById("range").value);
 }
 
 function setValue(value) {
-  document.getElementById("guess_1").value = value;
-  document.getElementById("guess_2").value = value;
+  document.getElementById("range").value = value;
+  document.getElementById("input").value = value;
 }
 
 function showSection(section) {
@@ -67,61 +67,45 @@ function showSection(section) {
 function showResult() {
   document.getElementById("secretNumber").innerText = secretNumber;
   document.getElementById("guessAttempts").innerText = guesses.length;
- }
- 
- function checkValue(value) {
-  const belowValues = guesses.filter(guess => guess < secretNumber);
-  const aboveValues = guesses.filter(guess => guess > secretNumber);
-  
-  const belowValue = belowValues.sort((a, b) => a - b).reverse()[0];
-  const aboveValue = aboveValues.sort((a, b) => a - b)[0];
-
-  if (belowValue >= value) {
-    return belowValue + 1;
-  };
-  
-  if (aboveValue <= value) {
-    return aboveValue - 1;
-  };
-  
-  return value;
+  document.getElementById("attemptsHistory").innerText = guesses;
  }
 
 function handleStart() {
   let min;
   let max;
 
-  const rangeValue_1 = Number(document.getElementById("range_1").value);
-  const rangeValue_2 = Number(document.getElementById("range_2").value);
+  const inputValue_1 = Number(document.getElementById("input_1").value);
+  const inputValue_2 = Number(document.getElementById("input_2").value);
 
-  if (isNaN(rangeValue_1) || isNaN(rangeValue_2)) {
+  if (isNaN(inputValue_1) || isNaN(inputValue_2)) {
     return;
   }
 
-  if(rangeValue_1 === 0) {
+  if(inputValue_1 === 0) {
     return;
   }
 
-  if(rangeValue_2 === 0) {
+  if(inputValue_2 === 0) {
     return;
   }
 
-  if(rangeValue_1 === rangeValue_2) {
+  if(inputValue_1 === inputValue_2) {
     return;
   }
 
-  if (rangeValue_1 < rangeValue_2) {
-    min = rangeValue_1;
-    max = rangeValue_2;
+  if (inputValue_1 < inputValue_2) {
+    min = inputValue_1;
+    max = inputValue_2;
   } else {
-    min = rangeValue_2;
-    max = rangeValue_1;
+    min = inputValue_2;
+    max = inputValue_1;
   }
 
   minNumber = min;
   maxNumber = max;
 
-  const guess = document.getElementById("guess_1");
+  const guess = document.getElementById("range");
+  console.log(guess)
   
   const startValue = Math.ceil(((max - min) / 2) + min);
   secretNumber = createRandomNumber(min, max);
@@ -138,56 +122,43 @@ function handleStart() {
 
 function handleInput() {
   const value = getValue();
-  const valueChecked = checkValue(value);
-
-  setValue(valueChecked);
-}
-
-
-function handleDecrease() {
-  const value = getValue() - 1;
-  const valueChecked = checkValue(value);
-  
-  setValue(valueChecked);
-}
-
-function handleIncrease() {
-  const value = getValue() + 1;
-  const valueChecked = checkValue(value);
-
-  setValue(valueChecked);
+  setValue(value);
 }
 
 function handleGuess() {
   const value = getValue();
-
+  
+  const guess = document.getElementById("range");
+  const p_element = document.getElementById("tip_1");
+  const strong_element = document.getElementById("tip_2");
+   
   guesses.push(value);
-  const p_element = document.getElementById("tip")
-  const span_element = p_element.querySelector("span");
-
+  
   p_element.innerHTML = "";
   
   document.getElementById("attemptsNumber").innerText = guesses.length;
-  document.getElementById("attemptsHistory").innerText = guesses;
   
   if (Number(value) === secretNumber) {
     showResult();
     showSection(3);
   } else if (value > secretNumber) {
     setValue(value - 1)
-    span_element.innerText = "menor";
+    strong_element.innerText = "menor";
+    guess.max = value - 1;
   } else if (value < secretNumber) {
     setValue(value + 1)
-    span_element.innerText = "maior";
+    strong_element.innerText = "maior";
+    guess.min = value + 1;
   }
 
-  p_element.append("Errou... o número secreto é ", span_element);
+  p_element.innerText = "Errou... o número secreto é";
 }
 
 function handleReplay() {
   document.getElementById("attemptsNumber").innerText = "";
   document.getElementById("attemptsHistory").innerText = "";
-  document.getElementById("tip").innerText = "";
+  document.getElementById("tip_1").innerText = "";
+  document.getElementById("tip_2").innerText = "";
   guesses = [];
   showSection(1);
 }
