@@ -96,7 +96,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  padding-block: var(--spacing-8);
+  padding-block: var(--spacing-6);
   
   background: var(--blue-900);
 }
