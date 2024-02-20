@@ -73,21 +73,21 @@ function openFormCreate() {
   clearForm("formCreate");
 
   document.getElementById("buttonOpenFormCreate").style.display = "none";
-  document.getElementById("formCreate").style.display = "block";
+  document.getElementById("formCreate").style.display = "flex";
   document.getElementById("divList").style.display = "none";
 } 
   
 function closeFormCreate() {
   document.getElementById("buttonOpenFormCreate").style.display = "inline-block";
   document.getElementById("formCreate").style.display = "none";
-  document.getElementById("divList").style.display = "block";
+  document.getElementById("divList").style.display = "grid";
 
   clearForm("formCreate");
 }
 
 function openFormEdit(mediaId) {
   document.getElementById("buttonOpenFormCreate").style.display = "none";
-  document.getElementById("formEdit").style.display = "block";
+  document.getElementById("formEdit").style.display = "flex";
   document.getElementById("divList").style.display = "none";
 
   fillFormEdit(mediaId);
@@ -96,7 +96,7 @@ function openFormEdit(mediaId) {
 function closeFormEdit() {
   document.getElementById("buttonOpenFormCreate").style.display = "inline-block";
   document.getElementById("formEdit").style.display = "none";
-  document.getElementById("divList").style.display = "block";
+  document.getElementById("divList").style.display = "grid";
 
   clearForm("formEdit");
 }
@@ -189,15 +189,20 @@ function createDivMedia(media) {
   const divMedia_element = document.createElement("div");
   const h3_element = document.createElement("h3");
   const img_element = document.createElement("img");
-  const iframe_element = document.createElement("iframe");
+  // const iframe_element = document.createElement("iframe");
   const buttonRemove_element = document.createElement("button");
   const buttonEdit_element = document.createElement("button");
 
-  divMedia_element.id = id;
+  const divButtons = document.createElement("div");
 
+  divButtons.className = "buttons";
+
+  
+  divMedia_element.id = id;
+  
   buttonRemove_element.innerText = "Remover";
   buttonRemove_element.onclick = () => removeMedia(id);
-
+  
   buttonEdit_element.innerText = "Editar";
   buttonEdit_element.onclick = () => openFormEdit(id);
   
@@ -205,13 +210,17 @@ function createDivMedia(media) {
   
   h3_element.id = "title";
   img_element.id = "cover";
-  iframe_element.id = "video";
-
+  // iframe_element.id = "video";
+  
   h3_element.innerText = title;
   img_element.src = cover;
-  iframe_element.src = videoUrl;
+  // iframe_element.src = videoUrl;
+  
+  
+  divButtons.append(buttonRemove_element, buttonEdit_element);
 
-  divMedia_element.append(buttonRemove_element, buttonEdit_element, h3_element, img_element, iframe_element);
+  divMedia_element.append(h3_element, img_element, divButtons);
+  // divMedia_element.append(buttonRemove_element, buttonEdit_element, h3_element, img_element, iframe_element);
   
   return divMedia_element;
 };

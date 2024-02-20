@@ -28,36 +28,36 @@
       </div>
     </header>
 
-    <div class="container">
-      <h1 class="page-title">
-        Aluraflix
-      </h1>
-      
-      <button id="buttonOpenFormCreate" type="button" onclick="openFormCreate()">
-        Adicione a sua mídia favorita?
+    <div class="container">     
+      <button class="add" id="buttonOpenFormCreate" type="button" onclick="openFormCreate()">
+        Adicionar mídia
       </button>
       
-      <form id="formCreate" class="form-wrapper" style="display: none">
+      <form class="form" id="formCreate"  style="display: none">
         <input id="title" placeholder="Insira o titulo da mídia" />
         <input id="cover" placeholder="Insira endereço de imagem" />
         <input id="video" placeholder="Insira uma url de um video do YouTube" />
 
-        <button type="reset">Cancelar</button>
-        <button type="submit">Adicionar Mídia</button>
+        <div>
+          <button type="reset">Cancelar</button>
+          <button type="submit">Adicionar Mídia</button>
+        </div>
       </form>
 
-      <form id="formEdit" class="form-wrapper" style="display: none">
+      <form class="form" id="formEdit" style="display: none">
         <input id="id" style="display: none" />
         <input id="title" placeholder="Insira o titulo da mídia" />
         <input id="cover" placeholder="Insira endereço de imagem" />
         <input id="video" placeholder="Insira uma url de um video do YouTube" />
-
-        <button type="reset">Cancelar</button>
-        <button type="submit">Editar Mídia</button>
+        
+        <div>
+          <button type="reset">Cancelar</button>
+          <button type="submit">Editar Mídia</button>
+        </div>
       </form>
     </div>
 
-    <div id="divList"></div> 
+    <div class="list" id="divList"></div> 
   </body>
 
   <script src="./script.js"></script>

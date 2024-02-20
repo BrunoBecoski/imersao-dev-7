@@ -96,7 +96,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  padding-block: var(--spacing-6);
+  padding-block: var(--spacing-2);
   
   background: var(--blue-900);
 }
@@ -104,11 +104,11 @@ header {
 header div {
   display: flex;
   justify-content: end;
-  width: var(--spacing-64);
+  width: var(--spacing-48);
 }
 
 header a {
-  padding: var(--spacing-2);
+  padding: var(--spacing-1);
   border-radius: var(--rounded);
   transition: var(--transition);
 }
