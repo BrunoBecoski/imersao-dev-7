@@ -189,39 +189,40 @@ function createDivMedia(media) {
   const divMedia_element = document.createElement("div");
   const h3_element = document.createElement("h3");
   const img_element = document.createElement("img");
-  // const iframe_element = document.createElement("iframe");
   const buttonRemove_element = document.createElement("button");
+  const buttonPlay = document.createElement("button");
   const buttonEdit_element = document.createElement("button");
 
   const divButtons = document.createElement("div");
 
-  divButtons.className = "buttons";
+  divButtons.className = "actions";
 
   
   divMedia_element.id = id;
+
+  divMedia_element.className = "item";
   
   buttonRemove_element.innerText = "Remover";
   buttonRemove_element.onclick = () => removeMedia(id);
   
+  buttonPlay.innerText = "Video";
+  buttonPlay.onclick = () => handlePlay(video);
+
   buttonEdit_element.innerText = "Editar";
   buttonEdit_element.onclick = () => openFormEdit(id);
   
-  const videoUrl = video.replace("https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/");
   
   h3_element.id = "title";
   img_element.id = "cover";
-  // iframe_element.id = "video";
   
   h3_element.innerText = title;
   img_element.src = cover;
-  // iframe_element.src = videoUrl;
   
   
-  divButtons.append(buttonRemove_element, buttonEdit_element);
+  divButtons.append(buttonRemove_element, buttonPlay, buttonEdit_element);
 
   divMedia_element.append(h3_element, img_element, divButtons);
-  // divMedia_element.append(buttonRemove_element, buttonEdit_element, h3_element, img_element, iframe_element);
-  
+
   return divMedia_element;
 };
 
@@ -270,4 +271,17 @@ function checkMediaExist(mediaToCheck) {
 
     if(media.video === mediaToCheck.video) { return true }
   }); 
+}
+
+
+function handlePlay(video) {
+  const div_element = document.getElementById("video")
+  const iframe_element = document.createElement("iframe");
+  const videoUrl = video.replace("https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/");
+  
+  iframe_element.src = videoUrl;
+
+  div_element.innerHTML = "";
+
+  div_element.appendChild(iframe_element);
 }
