@@ -35,7 +35,6 @@
       </div>
     </header>
 
-
     <div class="container">     
       <button class="add" id="buttonOpenFormCreate" type="button" onclick="openFormCreate()">
         Adicionar mídia
@@ -43,7 +42,7 @@
       
       <form class="form" id="formCreate"  style="display: none">
         <input id="title" placeholder="Insira o titulo da mídia" />
-        <input id="cover" placeholder="Insira endereço de imagem" />
+        <input id="image" placeholder="Insira endereço de imagem" />
         <input id="video" placeholder="Insira uma url de um video do YouTube" />
 
         <div>
@@ -55,7 +54,7 @@
       <form class="form" id="formEdit" style="display: none">
         <input id="id" style="display: none" />
         <input id="title" placeholder="Insira o titulo da mídia" />
-        <input id="cover" placeholder="Insira endereço de imagem" />
+        <input id="image" placeholder="Insira endereço de imagem" />
         <input id="video" placeholder="Insira uma url de um video do YouTube" />
         
         <div>
@@ -63,9 +62,9 @@
           <button type="submit">Editar Mídia</button>
         </div>
       </form>
+      
+      <div class="list" id="divList"></div> 
     </div>
-
-    <div class="list" id="divList"></div> 
   </body>
 
   <script src="./script.js"></script>

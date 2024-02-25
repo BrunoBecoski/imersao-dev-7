@@ -113,20 +113,20 @@ function submitFormCreate(event) {
   event.preventDefault();
   
   const title_element = event.target["title"];
-  const cover_element = event.target["cover"];
+  const image_element = event.target["image"];
   const video_element = event.target["video"];
   
   const title = title_element.value.trim();
-  const cover = cover_element.value.trim();
+  const image = image_element.value.trim();
   const video = video_element.value.trim();
   
-  if (!title || !cover || !video) {
+  if (!title || !image || !video) {
     return;
   }
 
   const exist = checkMediaExist({
     title,
-    cover,
+    image,
     video,
   });
 
@@ -139,12 +139,12 @@ function submitFormCreate(event) {
   addMedia({
     id,
     title,
-    cover,
+    image,
     video,
   });
 
   title_element.value = "";
-  cover_element.value = "";
+  image_element.value = "";
   video_element.value = "";
 
   closeFormCreate();
@@ -159,10 +159,10 @@ function submitFormEdit(event) {
 
   const mediaId = event.target["id"].value;
   const title = event.target["title"].value.trim();
-  const cover = event.target["cover"].value.trim();
+  const image = event.target["image"].value.trim();
   const video = event.target["video"].value.trim();
   
-  if(!title || !cover || !video) {
+  if(!title || !image || !video) {
     return;
   }
 
@@ -171,7 +171,7 @@ function submitFormEdit(event) {
   updateMedia(mediaId, {
     id,
     title,
-    cover,
+    image,
     video,
   })
 
@@ -182,7 +182,7 @@ function createDivMedia(media) {
   const {
     id,
     title,
-    cover,
+    image,
     video,
   } = media;
 
@@ -191,7 +191,8 @@ function createDivMedia(media) {
   const img_element = document.createElement("img");
   const buttonRemove_element = document.createElement("button");
   const buttonEdit_element = document.createElement("button");
-  const divButtons = document.createElement("div");
+  const divButtons_element = document.createElement("div");
+  const divCover_element = document.createElement("div");
 
   divMedia_element.id = id;
   divMedia_element.className = "item";
@@ -199,10 +200,14 @@ function createDivMedia(media) {
   h3_element.id = "title";
   h3_element.innerText = title;
   
-  img_element.id = "cover";
-  img_element.onclick = () => handlePlay(video);
+  img_element.id = "image";
+  divCover_element.onclick = () => handlePlay(video);
   img_element.title = "Abrir vídeo";
-  img_element.src = cover;
+  img_element.src = image;
+  
+  divCover_element.id = "cover"
+  divCover_element.className = "cover"
+  divCover_element.appendChild(img_element);
 
   buttonRemove_element.innerText = "Remover";
   buttonRemove_element.onclick = () => removeMedia(id);
@@ -210,10 +215,10 @@ function createDivMedia(media) {
   buttonEdit_element.innerText = "Editar";
   buttonEdit_element.onclick = () => openFormEdit(id);
 
-  divButtons.className = "actions";
-  divButtons.append(buttonRemove_element, buttonEdit_element);
+  divButtons_element.className = "actions";
+  divButtons_element.append(buttonRemove_element, buttonEdit_element);
 
-  divMedia_element.append(h3_element, img_element, divButtons);
+  divMedia_element.append(h3_element, divCover_element, divButtons_element);
 
   return divMedia_element;
 };
@@ -222,11 +227,11 @@ function clearForm(formId) {
   const formCreate_element = document.getElementById(formId);
 
   const titleInput_element = formCreate_element.querySelector("#title");
-  const coverInput_element = formCreate_element.querySelector("#cover");
+  const imageInput_element = formCreate_element.querySelector("#image");
   const videoInput_element = formCreate_element.querySelector("#video");
 
   titleInput_element.value = "";
-  coverInput_element.value = "";
+  imageInput_element.value = "";
   videoInput_element.value = "";
 }
 
@@ -234,7 +239,7 @@ function fillFormEdit(mediaId) {
   const {
     id,
     title,
-    cover,
+    image,
     video,
   } = mediaList.find(media => media.id === mediaId);
 
@@ -242,12 +247,12 @@ function fillFormEdit(mediaId) {
 
   const idInput_element = formEdit_element.querySelector("#id");
   const titleInput_element = formEdit_element.querySelector("#title");
-  const coverInput_element = formEdit_element.querySelector("#cover");
+  const imageInput_element = formEdit_element.querySelector("#image");
   const videoInput_element = formEdit_element.querySelector("#video");
 
   idInput_element.value = id;
   titleInput_element.value = title;
-  coverInput_element.value = cover;
+  imageInput_element.value = image;
   videoInput_element.value = video;
 }
 
@@ -259,7 +264,7 @@ function checkMediaExist(mediaToCheck) {
   return mediaList.some((media) => {
     if(media.title === mediaToCheck.title) { return true }
 
-    if(media.cover === mediaToCheck.cover) { return true }
+    if(media.img === mediaToCheck.img) { return true }
 
     if(media.video === mediaToCheck.video) { return true }
   }); 
