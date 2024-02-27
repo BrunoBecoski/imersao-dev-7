@@ -83,19 +83,24 @@
   width: var(--container-lg);
 }
 
+.item {
+  min-width: 0%;  
+  min-height: 0%;
+}
+
 .item h3 {
   text-align: center;
-  font-size: var(--font-3xl);
+  font-size: var(--font-2xl);
   padding: var(--spacing-4);
 }
 
 .cover {
   cursor: pointer;
 
- display: flex;
- align-items: center;
- justify-content: center;
-
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 }
 
 .cover::after {
@@ -111,9 +116,6 @@
 
 .cover img {
   cursor: pointer;
-
-  max-width: 100%;
-  max-height: 100%;
 }
 
 .cover:hover img{
@@ -124,9 +126,9 @@
 
 .actions {
   display: flex;
-  flex-direction: column;
-  gap: var(--spacing-1);
-  margin-top: var(--spacing-4);
+  justify-content: space-between;
+  gap: var(--spacing-2);
+  margin-top: var(--spacing-2);
 
 }
 
@@ -138,14 +140,14 @@
 }
 
 .actions button  {
+  width: 100%;
   border: none;
   cursor: pointer;
-
-  border-radius: var(--rounded);
-
+  
   color: var(--white);
   font-weight: 700;
   padding: var(--spacing-3);
+  border-radius: var(--rounded);
   background-color: var(--blue-700);
 }
 
