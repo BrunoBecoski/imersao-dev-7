@@ -187,11 +187,11 @@ function createDivMedia(media) {
   } = media;
 
   const divMedia_element = document.createElement("div");
+  const header_element = document.createElement("div");
   const h3_element = document.createElement("h3");
   const img_element = document.createElement("img");
   const buttonRemove_element = document.createElement("button");
   const buttonEdit_element = document.createElement("button");
-  const divButtons_element = document.createElement("div");
   const divCover_element = document.createElement("div");
 
   divMedia_element.id = id;
@@ -199,6 +199,9 @@ function createDivMedia(media) {
     
   h3_element.id = "title";
   h3_element.innerText = title;
+
+  header_element.className = "header"
+  header_element.append(buttonRemove_element,h3_element, buttonEdit_element);
   
   img_element.id = "image";
   divCover_element.onclick = () => handlePlay(video);
@@ -209,16 +212,15 @@ function createDivMedia(media) {
   divCover_element.className = "cover"
   divCover_element.appendChild(img_element);
 
-  buttonRemove_element.innerText = "Remover";
+  buttonRemove_element.className = "remove";
+  buttonRemove_element.title = "Remover";
   buttonRemove_element.onclick = () => removeMedia(id);
   
-  buttonEdit_element.innerText = "Editar";
+  buttonEdit_element.className = "edit";
+  buttonEdit_element.title = "Editar";
   buttonEdit_element.onclick = () => openFormEdit(id);
 
-  divButtons_element.className = "actions";
-  divButtons_element.append(buttonRemove_element, buttonEdit_element);
-
-  divMedia_element.append(h3_element, divCover_element, divButtons_element);
+  divMedia_element.append(header_element, divCover_element);
 
   return divMedia_element;
 };
