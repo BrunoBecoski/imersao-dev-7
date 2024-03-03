@@ -196,53 +196,36 @@ function createDivMedia(media) {
   } = media;
 
   const divMedia_element = document.createElement("div");
-  const header_element = document.createElement("div");
-  const h3_element = document.createElement("h3");
-  const img_element = document.createElement("img");
-  const divCover_element = document.createElement("div");
-
-  const buttonRemove_element = document.createElement("button");
-  const buttonEdit_element = document.createElement("button");
-
-  const divOverlay_element = document.createElement("div");
-
-  const buttonPlay_element = document.createElement("button");
-
-  const div_element = document.createElement("div");
-
-  div_element.className = "div";
-
   divMedia_element.id = id;
   divMedia_element.className = "item";
     
+  const h3_element = document.createElement("h3");
   h3_element.id = "title";
   h3_element.innerText = title;
 
-  header_element.className = "header"
-  
-  divOverlay_element.className = "overlay"
-
-
+  const img_element = document.createElement("img");
   img_element.id = "image";
   img_element.src = image;
-  
+
+  const divCover_element = document.createElement("div");
+  divCover_element.className = "cover";
+
+  const buttonPlay_element = document.createElement("button");
   buttonPlay_element.className = "play"
   buttonPlay_element.title = "Reproduzir"
   buttonPlay_element.onclick = () => handlePlay(video);
-
+  
+  const buttonRemove_element = document.createElement("button");
   buttonRemove_element.className = "remove";
   buttonRemove_element.title = "Remover";
   buttonRemove_element.onclick = () => removeMedia(id);
-  
+
+  const buttonEdit_element = document.createElement("button");
   buttonEdit_element.className = "edit";
   buttonEdit_element.title = "Editar";
   buttonEdit_element.onclick = () => openFormEdit(id);
-  
-  divCover_element.className = "cover";
-  header_element.appendChild(h3_element);
+
   divCover_element.append(img_element, buttonRemove_element, buttonPlay_element, buttonEdit_element);
-
-
   divMedia_element.append(h3_element, divCover_element);
 
   return divMedia_element;
