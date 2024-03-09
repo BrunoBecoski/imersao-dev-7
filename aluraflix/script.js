@@ -87,7 +87,7 @@ function openFormCreate() {
 function closeFormCreate() {
   document.getElementById("buttonOpenFormCreate").style.display = "inline-block";
   document.getElementById("formCreate").style.display = "none";
-  document.getElementById("divList").style.display = "grid";
+  document.getElementById("divList").style.display = "flex";
 
   clearForm("formCreate");
 }
@@ -103,7 +103,7 @@ function openFormEdit(mediaId) {
 function closeFormEdit() {
   document.getElementById("buttonOpenFormCreate").style.display = "inline-block";
   document.getElementById("formEdit").style.display = "none";
-  document.getElementById("divList").style.display = "grid";
+  document.getElementById("divList").style.display = "flex";
 
   clearForm("formEdit");
 }

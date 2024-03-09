@@ -94,13 +94,22 @@ body {
 }
 
 header {
+  background: var(--blue-900);
+  padding: auto;
+}
+
+header nav {
   display: flex;
   align-items: center;
-  justify-content: space-around;
-  padding-block: var(--spacing-2);
-  
-  background: var(--blue-900);
+  justify-content: space-between;
+  gap: var(--spacing-4);
+    
+  padding: var(--spacing-4);
+  margin: auto;
+  height: fit-content;
+  max-width: var(--container-2xl);
 }
+
 
 header div {
   display: flex;
