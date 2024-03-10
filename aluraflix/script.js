@@ -38,30 +38,35 @@ function addMedia(media) {
   setLocalStorage();
   renderMedias();
 
-  alert('Mídia adiciona com sucesso.')
+  alert('Mídia adicionada.');
 }
 
-function removeMedia(mediaId) {
-  mediaList = mediaList.filter(media => media.id !== mediaId);
-
-  setLocalStorage();
-  renderMedias();
-
-  alert("Mídia removida com sucesso.")
+function removeMedia(mediaToRemove) {
+  const response = confirm(`Remover: ${mediaToRemove.title}?`);
+  console.log(response)
+  
+  if (response) {
+    mediaList = mediaList.filter(media => media.id !== mediaToRemove.id);
+    
+    setLocalStorage();
+    renderMedias();
+  }
 }
 
-function updateMedia(mediaId, media) {
-  const index = mediaList.findIndex((media) => media.id === mediaId);
+function updateMedia(oldMedia, newMedia) {
+  const response = confirm(`Atualizar Mídia!`);
 
-  mediaList[index] = {
-    ...media,
+  if (response) {
+    const index = mediaList.findIndex((media) => media.id === oldMedia.id);
+
+    mediaList[index] = {
+      ...newMedia,
+    }
+
+    setLocalStorage();
   }
 
-  setLocalStorage();
   renderMedias();
-
-  alert('Mídia atualiza com sucesso.')
-
 }
 
 function renderMedias(){
@@ -127,8 +132,23 @@ function submitFormCreate(event) {
   const image = image_element.value.trim();
   const video = video_element.value.trim();
   
+  let message = ""
+
   if (!title || !image || !video) {
-    alert('Valores inválidos')
+    if (!title) {
+      message = "Título inválido!";
+    }
+    
+    if (!image) {
+      message = message + "\n" + "Imagem inválida!";
+    }
+    
+    if (!video) {
+      message = message + "\n" + "Vídeo inválido!";
+    }
+
+    alert(message);
+
     return;
   }
 
@@ -139,7 +159,6 @@ function submitFormCreate(event) {
   });
 
   if (exist) {
-    alert('Mídia já foi adicionada anteriormente.')
     return;
   }
 
@@ -177,12 +196,10 @@ function submitFormEdit(event) {
 
   const id = createUniqueId(title);
 
-  updateMedia(mediaId, {
-    id,
-    title,
-    image,
-    video,
-  })
+  const oldMedia = mediaList.find((media) => media.id === mediaId);
+  const newMedia = { id, title, image, video };
+
+  updateMedia(oldMedia, newMedia)
 
   closeFormEdit();
 }
@@ -218,7 +235,7 @@ function createDivMedia(media) {
   const buttonRemove_element = document.createElement("button");
   buttonRemove_element.className = "remove";
   buttonRemove_element.title = "Remover";
-  buttonRemove_element.onclick = () => removeMedia(id);
+  buttonRemove_element.onclick = () => removeMedia(media);
 
   const buttonEdit_element = document.createElement("button");
   buttonEdit_element.className = "edit";
@@ -265,30 +282,27 @@ function fillFormEdit(mediaId) {
 }
 
 function checkMediaExist(mediaToCheck) {
-
-  console.log(mediaToCheck)
   if (mediaList.length === 0) {
     return false;
   }
 
   return mediaList.some((media) => {
     if(media.title === mediaToCheck.title) {
-      alert('Título já foi adicionada anteriormente.');
+      alert('Título já foi adicionada anteriormente!');
       return true;
     }
 
     if(media.image === mediaToCheck.image) {
-      alert('Imagem já foi adicionada anteriormente.');
+      alert('Imagem já foi adicionada anteriormente!');
       return true;
     }
 
     if(media.video === mediaToCheck.video) {
-      alert('Vídeo já foi adicionada anteriormente.');
+      alert('Vídeo já foi adicionada anteriormente!');
       return true;
     }
   }); 
 }
-
 
 function handlePlay(video) {
   handleOpenModal();
