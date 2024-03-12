@@ -32,25 +32,28 @@
 
     <h1>Classificação Alura</h1>
 
-    <form id="createPlayerForm">
-      <label for="name">Nome: </label>
-      <input id="name" />
-      
-      <label for="avatar">Avatar: </label>
-      <input id="avatar" />
-      
-      <label for="wins">Vitórias: </label>
-      <input id="wins"  value="0" />
+    <button onclick="handleShowForm()">Adicionar novo jogador</button>
 
-      <label for="draws">Empates: </label>
-      <input id="draws" value="0" />
+      <form id="createPlayerForm" style="display: none;">
+        <label for="name">Nome: </label>
+        <input id="name" />
+        
+        <label for="avatar">Avatar: </label>
+        <input id="avatar" />
+        
+        <label for="wins">Vitórias: </label>
+        <input id="wins"  value="0" />
 
-      <label for="defeats">Derrotas</label>
-      <input id="defeats" value="0" />
-      
-      <button type="submit">Criar</button>
-    </form>
-
+        <label for="draws">Empates: </label>
+        <input id="draws" value="0" />
+        
+        <label for="defeats">Derrotas</label>
+        <input id="defeats" value="0" />
+        
+        <button type="reset">Cancelar</button>
+        <button type="submit">Criar</button>
+      </form> 
+    
     <table>
       <thead>
         <tr>

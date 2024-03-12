@@ -86,9 +86,16 @@ function setLocalStorage() {
   localStorage.setItem("playersList", JSON.stringify(playersList));
 }
 
+function handleShowForm() {
+  const form_element = document.getElementById("createPlayerForm");
+
+  form_element.style.display = "flex";
+}
+
 const createPlayerForm_element = document.getElementById("createPlayerForm");
 
 createPlayerForm_element.addEventListener("submit", submitCreatePlayer);
+createPlayerForm_element.addEventListener("reset", resetCreatePlayer);
 
 function submitCreatePlayer(event) {
   event.preventDefault();
@@ -97,10 +104,12 @@ function submitCreatePlayer(event) {
   const avatar = event.target["avatar"].value.trim();
 
   if(!name || !avatar) {
+    alert("Nome ou Avatar vazio!")
     return;
   }
-
+  
   if (checkNameAndAvatarUsed(name, avatar)) {
+    alert("Nome ou Avatar inválido!")
     return;
   }
     
@@ -119,6 +128,8 @@ function submitCreatePlayer(event) {
   if (isNaN(defeats)) {
     defeats = 0;
   }
+
+  const points = wins * 3 + draws;
   
   const player = {
     id: createUniqueId(name),
@@ -127,17 +138,29 @@ function submitCreatePlayer(event) {
     wins,
     draws,
     defeats,
-    points: wins * 3 + draws,
+    points,
   }
+
+  const response = confirm(`
+    Criar jogador
+    Nome: ${name}
+    Avatar: ${avatar}
+    Vitórias: ${wins}
+    Empates: ${draws}
+    Derrotas: ${defeats}
+    Pontos: ${points}
+  `);
     
-  addPlayerOnList(player);
-  addPlayerOnTable(player);
-  
-  event.target["name"].value = "";
-  event.target["avatar"].value = "";
-  event.target["wins"].value = "0";
-  event.target["draws"].value = "0";
-  event.target["defeats"].value = "0";
+  if (response) {
+    addPlayerOnList(player);
+    addPlayerOnTable(player);
+    
+    event.target.reset();
+  }
+}
+
+function resetCreatePlayer() {
+  createPlayerForm_element.style.display = "none";
 }
 
 function createUniqueId(name) {
@@ -254,7 +277,9 @@ function updatePlayerDefeats(player) {
   updatePlayerTrOnTable(newPlayer);
 }
 
-function savePlayerEdit(id) {
+function savePlayerEdit(oldPlayer) {
+  const id = oldPlayer.id;
+
   const avatar = document.getElementById(`avatar_${id}`).value;
   const name = document.getElementById(`name_${id}`).value;
   const wins = Number(document.getElementById(`wins_${id}`).value);
@@ -263,10 +288,11 @@ function savePlayerEdit(id) {
   const points = wins * 3 + draws;
   
   if (checkNameAndAvatarUsed(name, avatar, id)) {
+    // alert('Nome: ' + name + 'ou Avatar já estão sendo usados!');
     return;
   }
   
-  const player = {
+  const newPlayer = {
     id,
     avatar,
     name,
@@ -276,13 +302,19 @@ function savePlayerEdit(id) {
     points,
   }
 
-  updatePlayerOnList(player);
-  updatePlayerTrOnTable(player)
+  updatePlayerOnList(newPlayer);
+  updatePlayerTrOnTable(newPlayer);
 }
 
-function removePlayer(id) {
-  removePlayerOnList(id);
-  removePlayerOnTable(id);
+function removePlayer(player) {
+
+  console.log(player)
+  const response = confirm("Remover jogador: " + player.name);
+
+  if (response) {
+    removePlayerOnList(player.id);
+    removePlayerOnTable(player.id);
+  }
 }
 
 function createPlayerTr(player) {
@@ -350,8 +382,10 @@ function createPlayerInputTr(player) {
   const tdInputPoints_element = createInputTd(id, "points", points);
 
   const tdButtonCancel_element = createButtonTd("Cancelar", () => updatePlayerTrOnTable(player));
-  const tdButtonSave_element = createButtonTd("Salvar", () => savePlayerEdit(id));
-  const tdButtonRemove_element = createButtonTd("Remover", () => removePlayer(id));
+  const tdButtonSave_element = createButtonTd("Salvar", () => savePlayerEdit(player));
+  const tdButtonRemove_element = createButtonTd("Remover", () => removePlayer(player));
+
+  tdInputPoints_element.querySelector("input").disabled = true;
 
   tr_element.append(
     tdInputAvatar_element,
