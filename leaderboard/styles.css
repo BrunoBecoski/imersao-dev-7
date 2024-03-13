@@ -1,75 +1,109 @@
-.container {
-  height: 100vh;
-
-  width: 100vw;
-  padding: 20px;
-
-  text-align: center;
-
-  background-color: var(--blue-900);
-}
-
-form {
+main {
+  display: flex;
   flex-direction: column;
-}
-.page-title {
-  margin: 0 0 5px;
+  align-items: center;
 
-  color: #FFFFFF;
-}
-
-.page-subtitle {
-  margin-top: 5px;
-
-  color: #FFFFFF;
+  max-width: var(--container-2xl);
+  margin-inline: auto;
+  padding-inline: var(--spacing-10);
+  padding-bottom: var(--spacing-16);
 }
 
-.page-logo {
-  width: 200px;
+.container > div {
+  width: 100%;
+  
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-16);
+  justify-content: space-between;
 }
 
-.alura-logo {
-  width:40px;
-  position: absolute;
-  top: 10px;
-  right: 10px;
+.container span {
+  width: var(--spacing-60);
+}
+
+.container div button {
+  cursor: pointer;
+  padding: var(--spacing-4);
+  margin-block: var(--spacing-6);
+
+  border: none;
+  font-weight: 700;
+  color: var(--white);
+  font-size: var(--font-xl);
+  border-radius: var(--rounded);
+  background-color: var(--blue-700);
+
+  transition: var(--transition);
+
+}
+  
+.container div button:hover {
+  background-color: var(--red-500);
 }
 
 table {
   width: 100%;
 
-  border: 2px solid white;
   border-collapse: collapse;
 }
 
-h1 {
-  color: white;
+thead th{
+  padding: var(--spacing-4);
+  background-color: var(--red-500);
 }
 
-label {
-  color: white;
+thead button {
+  cursor: pointer;
+
+  border: none;
+  color: var(--white);
+  font-weight: 700;
+  font-size: var(--font-sm);
+  background-color: var(--red-500);
+}
+  
+tbody td {
+  color: var(--white);
+  background-color: var(--blue-800);
 }
 
-td img {
-  width: 50px;
-  height: 50px;
+tbody td:nth-child(even){
+  background-color: var(--blue-900);
+}
+
+tbody td {
+  text-align: center;
+  padding: var(--spacing-2);
+}
+
+tr + tr {
+  border-top: 1px solid var(--blue-700);
+}
+
+tbody td img {
+  width: var(--spacing-16);
+  height: var(--spacing-16);
 
   border-radius: 50%;
 }
 
-td input {
+tbody td input {
   width: 100px;
 }
 
-th,
-tr,
-td {
-  border: solid 1px white;
+table tbody button {
+  cursor: pointer;
+  background-color: var(--blue-500);
+  color: var(--white);
+  border: none;
+  border-radius: var(--rounded);
+  padding: var(--spacing-2);
+  font-weight: 500;
+  font-size: var(--font-sm);
 
-  color: white;
 }
 
-button {
-  background-color: #002351;
-  color: #F6F6F6;
+table td button:hover {
+  background-color: var(--red-500);
 }

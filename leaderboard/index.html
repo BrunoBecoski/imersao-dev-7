@@ -30,45 +30,52 @@
       </nav>
     </header>
 
-    <h1>Classificação Alura</h1>
+    <main class="container">
+      <div>
 
-    <button onclick="handleShowForm()">Adicionar novo jogador</button>
+        <span></span>
 
-      <form id="createPlayerForm" style="display: none;">
-        <label for="name">Nome: </label>
-        <input id="name" />
+        <h1>Classificação Alura</h1>
         
-        <label for="avatar">Avatar: </label>
-        <input id="avatar" />
-        
-        <label for="wins">Vitórias: </label>
-        <input id="wins"  value="0" />
+        <button onclick="handleShowForm()">Adicionar novo jogador</button>
 
-        <label for="draws">Empates: </label>
-        <input id="draws" value="0" />
-        
-        <label for="defeats">Derrotas</label>
-        <input id="defeats" value="0" />
-        
-        <button type="reset">Cancelar</button>
-        <button type="submit">Criar</button>
-      </form> 
-    
-    <table>
-      <thead>
-        <tr>
-          <th>Avatar</th>
-          <th id="sortByName"><button onclick="sortByName()">Nome</button></th>
-          <th id="sortByWins"><button onclick="sortByWins()">Vitórias</button></th>
-          <th id="sortByDraws"><button onclick="sortByDraws()">Empates</button></th>
-          <th id="sortByDefeats"><button onclick="sortByDefeats()">Derrotas</button></th>
-          <th id="sortByPoints"><button onclick="sortByPoints()">Pontos</button></th>
-          <th colspan="4">Ações</th>
-        </tr>
-      </thead>
+        <form id="createPlayerForm" style="display: none;">
+          <label for="name">Nome: </label>
+          <input id="name" />
+          
+          <label for="avatar">Avatar: </label>
+          <input id="avatar" />
+          
+          <label for="wins">Vitórias: </label>
+          <input id="wins"  value="0" />
 
-      <tbody id="playersTable"></tbody>
-    </table>
+          <label for="draws">Empates: </label>
+          <input id="draws" value="0" />
+          
+          <label for="defeats">Derrotas</label>
+          <input id="defeats" value="0" />
+          
+          <button type="reset">Cancelar</button>
+          <button type="submit">Criar</button>
+        </form> 
+      </div>
+      
+      <table>
+        <thead>
+          <tr>
+            <th>Avatar</th>
+            <th id="sortByName"><button onclick="sortByName()">Nome</button></th>
+            <th id="sortByWins"><button onclick="sortByWins()">Vitórias</button></th>
+            <th id="sortByDraws"><button onclick="sortByDraws()">Empates</button></th>
+            <th id="sortByDefeats"><button onclick="sortByDefeats()">Derrotas</button></th>
+            <th id="sortByPoints"><button onclick="sortByPoints()">Pontos</button></th>
+            <th colspan="4">Ações</th>
+          </tr>
+        </thead>
+
+        <tbody id="playersTable"></tbody>
+      </table>
+    </main>
   </body>
 
   <script src="./script.js"></script>
