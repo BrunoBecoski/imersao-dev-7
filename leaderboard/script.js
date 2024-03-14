@@ -307,8 +307,6 @@ function savePlayerEdit(oldPlayer) {
 }
 
 function removePlayer(player) {
-
-  console.log(player)
   const response = confirm("Remover jogador: " + player.name);
 
   if (response) {
@@ -381,9 +379,11 @@ function createPlayerInputTr(player) {
   const tdInputDefeats_element = createInputTd(id, "defeats", defeats);  
   const tdInputPoints_element = createInputTd(id, "points", points);
 
-  const tdButtonCancel_element = createButtonTd("Cancelar", () => updatePlayerTrOnTable(player));
+  const tdPlaceholder_element = document.createElement("td");
+
   const tdButtonSave_element = createButtonTd("Salvar", () => savePlayerEdit(player));
   const tdButtonRemove_element = createButtonTd("Remover", () => removePlayer(player));
+  const tdButtonClose_element = createButtonTd("Fechar", () => updatePlayerTrOnTable(player));
 
   tdInputPoints_element.querySelector("input").disabled = true;
 
@@ -394,9 +394,10 @@ function createPlayerInputTr(player) {
     tdInputDraws_element,
     tdInputDefeats_element,
     tdInputPoints_element,
-    tdButtonCancel_element,
+    tdPlaceholder_element,
     tdButtonSave_element,
     tdButtonRemove_element,
+    tdButtonClose_element,
   );
 
   return tr_element;
@@ -467,7 +468,7 @@ function sortByName() {
 
     return 0;
   });
-  
+
   set(
     th_element,
     sortType,
@@ -570,12 +571,17 @@ function get(tdId) {
 }
 
 function set(th_element, sortType, playersListSort) {
+  const button_element = th_element.querySelector("button");
+
   if (sortType === "asd") {
     th_element.dataset.type = "desc";
+    button_element.className = "show-down";
   }
 
   if (sortType === "desc") {    
     th_element.dataset.type = "asd";
+    button_element.className = "show-up";
+
 
     playersListSort.reverse();
   }

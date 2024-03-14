@@ -58,10 +58,26 @@ thead button {
 
   border: none;
   color: var(--white);
-  font-weight: 700;
-  font-size: var(--font-sm);
+  font-weight: 500;
   background-color: var(--red-500);
+  
+  transition: var(--transition);
 }
+
+thead button:hover {
+  font-weight: 700;
+}
+
+thead button.show-up::after {
+  content: "▲";
+  padding-left: var(--spacing-2);
+}
+
+thead button.show-down::after {
+  content: "▼";
+  padding-left: var(--spacing-2);
+}
+
   
 tbody td {
   color: var(--white);
@@ -101,7 +117,6 @@ table tbody button {
   padding: var(--spacing-2);
   font-weight: 500;
   font-size: var(--font-sm);
-
 }
 
 table td button:hover {
