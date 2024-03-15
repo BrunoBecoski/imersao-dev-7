@@ -573,15 +573,27 @@ function get(tdId) {
 function set(th_element, sortType, playersListSort) {
   const button_element = th_element.querySelector("button");
 
-  if (sortType === "asd") {
-    th_element.dataset.type = "desc";
-    button_element.className = "show-down";
+  const buttonDown_element = document.getElementsByClassName("show-down")[0];
+  const buttonUp_element = document.getElementsByClassName("show-up")[0];
+
+  if (buttonDown_element) {
+    buttonDown_element.className = "";
   }
 
+  if (buttonUp_element) {
+    buttonUp_element.className = "";
+  }
+
+  if (sortType === "asd") {
+    th_element.dataset.type = "desc";
+    button_element.className = "show-up";
+    button_element.title = "Ordenar por Decrescente";
+  }
+  
   if (sortType === "desc") {    
     th_element.dataset.type = "asd";
-    button_element.className = "show-up";
-
+    button_element.className = "show-down";
+    button_element.title = "Ordenar por Crescente";
 
     playersListSort.reverse();
   }
