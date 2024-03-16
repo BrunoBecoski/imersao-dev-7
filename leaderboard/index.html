@@ -32,33 +32,34 @@
 
     <main class="container">
       <div>
-
         <span></span>
 
         <h1>Classificação Alura</h1>
         
         <button onclick="handleShowForm()">Adicionar novo jogador</button>
+      </div>
 
-        <form id="createPlayerForm" style="display: none;">
-          <label for="name">Nome: </label>
-          <input id="name" />
-          
-          <label for="avatar">Avatar: </label>
-          <input id="avatar" />
-          
-          <label for="wins">Vitórias: </label>
-          <input id="wins"  value="0" />
+      <form id="createPlayerForm" style="display: none;">
+        <label for="name">Nome: </label>
+        <input id="name" />
+        
+        <label for="avatar">Avatar: </label>
+        <input id="avatar" />
+        
+        <label for="wins">Vitórias: </label>
+        <input id="wins"  value="0" />
 
-          <label for="draws">Empates: </label>
-          <input id="draws" value="0" />
-          
-          <label for="defeats">Derrotas</label>
-          <input id="defeats" value="0" />
-          
+        <label for="draws">Empates: </label>
+        <input id="draws" value="0" />
+        
+        <label for="defeats">Derrotas</label>
+        <input id="defeats" value="0" />
+        
+        <div>
           <button type="reset">Cancelar</button>
           <button type="submit">Criar</button>
-        </form> 
-      </div>
+        </div>
+      </form> 
       
       <table>
         <thead>

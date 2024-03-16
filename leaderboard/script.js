@@ -88,8 +88,10 @@ function setLocalStorage() {
 
 function handleShowForm() {
   const form_element = document.getElementById("createPlayerForm");
+  const table_element = document.getElementsByTagName("table")[0];
 
   form_element.style.display = "flex";
+  table_element.style.display = "none";
 }
 
 const createPlayerForm_element = document.getElementById("createPlayerForm");
@@ -160,7 +162,10 @@ function submitCreatePlayer(event) {
 }
 
 function resetCreatePlayer() {
+  const table_element = document.getElementsByTagName("table")[0];
+
   createPlayerForm_element.style.display = "none";
+  table_element.style.display = "table";
 }
 
 function createUniqueId(name) {
@@ -302,8 +307,43 @@ function savePlayerEdit(oldPlayer) {
     points,
   }
 
-  updatePlayerOnList(newPlayer);
-  updatePlayerTrOnTable(newPlayer);
+  if (Object.entries(oldPlayer).toString() === Object.entries(newPlayer).toString()) {
+    alert('Nenhum valor foi alterado.');
+    return;
+  }
+
+  const response = confirm(`
+    Atualizar
+    ${oldPlayer.avatar != newPlayer.avatar 
+      ? "Avatar \n de: \n" + oldPlayer.avatar + "\n para: \n " + newPlayer.avatar 
+      : ""
+    }
+    ${oldPlayer.name != newPlayer.name
+      ? "Nome de: " + oldPlayer.name + " para: " + newPlayer.name 
+      : ""
+    }
+    ${oldPlayer.wins != newPlayer.wins
+      ? " Vitória(s) de: " + oldPlayer.wins +  " para: " + newPlayer.wins 
+      : ""
+    }
+    ${oldPlayer.draws != newPlayer.draws
+      ? "Empate(s) de: " + oldPlayer.draws + " para: " + newPlayer.draws 
+      : ""
+    }
+    ${oldPlayer.defeats != newPlayer.defeats
+      ? "Derrota(s) de: " + oldPlayer.defeats + " para: " + newPlayer.defeats 
+      : ""
+    }
+    ${oldPlayer.points != newPlayer.points
+      ? "Ponto(s) de: " + oldPlayer.points + " para: " + newPlayer.points 
+      : ""
+    }
+  `);  
+
+  if (response) {
+    updatePlayerOnList(newPlayer);
+    updatePlayerTrOnTable(newPlayer);
+  }
 }
 
 function removePlayer(player) {

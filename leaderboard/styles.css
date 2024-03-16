@@ -18,6 +18,10 @@ main {
   justify-content: space-between;
 }
 
+.container h1 {
+  text-align: center;
+}
+
 .container span {
   width: var(--spacing-60);
 }
@@ -39,6 +43,11 @@ main {
   
 .container div button:hover {
   background-color: var(--red-500);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
 }
 
 table {
