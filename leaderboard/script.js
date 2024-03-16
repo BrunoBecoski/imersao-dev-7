@@ -288,7 +288,7 @@ function savePlayerEdit(oldPlayer) {
   const points = wins * 3 + draws;
   
   if (checkNameAndAvatarUsed(name, avatar, id)) {
-    // alert('Nome: ' + name + 'ou Avatar já estão sendo usados!');
+    alert('Nome: ' + name + ' ou Avatar já estão sendo usados!');
     return;
   }
   

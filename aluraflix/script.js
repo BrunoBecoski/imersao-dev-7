@@ -43,7 +43,6 @@ function addMedia(media) {
 
 function removeMedia(mediaToRemove) {
   const response = confirm(`Remover: ${mediaToRemove.title}?`);
-  console.log(response)
   
   if (response) {
     mediaList = mediaList.filter(media => media.id !== mediaToRemove.id);

@@ -35,7 +35,6 @@ main {
   background-color: var(--blue-700);
 
   transition: var(--transition);
-
 }
   
 .container div button:hover {
@@ -43,27 +42,30 @@ main {
 }
 
 table {
-  width: 100%;
+  max-width: 100%;
+  width: var(--container-2xl);
 
   border-collapse: collapse;
 }
 
 thead th{
   padding: var(--spacing-4);
-  background-color: var(--red-500);
-}
+  background-color: var(--red-500);}
 
 thead button {
   cursor: pointer;
 
   border: none;
   color: var(--white);
-  font-weight: 400;
+  font-weight: 700;
+  font-size: var(--font-md);
   background-color: var(--red-500);
+
+  transition: var(--transition);
 }
 
 thead button:hover {
-  font-weight: 900;
+  color: var(--red-100);
 }
 
 thead button.show-up::after {
@@ -76,7 +78,6 @@ thead button.show-down::after {
   padding-left: var(--spacing-2);
 }
 
-  
 tbody td {
   color: var(--white);
   background-color: var(--blue-800);
@@ -92,7 +93,7 @@ tbody td {
 }
 
 tr + tr {
-  border-top: 3px solid var(--blue-700);
+  border-top: 3px solid var(--blue-950);
 }
 
 tbody td img {
@@ -103,9 +104,22 @@ tbody td img {
 }
 
 tbody td input {
-  width: 100px;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  border: none;
+  border: 2px solid var(--blue-500);
+  padding: var(--spacing-4);
+  border-radius: var(--rounded);
+  background-color: var(--blue-950);
+  color: var(--white);
+  outline: none;
 }
 
+tbody td input:focus {
+  border-color: var(--red-500);
+}
+ 
 table tbody button {
   cursor: pointer;
   background-color: var(--blue-500);
