@@ -10,7 +10,7 @@
   </head>
 
   <body>
-    <header>
+    <header class="header">
       <nav>
         <div>
           <a href="../index.html">
@@ -36,7 +36,7 @@
 
         <h1>Classificação Alura</h1>
         
-        <button onclick="handleShowForm()">Adicionar novo jogador</button>
+        <button class="button button-lg" id="openForm" onclick="handleShowForm()">Adicionar novo jogador</button>
       </div>
 
       <form class="form" id="createPlayerForm" style="display: none;">
@@ -61,8 +61,8 @@
         </label>
         
         <div>
-          <button type="reset">Cancelar</button>
-          <button type="submit">Criar</button>
+          <button class="button button-cancel" type="reset">Cancelar</button>
+          <button class="button" type="submit">Criar</button>
         </div>
       </form> 
       

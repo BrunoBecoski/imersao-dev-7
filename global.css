@@ -22,6 +22,15 @@
   --red-800: #570C0F;
   --red-900: #2C0608;
 
+  --gray-200: #E3E3E3;
+  --gray-300: #C6C6C6;
+  --gray-400: #AAAAAA;
+  --gray-500: #8E8E8E;
+  --gray-600: #717171;
+  --gray-700: #555555;
+  --gray-800: #393939;
+  --gray-900: #1C1C1C;
+
   --black: #000000;
   --white: #FFFFFF;
   --overlay: rgb(0 0 0 / 0.7);
@@ -93,12 +102,12 @@ body {
   background-color: var(--blue-950);
 }
 
-header {
+.header {
   background: var(--blue-900);
   padding: auto;
 }
 
-header nav {
+.header nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -110,29 +119,65 @@ header nav {
   max-width: var(--container-2xl);
 }
 
-
-header div {
+.header div {
   display: flex;
   justify-content: end;
   width: var(--spacing-48);
 }
 
-header a {
+.header a {
   padding: var(--spacing-1);
   border-radius: var(--rounded);
   transition: var(--transition);
 }
 
-header a:hover {
+.header a:hover {
   background: var(--red-500);
 }
 
-header img {
+.header img {
   width: 100%;
 }
 
-header .title {
+.header .title {
   color: var(--white);
   text-decoration: none;
   border-radius: var(--rounded); 
+}
+
+.button {
+  cursor: pointer;
+  border: none;
+  color: var(--white);
+  background-color: var(--blue-700);
+  font-weight: 500;
+  padding: var(--spacing-2) var(--spacing-4);
+  border-radius: var(--rounded);
+  
+  transition: var(--transition);
+}
+
+.button:hover {
+  background-color: var(--blue-600);
+}
+
+.button-lg {
+  font-size: var(--font-lg);
+  padding: var(--spacing-4) var(--spacing-6);
+}
+
+.button-cancel {
+  background-color: var(--gray-700);
+}
+
+.button-cancel:hover {
+  background-color: var(--gray-600);
+}
+
+.button-delete {
+  background-color: var(--red-700);
+}
+
+.button-delete:hover {
+  background-color: var(--red-600);
 }

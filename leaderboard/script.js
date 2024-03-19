@@ -418,12 +418,13 @@ function createPlayerInputTr(player) {
   const tdInputDraws_element = createInputTd(id, "draws", draws);
   const tdInputDefeats_element = createInputTd(id, "defeats", defeats);  
   const tdInputPoints_element = createInputTd(id, "points", points);
-
   const tdPlaceholder_element = document.createElement("td");
-
   const tdButtonSave_element = createButtonTd("Salvar", () => savePlayerEdit(player));
   const tdButtonRemove_element = createButtonTd("Remover", () => removePlayer(player));
   const tdButtonClose_element = createButtonTd("Fechar", () => updatePlayerTrOnTable(player));
+
+  tdButtonRemove_element.querySelector("button").className = "button button-delete";
+  tdButtonClose_element.querySelector("button").className = "button button-cancel";
 
   tdInputPoints_element.querySelector("input").disabled = true;
 
@@ -470,6 +471,7 @@ function createButtonTd(text, onClick) {
 
   button_element.innerText = text;
   button_element.onclick = onClick;
+  button_element.className = "button";
   
   td_element.appendChild(button_element);
   

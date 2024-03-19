@@ -23,25 +23,6 @@ section{
   font-size: var(--font-2xl);
 }
 
-.handle {
-  border: none;
-  cursor: pointer;
-
-  border-radius: var(--rounded);
-
-  color: var(--white);
-  font-size: var(--font-2xl);
-  font-weight: 700;
-  padding: var(--spacing-3);
-  background-color: var(--blue-700);
-
-  max-width: var(--spacing-96);
-}
-
-.handle:hover {
-  background-color: var(--red-500);
-}
-
 .section_2 .tip,
 .section_2 .attempts,
 .section_3 .guess { 
