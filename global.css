@@ -145,12 +145,63 @@ body {
   border-radius: var(--rounded); 
 }
 
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+
+
+  width: 100%;
+  max-width: var(--container-sm);
+
+}
+
+.form div {
+  display: flex;
+  gap: var(--spacing-4);
+  justify-content: flex-end;
+  margin-top: var(--spacing-6);
+}
+
+.label {
+  color: var(--white);
+  font-size: var(--font-lg);
+  margin-top: var(--spacing-2);
+}
+
+.input {
+  width: 100%;
+  color: var(--white);
+  border: 2px solid var(--blue-500);
+  background-color: var(--blue-950);
+  
+  font-size: var(--font-lg);
+
+  border-radius: var(--rounded);
+  font-weight: 500;
+  padding: var(--spacing-2) var(--spacing-4);
+
+  outline: none;
+}
+
+.input::placeholder {
+  color: var(--blue-100);
+  font-weight: 400;
+  font-size: var(--font-sm);
+}
+
+.input:focus {
+  border-color: var(--red-500);
+}
+
 .button {
   cursor: pointer;
   border: none;
   color: var(--white);
   background-color: var(--blue-700);
   font-weight: 500;
+  font-size: var(--font-lg);
+
   padding: var(--spacing-2) var(--spacing-4);
   border-radius: var(--rounded);
   
@@ -181,3 +232,4 @@ body {
 .button-delete:hover {
   background-color: var(--red-600);
 }
+

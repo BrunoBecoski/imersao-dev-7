@@ -15,26 +15,6 @@
   margin-top: var(--spacing-10);
 }
 
-.form input {
-  width: 100%;
-  padding: var(--spacing-4);
-
-  color: var(--white);
-  font-size: var(--font-lg);
-  border-radius: var(--rounded);
-  border: 2px solid var(--blue-400);
-  background-color: var(--blue-950);
-}
-
-.form input:focus {
-  outline: none;
-  border-color: var(--red-500);
-}
-
-.form input::placeholder {
-  color: var(--blue-100);
-}
-
 .form div {
   display: flex;
   gap: var(--spacing-4);

@@ -55,30 +55,10 @@ section{
   justify-content: space-evenly;
 }
 
-.section_1 input {
-  border: 3px solid var(--blue-700);
-  color: var(--white);
-  font-size: var(--font-2xl);
-  background-color: transparent;
-
-  width: 150px;
-
-  outline: none;
-  padding: var(--spacing-1);
-
-  border-left: none;
-  border-top: none;
-  border-right: none;
-}
-
 .section_1 label {
   color: var(--white);
   font-size: var(--font-2xl);
   font-weight: 700;
-}
-
-.section_1 input:hover {
-  border-color: var(--blue-300);
 }
 
 .section_2 {

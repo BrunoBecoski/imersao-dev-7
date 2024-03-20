@@ -72,7 +72,7 @@ p {
   background-color: var(--blue-800);
 }
 
-.converter input,
+/* .converter input,
 .converter select {
   border: none;
   color: var(--white);
@@ -83,7 +83,7 @@ p {
 .converter input {
   outline: none;
   text-align: right;
-}
+} */
 
 .converter span {
   width: 2px;
@@ -93,7 +93,5 @@ p {
 }
 
 .converter div:has(:focus) span {
-  /* background-color: var(--blue-300); */
   background-color: var(--red-500);
-  
 }

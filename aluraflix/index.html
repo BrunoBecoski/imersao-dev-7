@@ -43,9 +43,12 @@
       </button>
       
       <form class="form" id="formCreate"  style="display: none">
-        <input id="title" placeholder="Insira o titulo da mídia" />
-        <input id="image" placeholder="Insira endereço de imagem" />
-        <input id="video" placeholder="Insira uma url de um video do YouTube" />
+        <label class="label" for="title">Título</label>
+        <input class="input" id="title" placeholder="Insira o titulo da mídia" />
+        <label class="label" for="image">Imagem</label>
+        <input class="input" id="image" placeholder="Insira endereço de imagem" />
+        <label class="label" for="video">Vídeo</label>
+        <input class="input" id="video" placeholder="Insira uma url de um video do YouTube" />
 
         <div>
           <button class="button button-cancel" type="reset">Cancelar</button>
@@ -54,10 +57,16 @@
       </form>
 
       <form class="form" id="formEdit" style="display: none">
-        <input id="id" style="display: none" />
-        <input id="title" placeholder="Insira o titulo da mídia" />
-        <input id="image" placeholder="Insira endereço de imagem" />
-        <input id="video" placeholder="Insira uma url de um video do YouTube" />
+        <input class="input" id="id" style="display: none" />
+
+        <label class="label" for="title">Título</label>
+        <input class="input" id="title" />
+
+        <label class="label" for="image">Imagem</label>
+        <input class="input" id="image" />
+        
+        <label class="label" for="video">Vídeo</label>
+        <input class="input" id="video" />
         
         <div>
           <button class="button button-cancel" type="reset">Cancelar</button>
