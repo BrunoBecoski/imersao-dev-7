@@ -40,22 +40,32 @@
       </div>
 
       <form class="form" id="createPlayerForm" style="display: none;">
-        <label class="label" for="name">Nome</label>
-        <input class="input" id="name" placeholder="Insira o nome do jogador"  />
-        
-        <label class="label" for="avatar">Avatar</label>
-        <input class="input" id="avatar" placeholder="Insira endereço de imagem"  />
+        <div class="label-input">
+          <label class="label" for="name">Nome</label>
+          <input class="input" id="name" placeholder="Insira o nome do jogador"  />
+        </div>
 
-        <label class="label" for="wins">Vitórias</label>
-        <input class="input" id="wins"  value="0" />
+        <div class="label-input">
+          <label class="label" for="avatar">Avatar</label>
+          <input class="input" id="avatar" placeholder="Insira endereço de imagem"  />
+        </div>
+        
+        <div class="label-input">
+          <label class="label" for="wins">Vitórias</label>
+          <input class="input" id="wins"  value="0" />
+        </div>
 
-        <label class="label" for="draws">Empates</label>
-        <input class="input" id="draws" value="0" />
+        <div class="label-input">
+          <label class="label" for="draws">Empates</label>
+          <input class="input" id="draws" value="0" />
+        </div>
+          
+        <div class="label-input">
+          <label class="label" for="defeats">Derrotas</label>
+          <input class="input" id="defeats" value="0" />
+        </div>
         
-        <label class="label" for="defeats">Derrotas</label>
-        <input class="input" id="defeats" value="0" />
-        
-        <div>
+        <div class="actions">
           <button class="button button-cancel" type="reset">Cancelar</button>
           <button class="button" type="submit">Criar</button>
         </div>

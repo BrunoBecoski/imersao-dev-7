@@ -148,7 +148,7 @@ body {
 .form {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-2);
+  gap: var(--spacing-4);
 
 
   width: 100%;
@@ -156,7 +156,13 @@ body {
 
 }
 
-.form div {
+.form .label-input {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.form .actions {
   display: flex;
   gap: var(--spacing-4);
   justify-content: flex-end;
@@ -166,7 +172,6 @@ body {
 .label {
   color: var(--white);
   font-size: var(--font-lg);
-  margin-top: var(--spacing-2);
 }
 
 .input {

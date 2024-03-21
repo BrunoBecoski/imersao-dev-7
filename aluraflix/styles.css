@@ -7,20 +7,6 @@
   margin-block: var(--spacing-10);
 }
 
-.form {
-  display: flex;
-  gap: var(--spacing-4);
-  flex-direction: column;
-  width: var(--container-sm);
-  margin-top: var(--spacing-10);
-}
-
-.form div {
-  display: flex;
-  gap: var(--spacing-4);
-  justify-content: flex-end;
-}
-
 .list {
   display: flex;
   justify-content: center;

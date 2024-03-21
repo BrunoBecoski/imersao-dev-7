@@ -43,34 +43,48 @@
       </button>
       
       <form class="form" id="formCreate"  style="display: none">
-        <label class="label" for="title">Título</label>
-        <input class="input" id="title" placeholder="Insira o titulo da mídia" />
-        <label class="label" for="image">Imagem</label>
-        <input class="input" id="image" placeholder="Insira endereço de imagem" />
-        <label class="label" for="video">Vídeo</label>
-        <input class="input" id="video" placeholder="Insira uma url de um video do YouTube" />
+        <div class="label-input">
+          <label class="label" for="title">Título</label>
+          <input class="input" id="title" placeholder="Insira o titulo da mídia" />
+        </div>
 
-        <div>
+        <div class="label-input">
+          <label class="label" for="image">Imagem</label>
+          <input class="input" id="image" placeholder="Insira endereço de imagem" />
+        </div>
+        
+        <div class="label-input">
+          <label class="label" for="video">Vídeo</label>
+          <input class="input" id="video" placeholder="Insira uma url de um video do YouTube" />
+        </div>
+
+        <div class="actions">
           <button class="button button-cancel" type="reset">Cancelar</button>
-          <button class="button" type="submit">Adicionar Mídia</button>
+          <button class="button" type="submit">Salvar</button>
         </div>
       </form>
 
       <form class="form" id="formEdit" style="display: none">
         <input class="input" id="id" style="display: none" />
 
-        <label class="label" for="title">Título</label>
-        <input class="input" id="title" />
+        <div class="label-input">
+          <label class="label" for="title">Título</label>
+          <input class="input" id="title" />
+        </div>
 
-        <label class="label" for="image">Imagem</label>
-        <input class="input" id="image" />
+        <div class="label-input">
+          <label class="label" for="image">Imagem</label>
+          <input class="input" id="image" />
+        </div>
         
-        <label class="label" for="video">Vídeo</label>
-        <input class="input" id="video" />
+        <div class="label-input">
+          <label class="label" for="video">Vídeo</label>
+          <input class="input" id="video" />
+        </div>
         
-        <div>
+        <div class="actions">
           <button class="button button-cancel" type="reset">Cancelar</button>
-          <button class="button" type="submit">Editar Mídia</button>
+          <button class="button" type="submit">Salvar</button>
         </div>
       </form>
       
