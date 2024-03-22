@@ -38,11 +38,13 @@
     </header>
 
     <main class="container">     
-      <button class="button button-lg" id="buttonOpenFormCreate" type="button" onclick="openFormCreate()">
+      <button class="button button-lg" id="buttonOpenForm" type="button" onclick="openForm()">
         Adicionar mídia
       </button>
       
-      <form class="form" id="formCreate"  style="display: none">
+      <form class="form" id="form"  style="display: none">
+        <input class="input" id="id" style="display: none" />
+
         <div class="label-input">
           <label class="label" for="title">Título</label>
           <input class="input" id="title" placeholder="Insira o titulo da mídia" />
@@ -64,30 +66,6 @@
         </div>
       </form>
 
-      <form class="form" id="formEdit" style="display: none">
-        <input class="input" id="id" style="display: none" />
-
-        <div class="label-input">
-          <label class="label" for="title">Título</label>
-          <input class="input" id="title" />
-        </div>
-
-        <div class="label-input">
-          <label class="label" for="image">Imagem</label>
-          <input class="input" id="image" />
-        </div>
-        
-        <div class="label-input">
-          <label class="label" for="video">Vídeo</label>
-          <input class="input" id="video" />
-        </div>
-        
-        <div class="actions">
-          <button class="button button-cancel" type="reset">Cancelar</button>
-          <button class="button" type="submit">Salvar</button>
-        </div>
-      </form>
-      
       <div class="list" id="divList"></div> 
     </main>
   </body>
