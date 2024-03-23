@@ -7,6 +7,23 @@
 //   document.getElementById("movie").value = "";
 // }
 
+let mediaList = [];
+
+getLocalStorage();
+
+function getLocalStorage() {
+  const localStorageMediaList = JSON.parse(localStorage.getItem("mediaList"));
+
+  if (localStorageMediaList) {
+    mediaList = localStorageMediaList; 
+    renderMedias();
+  } 
+}
+
+function setLocalStorage() {
+  localStorage.setItem("mediaList", JSON.stringify(mediaList));
+}
+
 const form_element = document.getElementById("form");
 form_element.addEventListener("reset", resetForm);
 form_element.addEventListener("submit", submitForm);
@@ -31,7 +48,6 @@ function submitForm(event) {
   event.preventDefault();
 
   const id = event.target["id"].value;
-
   const title = event.target["title"].value.trim();
   const image = event.target["image"].value.trim();
   const video = event.target["video"].value.trim();
@@ -56,6 +72,7 @@ function submitForm(event) {
   }
 
   const checkMessage = checkMediaExist({
+    id,
     title,
     image,
     video,
@@ -67,7 +84,12 @@ function submitForm(event) {
   }
 
   if (id) {
-
+    updateMedia({
+      id,
+      title,
+      image,
+      video,
+    });
   } else {
     createMedia({
       title,
@@ -76,28 +98,7 @@ function submitForm(event) {
     });
   } 
   
-  document.getElementById("buttonOpenForm").style.display = "inline-block";
-  document.getElementById("form").style.display = "none";
-  document.getElementById("divList").style.display = "flex";
-  
   event.target.reset();
-}
-
-let mediaList = [];
-
-getLocalStorage();
-
-function getLocalStorage() {
-  const localStorageMediaList = JSON.parse(localStorage.getItem("mediaList"));
-
-  if (localStorageMediaList) {
-    mediaList = localStorageMediaList; 
-    renderMedias();
-  } 
-}
-
-function setLocalStorage() {
-  localStorage.setItem("mediaList", JSON.stringify(mediaList));
 }
 
 function removeMedia(mediaToRemove) {
@@ -109,22 +110,6 @@ function removeMedia(mediaToRemove) {
     setLocalStorage();
     renderMedias();
   }
-}
-
-function updateMedia(oldMedia, newMedia) {
-  const response = confirm(`Atualizar Mídia!`);
-
-  if (response) {
-    const index = mediaList.findIndex((media) => media.id === oldMedia.id);
-
-    mediaList[index] = {
-      ...newMedia,
-    }
-
-    setLocalStorage();
-  }
-
-  renderMedias();
 }
 
 function renderMedias(){
@@ -161,30 +146,43 @@ function createMedia({ title, image, video }) {
   alert('Mídia criada com sucesso.');
 }
 
-function resetFormEdit() {
-  closeFormEdit();
-}
+function updateMedia({ id, title, image, video }) {
+  const newId = createUniqueId(title);
 
-function submitFormEdit(event) {
-  event.preventDefault();
+  const oldMedia = mediaList.find((media) => media.id === id);
+  const newMedia = { id: newId, title, image, video };
 
-  const mediaId = event.target["id"].value;
-  const title = event.target["title"].value.trim();
-  const image = event.target["image"].value.trim();
-  const video = event.target["video"].value.trim();
-  
-  if(!title || !image || !video) {
-    return;
+  let message = [];
+  let response = false;
+
+  if (oldMedia.title !== newMedia.title) {
+    message.push("Alterar título de: " + oldMedia.title + " para: " + newMedia.title + ".");
   }
 
-  const id = createUniqueId(title);
+  if (oldMedia.image !== newMedia.image) {
+    message.push("Alterar imagem de: " + oldMedia.image + " para: " + newMedia.image + ".");
+  }
 
-  const oldMedia = mediaList.find((media) => media.id === mediaId);
-  const newMedia = { id, title, image, video };
+  if (oldMedia.video !== newMedia.video) {
+    message.push("Alterar video de: " + oldMedia.video + " para: " + newMedia.video + ".");
+  }
 
-  updateMedia(oldMedia, newMedia)
+  if (message.length === 0) {
+    alert("Nenhum valor alterado.");
+  }
 
-  closeFormEdit();
+  if (message.length > 0) {
+    response = confirm(message.toString().replaceAll(',', '\n \n'));
+  }
+
+  if (response) {
+    const index = mediaList.findIndex((media) => media.id === oldMedia.id);
+  
+    mediaList[index] = { ...newMedia };
+    
+    setLocalStorage();
+    renderMedias();
+  }
 }
 
 function createDivMedia(media) {
@@ -253,26 +251,29 @@ function fillForm(mediaId) {
 }
 
 function checkMediaExist(mediaToCheck) {
+  let mediaListToCheck = mediaList;
+
   if (mediaList.length === 0) {
     return false;
   }
 
+  if (mediaToCheck.id !== "") {
+    mediaListToCheck = mediaList.filter(media => media.id === mediaListToCheck.id);
+  }
+
   let checkMessage = [];
 
- mediaList.some((media) => {
+  mediaListToCheck.forEach((media) => {
     if(media.title === mediaToCheck.title) {
-      checkMessage.push('Título já foi adicionada anteriormente!');
-      return true;
+      checkMessage.push("Título já foi adicionada anteriormente!");
     }
 
     if(media.image === mediaToCheck.image) {
-      checkMessage.push('Imagem já foi adicionada anteriormente!');
-      return true;
+      checkMessage.push("Imagem já foi adicionada anteriormente!");
     }
 
     if(media.video === mediaToCheck.video) {
-      checkMessage.push('Vídeo já foi adicionada anteriormente!');
-      return true;
+      checkMessage.push("Vídeo já foi adicionada anteriormente!");
     }
   }); 
 
