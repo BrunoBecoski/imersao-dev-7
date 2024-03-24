@@ -174,6 +174,7 @@ function createUniqueId(name) {
 
 function checkNameAndAvatarUsed(name, avatar, id) {
   let list = playersList;
+  let checkMessage = [];
 
   if (id) {
     list = playersList.filter(player => player.id !== id);
@@ -182,11 +183,15 @@ function checkNameAndAvatarUsed(name, avatar, id) {
   const nameUsed = list.some((player) => player.name === name);
   const avatarUsed = list.some((player) => player.avatar === avatar);
 
-  if (nameUsed || avatarUsed) {
-    return true;
-  } else {
-    return false;
+  if (nameUsed) {
+    checkMessage.push("Nome já existe.");
   }
+  
+  if (avatarUsed) {
+    checkMessage.push("Avatar já existe.");
+  }
+
+  return checkMessage;
 }
 
 function addPlayerOnList(player) {
@@ -292,8 +297,10 @@ function savePlayerEdit(oldPlayer) {
   const defeats = Number(document.getElementById(`defeats_${id}`).value);
   const points = wins * 3 + draws;
   
-  if (checkNameAndAvatarUsed(name, avatar, id)) {
-    alert('Nome: ' + name + ' ou Avatar já estão sendo usados!');
+  const checkMessage = checkNameAndAvatarUsed(name, avatar, id)
+  
+  if (checkMessage.length > 0) {
+    alert(checkMessage.toString().replaceAll(',', '\n \n'));
     return;
   }
   
@@ -307,38 +314,41 @@ function savePlayerEdit(oldPlayer) {
     points,
   }
 
-  if (Object.entries(oldPlayer).toString() === Object.entries(newPlayer).toString()) {
-    alert('Nenhum valor foi alterado.');
+  let message = [];
+  let response = false;
+
+  if (oldPlayer.avatar !== newPlayer.avatar) {
+    message.push("Alterar avatar de: " + oldPlayer.avatar + "\n para: " + newPlayer.avatar);
+  }
+
+  if (oldPlayer.name !== newPlayer.name) {
+    message.push("Alterar nome de: " + oldPlayer.name + " para: " + newPlayer.name);
+  }
+
+  if (oldPlayer.wins !== newPlayer.wins) {
+    message.push("Alterar vitória(s) de: " + oldPlayer.wins + " para: " + newPlayer.wins);
+  }
+
+  if (oldPlayer.draws !== newPlayer.draws) {
+    message.push("Alterar empate(s) de: " + oldPlayer.draws + " para: " + newPlayer.draws);
+  }
+
+  if (oldPlayer.defeats !== newPlayer.defeats) {
+    message.push("Alterar derrota(s) de: " + oldPlayer.defeats + " para: " + newPlayer.defeats);
+  }
+
+  if (oldPlayer.points !== newPlayer.points) {
+    message.push("Alterar ponto(s) de:"  + oldPlayer.points + " para: " + newPlayer.points);
+  }
+
+  if (message.length === 0) {
+    alert("Nenhum valor alterado.");
     return;
   }
 
-  const response = confirm(`
-    Atualizar
-    ${oldPlayer.avatar != newPlayer.avatar 
-      ? "Avatar \n de: \n" + oldPlayer.avatar + "\n para: \n " + newPlayer.avatar 
-      : ""
-    }
-    ${oldPlayer.name != newPlayer.name
-      ? "Nome de: " + oldPlayer.name + " para: " + newPlayer.name 
-      : ""
-    }
-    ${oldPlayer.wins != newPlayer.wins
-      ? " Vitória(s) de: " + oldPlayer.wins +  " para: " + newPlayer.wins 
-      : ""
-    }
-    ${oldPlayer.draws != newPlayer.draws
-      ? "Empate(s) de: " + oldPlayer.draws + " para: " + newPlayer.draws 
-      : ""
-    }
-    ${oldPlayer.defeats != newPlayer.defeats
-      ? "Derrota(s) de: " + oldPlayer.defeats + " para: " + newPlayer.defeats 
-      : ""
-    }
-    ${oldPlayer.points != newPlayer.points
-      ? "Ponto(s) de: " + oldPlayer.points + " para: " + newPlayer.points 
-      : ""
-    }
-  `);  
+  if (message.length > 0) {
+    response = confirm(message.toString().replaceAll(',', '\n \n'));
+  }
 
   if (response) {
     updatePlayerOnList(newPlayer);

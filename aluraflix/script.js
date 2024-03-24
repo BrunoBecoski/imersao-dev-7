@@ -102,7 +102,7 @@ function submitForm(event) {
 }
 
 function removeMedia(mediaToRemove) {
-  const response = confirm(`Remover: ${mediaToRemove.title}?`);
+  const response = confirm("Remover: " + mediaToRemove.title);
   
   if (response) {
     mediaList = mediaList.filter(media => media.id !== mediaToRemove.id);
@@ -143,7 +143,7 @@ function createMedia({ title, image, video }) {
   setLocalStorage();
   renderMedias();
 
-  alert('Mídia criada com sucesso.');
+  alert("Mídia: " + title + " criada com sucesso!");
 }
 
 function updateMedia({ id, title, image, video }) {
@@ -156,15 +156,15 @@ function updateMedia({ id, title, image, video }) {
   let response = false;
 
   if (oldMedia.title !== newMedia.title) {
-    message.push("Alterar título de: " + oldMedia.title + " para: " + newMedia.title + ".");
+    message.push("Alterar título de: " + oldMedia.title + " para: " + newMedia.title);
   }
 
   if (oldMedia.image !== newMedia.image) {
-    message.push("Alterar imagem de: " + oldMedia.image + " para: " + newMedia.image + ".");
+    message.push("Alterar imagem de: " + oldMedia.image + " para: " + newMedia.image);
   }
 
   if (oldMedia.video !== newMedia.video) {
-    message.push("Alterar video de: " + oldMedia.video + " para: " + newMedia.video + ".");
+    message.push("Alterar video de: " + oldMedia.video + " para: " + newMedia.video);
   }
 
   if (message.length === 0) {
@@ -258,7 +258,7 @@ function checkMediaExist(mediaToCheck) {
   }
 
   if (mediaToCheck.id !== "") {
-    mediaListToCheck = mediaList.filter(media => media.id === mediaListToCheck.id);
+    mediaListToCheck = mediaList.filter(media => media.id !== mediaToCheck.id);
   }
 
   let checkMessage = [];
