@@ -89,19 +89,6 @@ tbody td img {
   border-radius: 50%;
 }
 
-/* tbody td input {
-  text-align: center;
-  width: 100%;
-  height: 100%;
-  border: none;
-  border: 2px solid var(--blue-500);
-  padding: var(--spacing-4);
-  border-radius: var(--rounded);
-  background-color: var(--blue-950);
-  color: var(--white);
-  outline: none;
+.tr_inputs {
+  border: 3px solid var(--red-500);
 }
-
-tbody td input:focus {
-  border-color: var(--red-500);
-} */

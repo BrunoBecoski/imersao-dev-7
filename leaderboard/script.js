@@ -184,11 +184,11 @@ function checkNameAndAvatarUsed(name, avatar, id) {
   const avatarUsed = list.some((player) => player.avatar === avatar);
 
   if (nameUsed) {
-    checkMessage.push("Nome já existe.");
+    checkMessage.push("Nome: " + name + " já está sendo usado.");
   }
   
   if (avatarUsed) {
-    checkMessage.push("Avatar já existe.");
+    checkMessage.push("Avatar já está sendo usado.");
   }
 
   return checkMessage;
@@ -438,6 +438,8 @@ function createPlayerInputTr(player) {
 
   tdInputPoints_element.querySelector("input").disabled = true;
 
+  tr_element.className = "tr_inputs";
+
   tr_element.append(
     tdInputAvatar_element,
     tdInputName_element,
@@ -494,6 +496,7 @@ function createInputTd(id, name, value) {
 
   input_element.value = value;
   input_element.id = `${name}_${id}`;
+  input_element.className = "input";
 
   td_element.appendChild(input_element);
 
