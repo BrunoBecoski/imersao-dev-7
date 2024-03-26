@@ -29,7 +29,8 @@ main {
 }
 
 .mode option {
-  font-size: var(--font-3xl);
+  text-align: center;
+  font-size: var(--font-2xl);
   background-color: var(--blue-800);
 }
 
@@ -39,7 +40,7 @@ p {
 
 .converter {
   display: flex;
-  gap: var(--spacing-4);
+  gap: var(--spacing-3);
   flex-direction: column;
 }
 
@@ -49,7 +50,7 @@ p {
   gap: var(--spacing-4);
   padding: var(--spacing-2);
   
-  border: 2px solid var(--blue-700);
+  border: 2px solid var(--blue-500);
   border-radius: var(--rounded);
 }
 
@@ -57,39 +58,27 @@ p {
   border-color: var(--red-500);
 }
 
-.converter select {
-  padding:  var(--spacing-1);
-  
-  outline: none;
-  font-weight: 600;
-  color: var(--white);
-  font-size: var(--font-lg);
-  background-color: var(--blue-700);
-}
-
 .converter option {
   font-size: var(--font-lg);
   background-color: var(--blue-800);
 }
 
-/* .converter input,
-.converter select {
+.converter input {
   border: none;
-  color: var(--white);
-  font-size: var(--font-lg);
-  background-color: transparent;
+  text-align: right;
 }
 
-.converter input {
-  outline: none;
-  text-align: right;
-} */
+.converter select {
+  border: none;
+  background-color: transparent;
+  text-align: left;
+}
 
 .converter span {
-  width: 2px;
+  width: 3px;
   height: 48px;
 
-  background-color: var(--blue-700);
+  background-color: var(--blue-500);
 }
 
 .converter div:has(:focus) span {

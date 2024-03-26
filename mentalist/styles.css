@@ -48,18 +48,6 @@ section{
   align-items: center;
 }
 
-.section_1 div {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-}
-
-.section_1 label {
-  color: var(--white);
-  font-size: var(--font-2xl);
-  font-weight: 700;
-}
 
 .section_2 {
   display: flex;

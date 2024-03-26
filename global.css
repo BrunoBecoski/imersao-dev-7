@@ -170,6 +170,7 @@ body {
 }
 
 .label {
+  cursor: pointer;
   color: var(--white);
   font-size: var(--font-lg);
 }

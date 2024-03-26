@@ -33,12 +33,16 @@
     <section class="section_1" id="section_1">
       <h2 class="subtitle">Escolha o valor mínimo e o valor máximo tamanho para ser sorteado</h2>
 
-      <div>
-        <label for="input_1">Mínimo:</label>
-        <input class="input" id="input_1" min="1" value="1" />
+      <div class="form">
+        <div class="label-input">
+          <label class="label" for="input_1">Mínimo</label>
+          <input class="input" id="input_1" min="1" value="1" />
+        </div>
         
-        <label for="input_2">Máximo:</label>
-        <input class="input" id="input_2" min="1" value="1000" />
+        <div class="label-input">
+          <label class="label" for="input_2">Máximo</label>
+          <input class="input" id="input_2" min="1" value="1000" />
+        </div>
       </div>
     
       <button class="button button-lg" onclick="handleStart()">Começar</button>
