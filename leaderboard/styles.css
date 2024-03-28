@@ -9,22 +9,8 @@ main {
   padding-bottom: var(--spacing-16);
 }
 
-.container > div {
-  width: 100%;
-  
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-16);
-  justify-content: space-between;
-  padding-block: var(--spacing-8);
-}
-
-.container span {
-  width: var(--spacing-60);
-}
-
-.container h1 {
-  text-align: center;
+.container > button {
+  margin-block: var(--spacing-8);
 }
 
 table {

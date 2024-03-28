@@ -116,7 +116,7 @@ body {
   padding: var(--spacing-4);
   margin: auto;
   height: fit-content;
-  max-width: var(--container-2xl);
+  max-width: var(--container-lg);
 }
 
 .header div {
