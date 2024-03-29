@@ -1,12 +1,4 @@
-nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--spacing-16);
-  margin: var(--spacing-6);
-  justify-content: space-around;
-}
-
-nav .card { 
+.card { 
   display: flex;
   align-items: center;
   justify-content: center;
@@ -24,11 +16,11 @@ nav .card {
   transition: var(--transition);
 }
 
-nav .card:hover {
+.card:hover {
   background-color: var(--red-500);
 }
 
-nav .card img {
+.card img {
   width: 100%;
   border-radius: var(--rounded);
 }

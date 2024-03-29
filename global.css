@@ -145,15 +145,26 @@ body {
   border-radius: var(--rounded); 
 }
 
+.main {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-16);
+  
+  max-width: var(--container-2xl);
+  margin-inline: auto;
+  padding-inline: var(--spacing-8);
+  padding-block: var(--spacing-16);
+}
+
 .form {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-4);
 
-
   width: 100%;
   max-width: var(--container-sm);
-
 }
 
 .form .label-input {
