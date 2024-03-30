@@ -1,12 +1,5 @@
-main {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-5);
-  flex-direction: column;
-}
-
 .mode {
-  margin-top: var(--spacing-12);
+  margin-bottom: var(--spacing-6);
 }
 
 .mode label {

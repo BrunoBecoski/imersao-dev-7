@@ -1,9 +1,11 @@
-body .main {
+main > div {
+  display: flex;
   flex-direction: row;
+  justify-content: center;
+  gap: var(--spacing-8);
 }
 
 .card { 
-  width: 20%;
   display: flex;
   gap: var(--spacing-6);
   flex-direction: column;

@@ -29,35 +29,39 @@
         </div>
       </nav>
     </header>
-    
 
-    <main>
-      <div class="mode">
-        <label>
-          Conversor de:
-          
-          <select id="mode_selection" onchange="handleSelectMode()">
-            <option value="currency" selected>Moedas</option>
-            <option value="temperature">Temperaturas</option>
-            <option value="length">Comprimentos</option>
-            <option value="time">Tempos</option>
-          </select>
-        </label>
-      </div>
+    <main class="main">
+      <h2 class="h2">Selecione o modo do conversor</h2>
       
-      <div class="converter">
-        <div>
-          <input class="input" id="input_1" oninput="handleInput('input_1')" />
-          <span></span>
-          <select class="input" id="select_1" onchange="handleInput('select_1')"></select>
+      <div>
+        <div class="mode">
+          <label>
+            Conversor de:
+            
+            <select id="mode_selection" onchange="handleSelectMode()">
+              <option value="currency" selected>Moedas</option>
+              <option value="temperature">Temperaturas</option>
+              <option value="length">Comprimentos</option>
+              <option value="time">Tempos</option>
+            </select>
+          </label>
         </div>
-
-        <div>
-          <input class="input" id="input_2" oninput="handleInput('input_2')"  />
-          <span></span>
-          <select class="input" id="select_2" onchange="handleInput('select_2')"></select>
+      
+        <div class="converter">
+          <div>
+            <input class="input" id="input_1" oninput="handleInput('input_1')" />
+            <span></span>
+            <select class="input" id="select_1" onchange="handleInput('select_1')"></select>
+          </div>
+          
+          <div>
+            <input class="input" id="input_2" oninput="handleInput('input_2')"  />
+            <span></span>
+            <select class="input" id="select_2" onchange="handleInput('select_2')"></select>
+          </div>
         </div>
       </div>
+    </main>
   </body>
 
   <script src="./script.js"></script>
