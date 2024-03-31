@@ -160,6 +160,7 @@ body {
 
 .h2 {
   font-size: var(--font-3xl);
+  text-align: center;
 }
 
 .form {
