@@ -158,6 +158,13 @@ body {
   padding-block: var(--spacing-16);
 }
 
+.main-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .h2 {
   font-size: var(--font-3xl);
   text-align: center;
