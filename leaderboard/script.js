@@ -87,11 +87,9 @@ function setLocalStorage() {
 }
 
 function handleShowForm() {
-  const form_element = document.getElementById("createPlayerForm");
-  const table_element = document.getElementsByTagName("table")[0];
-
-  form_element.style.display = "flex";
-  table_element.style.display = "none";
+  document.getElementById('mainHeader').style.display = "none";
+  document.getElementById("createPlayerForm").style.display = "flex";
+  document.getElementsByTagName("table")[0].style.display = "none";
 }
 
 const createPlayerForm_element = document.getElementById("createPlayerForm");
@@ -109,9 +107,11 @@ function submitCreatePlayer(event) {
     alert("Nome ou Avatar vazio!")
     return;
   }
+
+  const checkMessage = checkNameAndAvatarUsed(name, avatar)
   
-  if (checkNameAndAvatarUsed(name, avatar)) {
-    alert("Nome ou Avatar inválido!")
+  if (checkMessage.length > 0) {
+    alert(checkMessage.toString().replaceAll(',', '\n \n'));
     return;
   }
     
@@ -162,10 +162,9 @@ function submitCreatePlayer(event) {
 }
 
 function resetCreatePlayer() {
-  const table_element = document.getElementsByTagName("table")[0];
-
   createPlayerForm_element.style.display = "none";
-  table_element.style.display = "table";
+  document.getElementsByTagName("table")[0].style.display = "table";
+  document.getElementById("mainHeader").style.display = "flex"
 }
 
 function createUniqueId(name) {

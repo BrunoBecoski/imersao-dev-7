@@ -33,13 +33,13 @@ function openForm(id) {
     fillForm(id);
   }
   
-  document.getElementById("buttonOpenForm").style.display = "none";
+  document.getElementById("mainHeader").style.display = "none";
   document.getElementById("form").style.display = "flex";
   document.getElementById("divList").style.display = "none";
 } 
 
 function resetForm() {
-  document.getElementById("buttonOpenForm").style.display = "inline-block";
+  document.getElementById("mainHeader").style.display = "flex";
   document.getElementById("form").style.display = "none";
   document.getElementById("divList").style.display = "flex";
 }
